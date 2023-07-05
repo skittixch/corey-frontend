@@ -1,6 +1,6 @@
 # corey
 
-I need to update my server to Debian 9 at least. I'm making a snapshot on digitalocean now. later will upgrade. That'll allow me to use let's encrypt to get https working.
+~I need to update my server to Debian 9 at least. I'm making a snapshot on digitalocean now. later will upgrade. That'll allow me to use let's encrypt to get https working.~ Done!
 
 good lord. ok, I (think I) just figured out how to get cuda to run on a docker container of stable diffusion. it's late and i have to go to bed before I go any further, but here's what I did.
 
