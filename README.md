@@ -13,5 +13,4 @@ run this
 then make your Dockerfile 
 `FROM nvidia/cuda:11.0.3-base-ubuntu20.04`
 `CMD nvidia-smi`
-
-That's as far as I've gotten.
+docker run command = `docker run --gpus all -d stable-diffusion-crai-v01`
