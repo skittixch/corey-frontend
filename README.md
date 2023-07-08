@@ -13,6 +13,7 @@ Finally, you need an nvidia supplied base image. I went with Cuda 11.0.3 and ubu
 
 to pull the base image, run this
 `docker pull nvidia/cuda:11.0.3-base-ubuntu20.04`
+if you pull a more recent one, it'll install a later version of Python that makes the installation fail.
 
 docker run command = `docker run --gpus all -d -p 7860:7860 stable-diffusion-crai-v01`
 
