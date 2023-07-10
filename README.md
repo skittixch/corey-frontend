@@ -32,6 +32,7 @@ ENV LISTEN 7860
 EXPOSE 7860
 ```
 `docker build -t stable-diffusion-crai-v01 . `
+
 To Do: include the ssh remote tunnel in the crai container. use compose and secrets for the private key.
 For now, run "remoteproxy.bat" in shell:startup
 
