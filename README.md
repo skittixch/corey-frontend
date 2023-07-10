@@ -40,6 +40,6 @@ For now, run "remoteproxy.bat" in shell:startup
 - get ai.ericbacus.com subdomain working. I've got a virtualhost set up in apache2, but the way it's forwarding the websockets traffic, it's throwing errors.
 
 - according to a (Reddit comment)[https://www.reddit.com/r/sveltejs/comments/v8owzc/comment/ibruetp/?utm_source=share&utm_medium=mweb3x&utm_name=mweb3xcss&utm_term=1&utm_content=share_button], 
-I could use this technique to pull the intermediate images while they're being generated. I think this would really add some wow factor
+I could use this technique to pull the intermediate images while they're being generated. I think this would really add some wow factor. Apparently, in sveltekit, I should use a server-side script tag to read the contents of the folder and send one as a prop to the page when it gets loaded.
 
-in sveltekit, use a server-side script tag to read the contents of the folder and send one as a prop to the page when it gets loaded
+- figure out if I can just use DNS from digitalocean, or if I have to stick with dnsmadeeasy. figure this out in the next week or 2 since it renews on the 22nd
