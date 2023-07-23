@@ -44,3 +44,5 @@ For now, run "remoteproxy.bat" in shell:startup
 I could use this technique to pull the intermediate images while they're being generated. I think this would really add some wow factor. Apparently, in sveltekit, I should use a server-side script tag to read the contents of the folder and send one as a prop to the page when it gets loaded.
 
 - figure out if I can just use DNS from digitalocean, or if I have to stick with dnsmadeeasy. figure this out in the next week or 2 since it renews on the 22nd
+
+- Happy birthday bro
