@@ -34,15 +34,11 @@ EXPOSE 7860
 `docker build -t stable-diffusion-crai-v01 . `
 
 ## To Do: 
--investigate sveltekit to overcome cors errors!
-- make connection automatically on container run. Include the ssh remote tunnel in the crai container. use compose and secrets for the private key.
-For now, run "remoteproxy.bat" in shell:startup
-
-~~- get ai.ericbacus.com subdomain working. I've got a virtualhost set up in apache2, but the way it's forwarding the websockets traffic, it's throwing errors.~~
+deploy in swarm mode to use secrets for the private keys.
 
 - according to a (Reddit comment)[https://www.reddit.com/r/sveltejs/comments/v8owzc/comment/ibruetp/?utm_source=share&utm_medium=mweb3x&utm_name=mweb3xcss&utm_term=1&utm_content=share_button], 
 I could use this technique to pull the intermediate images while they're being generated. I think this would really add some wow factor. Apparently, in sveltekit, I should use a server-side script tag to read the contents of the folder and send one as a prop to the page when it gets loaded.
 
-- figure out if I can just use DNS from digitalocean, or if I have to stick with dnsmadeeasy. figure this out in the next week or 2 since it renews on the 22nd
+- figure out if I can just use DNS from digitalocean
 
-- Happy birthday bro
+# Happy birthday bro - July 23rd, 2023
