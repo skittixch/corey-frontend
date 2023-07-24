@@ -433,7 +433,7 @@ var app = (function () {
     const { Error: Error_1, console: console_1 } = globals;
     const file = "src\\App.svelte";
 
-    // (95:0) {#if imageData}
+    // (97:0) {#if imageData}
     function create_if_block(ctx) {
     	let div;
     	let img;
@@ -447,9 +447,9 @@ var app = (function () {
     			if (!src_url_equal(img.src, img_src_value = /*imageData*/ ctx[1])) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "Generated image");
     			attr_dev(img, "class", img_class_value = "" + (null_to_empty(/*imageLoaded*/ ctx[2] ? 'fade-in' : '') + " svelte-10a5fph"));
-    			add_location(img, file, 96, 2, 1965);
+    			add_location(img, file, 98, 2, 1988);
     			attr_dev(div, "class", "image-container svelte-10a5fph");
-    			add_location(div, file, 95, 1, 1932);
+    			add_location(div, file, 97, 1, 1955);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -473,7 +473,7 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(95:0) {#if imageData}",
+    		source: "(97:0) {#if imageData}",
     		ctx
     	});
 
@@ -504,10 +504,10 @@ var app = (function () {
     			if_block_anchor = empty();
     			attr_dev(input, "placeholder", "Corey...");
     			attr_dev(input, "class", "svelte-10a5fph");
-    			add_location(input, file, 91, 1, 1808);
-    			add_location(button, file, 92, 1, 1863);
+    			add_location(input, file, 93, 1, 1831);
+    			add_location(button, file, 94, 1, 1886);
     			attr_dev(div, "class", div_class_value = "" + (null_to_empty(/*dataSent*/ ctx[3] ? 'container sent' : 'container') + " svelte-10a5fph"));
-    			add_location(div, file, 90, 0, 1750);
+    			add_location(div, file, 92, 0, 1773);
     		},
     		l: function claim(nodes) {
     			throw new Error_1("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -588,30 +588,20 @@ var app = (function () {
     		$$invalidate(3, dataSent = true);
     		let tempPrompt = prompt.replace(/corey/gi, '<lora:crzx_v09:1> ohwx man');
 
-    		let args = [
-    			img_base64,
-    			true,
-    			'0',
-    			'/usr/src/app/models/roop/inswapper_128.onnx',
-    			'CodeFormer',
-    			1,
-    			null,
-    			1,
-    			'None',
-    			false,
-    			true
-    		];
-
-    		let alwayson_scripts = { "roop": { args } };
-
+    		/* 
+    let args = [img_base64, true, '0', '/usr/src/app/models/roop/inswapper_128.onnx', 'CodeFormer', 1, null, 1, 'None', false, true];
+    #let alwayson_scripts = { "roop": { "args": args } };
+    */
     		const response = await fetch('https://ai.ericbacus.com/sdapi/v1/txt2img', {
     			method: 'POST',
     			headers: { 'Content-Type': 'application/json' },
     			mode: 'cors',
     			body: JSON.stringify({
     				prompt: tempPrompt,
-    				steps: 64,
-    				alwayson_scripts
+    				steps: 64, /*, 
+    alwayson_scripts: alwayson_scripts
+    */
+    				
     			})
     		});
 
