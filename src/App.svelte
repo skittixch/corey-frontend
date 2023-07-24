@@ -9,13 +9,21 @@
 		dataSent = true;
 		let tempPrompt = prompt.replace(/corey/gi, '<lora:crzx_v09:1> ohwx man');
 
+		let args = [img_base64, true, '0', '/usr/src/app/models/roop/inswapper_128.onnx', 'CodeFormer', 1, null, 1, 'None', false, true];
+		let alwayson_scripts = { "roop": { "args": args } };
+
+
 		const response = await fetch('https://ai.ericbacus.com/sdapi/v1/txt2img', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
 			mode: 'cors',
-			body: JSON.stringify({ prompt: tempPrompt, steps: 64 })
+			body: JSON.stringify({
+				prompt: tempPrompt,
+				steps: 64, 
+				alwayson_scripts: alwayson_scripts
+			 })
 		});
 
 		if (!response.ok) {
