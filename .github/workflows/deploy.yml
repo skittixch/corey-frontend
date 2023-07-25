@@ -28,4 +28,4 @@ jobs:
         host: ${{ secrets.SERVER_HOST }}
         username: ${{ secrets.SERVER_USERNAME }}
         key: ${{ secrets.SERVER_SSH_KEY }}
-        script: "cd /var/www/html/corey && git pull origin main && npm install && npm run build"
+        script: "cd /var/www/html && (test -d corey || git clone git@github.com:skittixch/https://github.com/skittixch/corey-frontend.git corey) && cd corey && git pull origin main && npm install && npm run build"
