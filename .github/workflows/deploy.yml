@@ -11,6 +11,11 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
+    - name: Setup SSH Agent
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.SERVER_SSH_KEY }}
+
     - name: Use Node.js
       uses: actions/setup-node@v2
       with:
@@ -28,14 +33,4 @@ jobs:
         host: ${{ secrets.SERVER_HOST }}
         username: ${{ secrets.SERVER_USERNAME }}
         key: ${{ secrets.SERVER_SSH_KEY }}
-        script: |
-          mkdir -p ~/.ssh && 
-          echo "${{ secrets.SERVER_SSH_KEY }}" > ~/.ssh/id_rsa &&
-          chmod 600 ~/.ssh/id_rsa && 
-          ssh-keyscan github.com >> ~/.ssh/known_hosts && 
-          cd /var/www/html/coreyDev && 
-          git clone git@github.com:skittixch/corey-frontend.git && 
-          cd corey-frontend && 
-          git pull origin main && 
-          npm install && 
-          npm run build
+        script: "cd /var/www/html/coreyDev && git clone git@github.com:skittixch/corey-frontend.git && cd corey-frontend && git pull origin main && npm install && npm run build"
