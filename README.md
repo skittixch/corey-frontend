@@ -3,6 +3,8 @@
 This is a project made with love for my best friend Corey who left this earth on April 15th, 2023 at the age of 36. Motherfucker.
 
 # building this yourself
+so eventually I'll include everything I'll need to run the backend and the frontend, but at the moment, this repo is only going to feature the front end.  For the back end.....
+
 To build this yourself on a new machine... First, let's assume you're me, and have an NVIDIA graphics card, otherwise, idfk. AMD is supported, but you'll have to look around.
 
 First, install wsl ubuntu on your host system (in my case, a windows 11 insider preview build).
