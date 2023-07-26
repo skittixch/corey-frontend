@@ -1,4 +1,5 @@
 <script>
+
 	import { onMount, afterUpdate } from 'svelte';
 	let prompt = '';
 	let imageData = '';
@@ -47,9 +48,12 @@
 		}
 	});
 
+	
+
 
 
 </script>
+
 
 <style>
 	.container {
@@ -94,6 +98,9 @@
 	<input bind:value={prompt} placeholder="Corey..." />
 	<button on:click={sendData}>Send</button>
 </div>
+<p>alpha v0.01
+	
+</p>
 {#if imageData}
 	<div class="image-container">
 		<img src={imageData} alt="Generated image" class={imageLoaded ? 'fade-in' : ''} />

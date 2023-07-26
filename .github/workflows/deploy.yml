@@ -20,7 +20,7 @@ jobs:
 
     - name: Install dependencies and build
       run: |
-        npm ci
+        npm install
         npm run build
 
     - name: Deploy to server
@@ -30,4 +30,4 @@ jobs:
         username: ${{ secrets.SERVER_USERNAME }}
         key: ${{ secrets.SERVER_SSH_KEY }}
         source: "public/*"
-        target: "/var/www/html/coreyDev/corey-frontend"
+        target: "/var/www/html/corey"
