@@ -29,5 +29,5 @@ jobs:
         host: ${{ secrets.SERVER_HOST }}
         username: ${{ secrets.SERVER_USERNAME }}
         key: ${{ secrets.SERVER_SSH_KEY }}
-        source: "public/*" # replace with the path to your public directory
+        source: "public/*"
         target: "/var/www/html/coreyDev/corey-frontend"
