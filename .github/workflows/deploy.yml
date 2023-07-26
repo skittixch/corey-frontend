@@ -35,9 +35,11 @@ jobs:
         npm run build
 
     - name: Deploy to server
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.SERVER_HOST }}
-        username: ${{ secrets.SERVER_USERNAME }}
-        key: ${{ secrets.SERVER_SSH_KEY }}
-        script: "cd /var/www/html/coreyDev && git clone git@github.com:skittixch/corey-frontend.git && cd corey-frontend && git pull origin main && npm install && npm run build"
+      run: |
+        ssh -o StrictHostKeyChecking=no -l ${{ secrets.SERVER_USERNAME }} ${{ secrets.SERVER_HOST }} "\
+        cd /var/www/html/coreyDev && \
+        git clone git@github.com:skittixch/corey-frontend.git && \
+        cd corey-frontend && \
+        git pull origin main && \
+        npm install && \
+        npm run build"
