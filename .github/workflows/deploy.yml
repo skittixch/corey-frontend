@@ -40,7 +40,7 @@ jobs:
         username: ${{ secrets.SERVER_USERNAME }}
         key: ${{ secrets.SERVER_SSH_KEY }}
         script: |
-            find /var/www/html/corey -mindepth 1 -maxdepth 1 ! -name public -exec rm -rf {} \;
-            mv /var/www/html/corey/public/* /var/www/html/corey/ &&
-            rmdir /var/www/html/corey/public
+            sudo find /var/www/html/corey -mindepth 1 -maxdepth 1 ! -name public -exec rm -rf {} \;
+            sudo mv /var/www/html/corey/public/* /var/www/html/corey/ &&
+            sudo rmdir /var/www/html/corey/public
       
