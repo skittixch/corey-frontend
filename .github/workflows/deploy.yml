@@ -11,10 +11,17 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Setup SSH Agent
+    - name: Setup SSH Agent for server access
       uses: webfactory/ssh-agent@v0.5.3
       with:
         ssh-private-key: ${{ secrets.SERVER_SSH_KEY }}
+      
+    - name: Setup SSH Agent for GitHub access
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.GH_ACTION_SSH_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        echo -e "Host *\n\tStrictHostKeyChecking no\n\tIdentityFile ~/.ssh/id_rsa\n\tUser git" > ~/.ssh/config
 
     - name: Use Node.js
       uses: actions/setup-node@v2
