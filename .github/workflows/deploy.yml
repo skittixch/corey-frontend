@@ -24,14 +24,6 @@ jobs:
         sudo npm install -g rollup
         npm run build
 
-    - name: Clear deployment directory
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.SERVER_HOST }}
-        username: ${{ secrets.SERVER_USERNAME }}
-        key: ${{ secrets.SERVER_SSH_KEY }}
-        script: "rm -rf /var/www/html/corey/*"
-
     - name: Deploy to server
       uses: appleboy/scp-action@master
       with:
@@ -39,4 +31,12 @@ jobs:
         username: ${{ secrets.SERVER_USERNAME }}
         key: ${{ secrets.SERVER_SSH_KEY }}
         source: "public/."
-        target: "/var/www/html/corey"
+        target: "/var/www/html/corey/public"
+
+    - name: Move files up one directory
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USERNAME }}
+        key: ${{ secrets.SERVER_SSH_KEY }}
+        script: "mv /var/www/html/corey/public/* /var/www/html/corey && rmdir /var/www/html/corey/public"
