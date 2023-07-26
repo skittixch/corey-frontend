@@ -1,4 +1,5 @@
-name: Deploy to server
+name: Build and Deploy
+
 on:
   push:
     branches:
@@ -7,39 +8,26 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
 
-    - name: Setup SSH Agent for server access
-      uses: webfactory/ssh-agent@v0.5.3
-      with:
-        ssh-private-key: ${{ secrets.SERVER_SSH_KEY }}
-      
-    - name: Setup SSH Agent for GitHub access
-      run: |
-        mkdir -p ~/.ssh
-        echo "${{ secrets.GH_ACTION_SSH_KEY }}" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        echo -e "Host *\n\tStrictHostKeyChecking no\n\tIdentityFile ~/.ssh/id_rsa\n\tUser git" > ~/.ssh/config
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
 
     - name: Use Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: 16.14.0
+        node-version: '16'
 
-    - name: Build project
+    - name: Install dependencies and build
       run: |
-        npm install
-        npm install -g rollup
+        npm ci
         npm run build
 
     - name: Deploy to server
-      run: |
-        ssh -o StrictHostKeyChecking=no -l ${{ secrets.SERVER_USERNAME }} ${{ secrets.SERVER_HOST }} "\
-        cd /var/www/html/coreyDev && \
-        git clone git@github.com:skittixch/corey-frontend.git && \
-        cd corey-frontend && \
-        git pull origin main && \
-        npm install && \
-        npm run build"
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USERNAME }}
+        key: ${{ secrets.SERVER_SSH_KEY }}
+        source: "public/*" # replace with the path to your public directory
+        target: "/var/www/html/coreyDev/corey-frontend"
