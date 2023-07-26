@@ -40,4 +40,4 @@ jobs:
         username: ${{ secrets.SERVER_USERNAME }}
         key: ${{ secrets.SERVER_SSH_KEY }}
         script: |
-        rm -rf /var/www/html/corey && mv /var/www/html/public /var/www/html/corey
+          rm -rf /var/www/html/corey && mv /var/www/html/public /var/www/html/corey
