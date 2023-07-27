@@ -401,6 +401,17 @@ var app = (function () {
         else
             dispatch_dev('SvelteDOMSetAttribute', { node, attribute, value });
     }
+    function prop_dev(node, property, value) {
+        node[property] = value;
+        dispatch_dev('SvelteDOMSetProperty', { node, property, value });
+    }
+    function set_data_dev(text, data) {
+        data = '' + data;
+        if (text.data === data)
+            return;
+        dispatch_dev('SvelteDOMSetData', { node: text, data });
+        text.data = data;
+    }
     function validate_slots(name, slot, keys) {
         for (const slot_key of Object.keys(slot)) {
             if (!~keys.indexOf(slot_key)) {
@@ -433,8 +444,8 @@ var app = (function () {
     const { Error: Error_1, console: console_1 } = globals;
     const file = "src\\App.svelte";
 
-    // (104:0) {#if imageData}
-    function create_if_block(ctx) {
+    // (90:0) {#if imageData}
+    function create_if_block_2(ctx) {
     	let div;
     	let img;
     	let img_src_value;
@@ -445,11 +456,11 @@ var app = (function () {
     			div = element("div");
     			img = element("img");
     			if (!src_url_equal(img.src, img_src_value = /*imageData*/ ctx[1])) attr_dev(img, "src", img_src_value);
-    			attr_dev(img, "alt", "Generated image");
-    			attr_dev(img, "class", img_class_value = "" + (null_to_empty(/*imageLoaded*/ ctx[2] ? 'fade-in' : '') + " svelte-10a5fph"));
-    			add_location(img, file, 105, 2, 2022);
-    			attr_dev(div, "class", "image-container svelte-10a5fph");
-    			add_location(div, file, 104, 1, 1989);
+    			attr_dev(img, "alt", "");
+    			attr_dev(img, "class", img_class_value = "" + (null_to_empty(/*imageLoaded*/ ctx[3] ? "fade-in" : "") + " svelte-uy0ir4"));
+    			add_location(img, file, 91, 4, 2519);
+    			attr_dev(div, "class", "image-container svelte-uy0ir4");
+    			add_location(div, file, 90, 2, 2484);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -460,7 +471,7 @@ var app = (function () {
     				attr_dev(img, "src", img_src_value);
     			}
 
-    			if (dirty & /*imageLoaded*/ 4 && img_class_value !== (img_class_value = "" + (null_to_empty(/*imageLoaded*/ ctx[2] ? 'fade-in' : '') + " svelte-10a5fph"))) {
+    			if (dirty & /*imageLoaded*/ 8 && img_class_value !== (img_class_value = "" + (null_to_empty(/*imageLoaded*/ ctx[3] ? "fade-in" : "") + " svelte-uy0ir4"))) {
     				attr_dev(img, "class", img_class_value);
     			}
     		},
@@ -471,9 +482,111 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
+    		id: create_if_block_2.name,
+    		type: "if",
+    		source: "(90:0) {#if imageData}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (96:0) {#if currentImageData}
+    function create_if_block_1(ctx) {
+    	let div;
+    	let img;
+    	let img_src_value;
+    	let img_class_value;
+    	let mounted;
+    	let dispose;
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			img = element("img");
+    			if (!src_url_equal(img.src, img_src_value = /*currentImageData*/ ctx[2])) attr_dev(img, "src", img_src_value);
+    			attr_dev(img, "alt", "Current image");
+    			attr_dev(img, "class", img_class_value = "" + (null_to_empty(/*imageLoaded*/ ctx[3] ? "fade-in" : "") + " svelte-uy0ir4"));
+    			add_location(img, file, 97, 4, 2676);
+    			attr_dev(div, "class", "current-image-container svelte-uy0ir4");
+    			add_location(div, file, 96, 2, 2633);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			append_dev(div, img);
+
+    			if (!mounted) {
+    				dispose = listen_dev(img, "error", /*error_handler*/ ctx[9], false, false, false, false);
+    				mounted = true;
+    			}
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*currentImageData*/ 4 && !src_url_equal(img.src, img_src_value = /*currentImageData*/ ctx[2])) {
+    				attr_dev(img, "src", img_src_value);
+    			}
+
+    			if (dirty & /*imageLoaded*/ 8 && img_class_value !== (img_class_value = "" + (null_to_empty(/*imageLoaded*/ ctx[3] ? "fade-in" : "") + " svelte-uy0ir4"))) {
+    				attr_dev(img, "class", img_class_value);
+    			}
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    			mounted = false;
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_1.name,
+    		type: "if",
+    		source: "(96:0) {#if currentImageData}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (107:0) {#if progressData && !imageLoaded}
+    function create_if_block(ctx) {
+    	let div;
+    	let p;
+    	let t0;
+    	let t1_value = /*progressData*/ ctx[5].progress * 100 + "";
+    	let t1;
+    	let t2;
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			p = element("p");
+    			t0 = text("Progress: ");
+    			t1 = text(t1_value);
+    			t2 = text("%");
+    			add_location(p, file, 109, 4, 2977);
+    			attr_dev(div, "class", "progress-container svelte-uy0ir4");
+    			add_location(div, file, 108, 2, 2939);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			append_dev(div, p);
+    			append_dev(p, t0);
+    			append_dev(p, t1);
+    			append_dev(p, t2);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*progressData*/ 32 && t1_value !== (t1_value = /*progressData*/ ctx[5].progress * 100 + "")) set_data_dev(t1, t1_value);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(104:0) {#if imageData}",
+    		source: "(107:0) {#if progressData && !imageLoaded}",
     		ctx
     	});
 
@@ -485,14 +598,20 @@ var app = (function () {
     	let input;
     	let t0;
     	let button;
+    	let t1;
+    	let button_disabled_value;
     	let div_class_value;
     	let t2;
     	let p;
     	let t4;
-    	let if_block_anchor;
+    	let t5;
+    	let t6;
+    	let if_block2_anchor;
     	let mounted;
     	let dispose;
-    	let if_block = /*imageData*/ ctx[1] && create_if_block(ctx);
+    	let if_block0 = /*imageData*/ ctx[1] && create_if_block_2(ctx);
+    	let if_block1 = /*currentImageData*/ ctx[2] && create_if_block_1(ctx);
+    	let if_block2 = /*progressData*/ ctx[5] && !/*imageLoaded*/ ctx[3] && create_if_block(ctx);
 
     	const block = {
     		c: function create() {
@@ -500,20 +619,25 @@ var app = (function () {
     			input = element("input");
     			t0 = space();
     			button = element("button");
-    			button.textContent = "Send";
+    			t1 = text("Send");
     			t2 = space();
     			p = element("p");
-    			p.textContent = "alpha v0.01";
+    			p.textContent = "alpha v0.02";
     			t4 = space();
-    			if (if_block) if_block.c();
-    			if_block_anchor = empty();
+    			if (if_block0) if_block0.c();
+    			t5 = space();
+    			if (if_block1) if_block1.c();
+    			t6 = space();
+    			if (if_block2) if_block2.c();
+    			if_block2_anchor = empty();
     			attr_dev(input, "placeholder", "Corey...");
-    			attr_dev(input, "class", "svelte-10a5fph");
-    			add_location(input, file, 97, 1, 1840);
-    			add_location(button, file, 98, 1, 1895);
-    			attr_dev(div, "class", div_class_value = "" + (null_to_empty(/*dataSent*/ ctx[3] ? 'container sent' : 'container') + " svelte-10a5fph"));
-    			add_location(div, file, 96, 0, 1782);
-    			add_location(p, file, 100, 0, 1946);
+    			attr_dev(input, "class", "svelte-uy0ir4");
+    			add_location(input, file, 78, 2, 2178);
+    			button.disabled = button_disabled_value = /*dataSent*/ ctx[4] && !/*imageLoaded*/ ctx[3];
+    			add_location(button, file, 85, 2, 2317);
+    			attr_dev(div, "class", div_class_value = "" + (null_to_empty(/*dataSent*/ ctx[4] ? "container sent" : "container") + " svelte-uy0ir4"));
+    			add_location(div, file, 77, 0, 2119);
+    			add_location(p, file, 88, 0, 2445);
     		},
     		l: function claim(nodes) {
     			throw new Error_1("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -524,16 +648,22 @@ var app = (function () {
     			set_input_value(input, /*prompt*/ ctx[0]);
     			append_dev(div, t0);
     			append_dev(div, button);
+    			append_dev(button, t1);
     			insert_dev(target, t2, anchor);
     			insert_dev(target, p, anchor);
     			insert_dev(target, t4, anchor);
-    			if (if_block) if_block.m(target, anchor);
-    			insert_dev(target, if_block_anchor, anchor);
+    			if (if_block0) if_block0.m(target, anchor);
+    			insert_dev(target, t5, anchor);
+    			if (if_block1) if_block1.m(target, anchor);
+    			insert_dev(target, t6, anchor);
+    			if (if_block2) if_block2.m(target, anchor);
+    			insert_dev(target, if_block2_anchor, anchor);
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(input, "input", /*input_input_handler*/ ctx[5]),
-    					listen_dev(button, "click", /*sendData*/ ctx[4], false, false, false, false)
+    					listen_dev(input, "input", /*input_input_handler*/ ctx[7]),
+    					listen_dev(input, "click", /*click_handler*/ ctx[8], false, false, false, false),
+    					listen_dev(button, "click", /*sendData*/ ctx[6], false, false, false, false)
     				];
 
     				mounted = true;
@@ -544,21 +674,51 @@ var app = (function () {
     				set_input_value(input, /*prompt*/ ctx[0]);
     			}
 
-    			if (dirty & /*dataSent*/ 8 && div_class_value !== (div_class_value = "" + (null_to_empty(/*dataSent*/ ctx[3] ? 'container sent' : 'container') + " svelte-10a5fph"))) {
+    			if (dirty & /*dataSent, imageLoaded*/ 24 && button_disabled_value !== (button_disabled_value = /*dataSent*/ ctx[4] && !/*imageLoaded*/ ctx[3])) {
+    				prop_dev(button, "disabled", button_disabled_value);
+    			}
+
+    			if (dirty & /*dataSent*/ 16 && div_class_value !== (div_class_value = "" + (null_to_empty(/*dataSent*/ ctx[4] ? "container sent" : "container") + " svelte-uy0ir4"))) {
     				attr_dev(div, "class", div_class_value);
     			}
 
     			if (/*imageData*/ ctx[1]) {
-    				if (if_block) {
-    					if_block.p(ctx, dirty);
+    				if (if_block0) {
+    					if_block0.p(ctx, dirty);
     				} else {
-    					if_block = create_if_block(ctx);
-    					if_block.c();
-    					if_block.m(if_block_anchor.parentNode, if_block_anchor);
+    					if_block0 = create_if_block_2(ctx);
+    					if_block0.c();
+    					if_block0.m(t5.parentNode, t5);
     				}
-    			} else if (if_block) {
-    				if_block.d(1);
-    				if_block = null;
+    			} else if (if_block0) {
+    				if_block0.d(1);
+    				if_block0 = null;
+    			}
+
+    			if (/*currentImageData*/ ctx[2]) {
+    				if (if_block1) {
+    					if_block1.p(ctx, dirty);
+    				} else {
+    					if_block1 = create_if_block_1(ctx);
+    					if_block1.c();
+    					if_block1.m(t6.parentNode, t6);
+    				}
+    			} else if (if_block1) {
+    				if_block1.d(1);
+    				if_block1 = null;
+    			}
+
+    			if (/*progressData*/ ctx[5] && !/*imageLoaded*/ ctx[3]) {
+    				if (if_block2) {
+    					if_block2.p(ctx, dirty);
+    				} else {
+    					if_block2 = create_if_block(ctx);
+    					if_block2.c();
+    					if_block2.m(if_block2_anchor.parentNode, if_block2_anchor);
+    				}
+    			} else if (if_block2) {
+    				if_block2.d(1);
+    				if_block2 = null;
     			}
     		},
     		i: noop,
@@ -568,8 +728,12 @@ var app = (function () {
     			if (detaching) detach_dev(t2);
     			if (detaching) detach_dev(p);
     			if (detaching) detach_dev(t4);
-    			if (if_block) if_block.d(detaching);
-    			if (detaching) detach_dev(if_block_anchor);
+    			if (if_block0) if_block0.d(detaching);
+    			if (detaching) detach_dev(t5);
+    			if (if_block1) if_block1.d(detaching);
+    			if (detaching) detach_dev(t6);
+    			if (if_block2) if_block2.d(detaching);
+    			if (detaching) detach_dev(if_block2_anchor);
     			mounted = false;
     			run_all(dispose);
     		}
@@ -589,31 +753,53 @@ var app = (function () {
     function instance($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('App', slots, []);
-    	let prompt = '';
-    	let imageData = '';
+    	let prompt = "";
+    	let imageData = "";
+    	let currentImageData = ""; // ADDED: Variable to hold the current image data
     	let imageLoaded = false;
     	let dataSent = false;
+    	let progressData = null;
+
+    	async function fetchProgress() {
+    		const response = await fetch("https://ai.ericbacus.com/sdapi/v1/progress", {
+    			method: "GET",
+    			headers: { "Content-Type": "application/json" },
+    			mode: "cors"
+    		});
+
+    		if (!response.ok) {
+    			throw new Error(`HTTP error! status: ${response.status}`);
+    		}
+
+    		const result = await response.json();
+    		$$invalidate(5, progressData = result);
+
+    		// ADDED: Update currentImageData with the current_image data
+    		$$invalidate(2, currentImageData = `data:image/png;base64,${result.current_image}`);
+
+    		// If progress is not complete, fetch again
+    		if (result.progress < 100) {
+    			setTimeout(fetchProgress, 1000);
+    		}
+    	}
 
     	async function sendData() {
-    		$$invalidate(3, dataSent = true);
-    		let tempPrompt = prompt.replace(/corey/gi, '<lora:crzx_v09:1> ohwx man');
+    		$$invalidate(4, dataSent = true);
+    		let tempPrompt = prompt.replace(/corey/gi, "<lora:crzx_v09:1> ohwx man");
 
-    		/* 
-    let args = [img_base64, true, '0', '/usr/src/app/models/roop/inswapper_128.onnx', 'CodeFormer', 1, null, 1, 'None', false, true];
-    #let alwayson_scripts = { "roop": { "args": args } };
-    */
-    		const response = await fetch('https://ai.ericbacus.com/sdapi/v1/txt2img', {
-    			method: 'POST',
-    			headers: { 'Content-Type': 'application/json' },
-    			mode: 'cors',
-    			body: JSON.stringify({
-    				prompt: tempPrompt,
-    				steps: 64, /*, 
-    alwayson_scripts: alwayson_scripts
-    */
-    				
-    			})
+    		// ADDED: Moved the fetch operation into a separate variable
+    		const responsePromise = fetch("https://ai.ericbacus.com/sdapi/v1/txt2img", {
+    			method: "POST",
+    			headers: { "Content-Type": "application/json" },
+    			mode: "cors",
+    			body: JSON.stringify({ prompt: tempPrompt, steps: 64 })
     		});
+
+    		// ADDED: Start fetching progress immediately after sending the request
+    		fetchProgress();
+
+    		// ADDED: Await the response after starting the progress fetching
+    		const response = await responsePromise;
 
     		if (!response.ok) {
     			throw new Error(`HTTP error! status: ${response.status}`);
@@ -630,7 +816,7 @@ var app = (function () {
     			img.src = imageData;
 
     			img.onload = () => {
-    				$$invalidate(2, imageLoaded = true);
+    				$$invalidate(3, imageLoaded = true);
     			};
     		}
     	});
@@ -646,28 +832,50 @@ var app = (function () {
     		$$invalidate(0, prompt);
     	}
 
+    	const click_handler = () => {
+    		if (!prompt) $$invalidate(0, prompt = "Corey ");
+    	};
+
+    	const error_handler = () => $$invalidate(2, currentImageData = null);
+
     	$$self.$capture_state = () => ({
     		onMount,
     		afterUpdate,
     		prompt,
     		imageData,
+    		currentImageData,
     		imageLoaded,
     		dataSent,
+    		progressData,
+    		fetchProgress,
     		sendData
     	});
 
     	$$self.$inject_state = $$props => {
     		if ('prompt' in $$props) $$invalidate(0, prompt = $$props.prompt);
     		if ('imageData' in $$props) $$invalidate(1, imageData = $$props.imageData);
-    		if ('imageLoaded' in $$props) $$invalidate(2, imageLoaded = $$props.imageLoaded);
-    		if ('dataSent' in $$props) $$invalidate(3, dataSent = $$props.dataSent);
+    		if ('currentImageData' in $$props) $$invalidate(2, currentImageData = $$props.currentImageData);
+    		if ('imageLoaded' in $$props) $$invalidate(3, imageLoaded = $$props.imageLoaded);
+    		if ('dataSent' in $$props) $$invalidate(4, dataSent = $$props.dataSent);
+    		if ('progressData' in $$props) $$invalidate(5, progressData = $$props.progressData);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [prompt, imageData, imageLoaded, dataSent, sendData, input_input_handler];
+    	return [
+    		prompt,
+    		imageData,
+    		currentImageData,
+    		imageLoaded,
+    		dataSent,
+    		progressData,
+    		sendData,
+    		input_input_handler,
+    		click_handler,
+    		error_handler
+    	];
     }
 
     class App extends SvelteComponentDev {

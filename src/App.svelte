@@ -2,19 +2,42 @@
   import { onMount, afterUpdate } from "svelte";
   let prompt = "";
   let imageData = "";
+  let currentImageData = ""; // ADDED: Variable to hold the current image data
   let imageLoaded = false;
   let dataSent = false;
+  let progressData = null;
+
+  async function fetchProgress() {
+    const response = await fetch("https://ai.ericbacus.com/sdapi/v1/progress", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      mode: "cors",
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const result = await response.json();
+    progressData = result;
+
+    // ADDED: Update currentImageData with the current_image data
+    currentImageData = `data:image/png;base64,${result.current_image}`;
+
+    // If progress is not complete, fetch again
+    if (result.progress < 100) {
+      setTimeout(fetchProgress, 1000);
+    }
+  }
 
   async function sendData() {
     dataSent = true;
     let tempPrompt = prompt.replace(/corey/gi, "<lora:crzx_v09:1> ohwx man");
 
-    /* 
-		let args = [img_base64, true, '0', '/usr/src/app/models/roop/inswapper_128.onnx', 'CodeFormer', 1, null, 1, 'None', false, true];
-		#let alwayson_scripts = { "roop": { "args": args } };
-		*/
-
-    const response = await fetch("https://ai.ericbacus.com/sdapi/v1/txt2img", {
+    // ADDED: Moved the fetch operation into a separate variable
+    const responsePromise = fetch("https://ai.ericbacus.com/sdapi/v1/txt2img", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -22,11 +45,15 @@
       mode: "cors",
       body: JSON.stringify({
         prompt: tempPrompt,
-        steps: 64 /*, 
-				alwayson_scripts: alwayson_scripts
-				*/,
+        steps: 64,
       }),
     });
+
+    // ADDED: Start fetching progress immediately after sending the request
+    fetchProgress();
+
+    // ADDED: Await the response after starting the progress fetching
+    const response = await responsePromise;
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -49,14 +76,40 @@
 </script>
 
 <div class={dataSent ? "container sent" : "container"}>
-  <input bind:value={prompt} placeholder="Corey..." />
-  <button on:click={sendData}>Send</button>
+  <input
+    bind:value={prompt}
+    placeholder="Corey..."
+    on:click={() => {
+      if (!prompt) prompt = "Corey ";
+    }}
+  />
+  <button on:click={sendData} disabled={dataSent && !imageLoaded}>Send</button>
+  <!-- Here is the corrected change -->
 </div>
-<p>alpha v0.01</p>
+<p>alpha v0.02</p>
 {#if imageData}
   <div class="image-container">
     <img src={imageData} alt="" class={imageLoaded ? "fade-in" : ""} />
-    <!-- ideally, alt tag would be replaced by the prompt -->
+  </div>
+{/if}
+
+{#if currentImageData}
+  <div class="current-image-container">
+    <img
+      src={currentImageData}
+      alt="Current image"
+      class={imageLoaded ? "fade-in" : ""}
+      on:error={() => (currentImageData = null)}
+    />
+  </div>
+{/if}
+
+{#if progressData && !imageLoaded}
+  <!-- Added !imageLoaded condition -->
+  <div class="progress-container">
+    <p>Progress: {progressData.progress * 100}%</p>
+    <!-- Multiply progress by 100 -->
+    <!-- Display more progress data as needed -->
   </div>
 {/if}
 
@@ -80,11 +133,19 @@
     text-align: center;
   }
 
-  .image-container {
+  .image-container,
+  .progress-container,
+  .current-image-container {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+
+  .current-image-container img {
+    width: 512px;
+    height: 512px;
+    object-fit: cover;
   }
 
   img {
