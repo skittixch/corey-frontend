@@ -97,7 +97,7 @@
   <div class="current-image-container">
     <img
       src={currentImageData}
-      alt="Current image"
+      alt="output"
       class={imageLoaded ? "fade-in" : ""}
       on:error={() => (currentImageData = null)}
     />
