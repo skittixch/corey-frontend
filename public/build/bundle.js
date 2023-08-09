@@ -35,9 +35,6 @@ var app = (function () {
     function is_empty(obj) {
         return Object.keys(obj).length === 0;
     }
-    function null_to_empty(value) {
-        return value == null ? '' : value;
-    }
 
     const globals = (typeof window !== 'undefined'
         ? window
@@ -444,7 +441,7 @@ var app = (function () {
     const { Error: Error_1, console: console_1 } = globals;
     const file = "src\\App.svelte";
 
-    // (90:0) {#if imageData}
+    // (116:0) {#if imageData}
     function create_if_block_2(ctx) {
     	let div;
     	let img;
@@ -457,10 +454,10 @@ var app = (function () {
     			img = element("img");
     			if (!src_url_equal(img.src, img_src_value = /*imageData*/ ctx[1])) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "");
-    			attr_dev(img, "class", img_class_value = "" + (null_to_empty(/*imageLoaded*/ ctx[3] ? "fade-in" : "") + " svelte-uy0ir4"));
-    			add_location(img, file, 91, 4, 2519);
-    			attr_dev(div, "class", "image-container svelte-uy0ir4");
-    			add_location(div, file, 90, 2, 2484);
+    			attr_dev(img, "class", img_class_value = /*imageLoaded*/ ctx[3] ? "fade-in" : "");
+    			add_location(img, file, 117, 4, 4373);
+    			attr_dev(div, "class", "image-container");
+    			add_location(div, file, 116, 2, 4339);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -471,7 +468,7 @@ var app = (function () {
     				attr_dev(img, "src", img_src_value);
     			}
 
-    			if (dirty & /*imageLoaded*/ 8 && img_class_value !== (img_class_value = "" + (null_to_empty(/*imageLoaded*/ ctx[3] ? "fade-in" : "") + " svelte-uy0ir4"))) {
+    			if (dirty & /*imageLoaded*/ 8 && img_class_value !== (img_class_value = /*imageLoaded*/ ctx[3] ? "fade-in" : "")) {
     				attr_dev(img, "class", img_class_value);
     			}
     		},
@@ -484,14 +481,14 @@ var app = (function () {
     		block,
     		id: create_if_block_2.name,
     		type: "if",
-    		source: "(90:0) {#if imageData}",
+    		source: "(116:0) {#if imageData}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (96:0) {#if currentImageData}
+    // (125:0) {#if currentImageData}
     function create_if_block_1(ctx) {
     	let div;
     	let img;
@@ -505,11 +502,11 @@ var app = (function () {
     			div = element("div");
     			img = element("img");
     			if (!src_url_equal(img.src, img_src_value = /*currentImageData*/ ctx[2])) attr_dev(img, "src", img_src_value);
-    			attr_dev(img, "alt", "Current image");
-    			attr_dev(img, "class", img_class_value = "" + (null_to_empty(/*imageLoaded*/ ctx[3] ? "fade-in" : "") + " svelte-uy0ir4"));
-    			add_location(img, file, 97, 4, 2676);
-    			attr_dev(div, "class", "current-image-container svelte-uy0ir4");
-    			add_location(div, file, 96, 2, 2633);
+    			attr_dev(img, "alt", "output");
+    			attr_dev(img, "class", img_class_value = /*imageLoaded*/ ctx[3] ? "fade-in" : "");
+    			add_location(img, file, 126, 4, 4560);
+    			attr_dev(div, "class", "current-image-container");
+    			add_location(div, file, 125, 2, 4518);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -525,7 +522,7 @@ var app = (function () {
     				attr_dev(img, "src", img_src_value);
     			}
 
-    			if (dirty & /*imageLoaded*/ 8 && img_class_value !== (img_class_value = "" + (null_to_empty(/*imageLoaded*/ ctx[3] ? "fade-in" : "") + " svelte-uy0ir4"))) {
+    			if (dirty & /*imageLoaded*/ 8 && img_class_value !== (img_class_value = /*imageLoaded*/ ctx[3] ? "fade-in" : "")) {
     				attr_dev(img, "class", img_class_value);
     			}
     		},
@@ -540,14 +537,14 @@ var app = (function () {
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(96:0) {#if currentImageData}",
+    		source: "(125:0) {#if currentImageData}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (107:0) {#if progressData && !imageLoaded}
+    // (136:0) {#if progressData && !imageLoaded}
     function create_if_block(ctx) {
     	let div;
     	let p;
@@ -563,9 +560,9 @@ var app = (function () {
     			t0 = text("Progress: ");
     			t1 = text(t1_value);
     			t2 = text("%");
-    			add_location(p, file, 109, 4, 2977);
-    			attr_dev(div, "class", "progress-container svelte-uy0ir4");
-    			add_location(div, file, 108, 2, 2939);
+    			add_location(p, file, 138, 4, 4842);
+    			attr_dev(div, "class", "progress-container");
+    			add_location(div, file, 137, 2, 4805);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -586,7 +583,7 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(107:0) {#if progressData && !imageLoaded}",
+    		source: "(136:0) {#if progressData && !imageLoaded}",
     		ctx
     	});
 
@@ -594,16 +591,21 @@ var app = (function () {
     }
 
     function create_fragment(ctx) {
-    	let div;
-    	let input;
+    	let head;
+    	let link;
     	let t0;
-    	let button;
+    	let div1;
+    	let div0;
+    	let input;
     	let t1;
+    	let button;
+    	let img;
+    	let img_src_value;
     	let button_disabled_value;
-    	let div_class_value;
+    	let div1_class_value;
     	let t2;
+    	let t3;
     	let p;
-    	let t4;
     	let t5;
     	let t6;
     	let if_block2_anchor;
@@ -615,44 +617,62 @@ var app = (function () {
 
     	const block = {
     		c: function create() {
-    			div = element("div");
-    			input = element("input");
+    			head = element("head");
+    			link = element("link");
     			t0 = space();
+    			div1 = element("div");
+    			div0 = element("div");
+    			input = element("input");
+    			t1 = space();
     			button = element("button");
-    			t1 = text("Send");
+    			img = element("img");
     			t2 = space();
-    			p = element("p");
-    			p.textContent = "alpha v0.02";
-    			t4 = space();
     			if (if_block0) if_block0.c();
+    			t3 = space();
+    			p = element("p");
+    			p.textContent = "alpha v0.0.3";
     			t5 = space();
     			if (if_block1) if_block1.c();
     			t6 = space();
     			if (if_block2) if_block2.c();
     			if_block2_anchor = empty();
+    			attr_dev(link, "rel", "stylesheet");
+    			attr_dev(link, "href", "./AppStyle.css");
+    			add_location(link, file, 93, 2, 3744);
+    			add_location(head, file, 92, 0, 3735);
     			attr_dev(input, "placeholder", "Corey...");
-    			attr_dev(input, "class", "svelte-uy0ir4");
-    			add_location(input, file, 78, 2, 2178);
+    			add_location(input, file, 99, 4, 3942);
+    			if (!src_url_equal(img.src, img_src_value = "/send.svg")) attr_dev(img, "src", img_src_value);
+    			attr_dev(img, "alt", "Send");
+    			attr_dev(img, "class", "arrow-icon");
+    			add_location(img, file, 110, 7, 4197);
+    			attr_dev(button, "class", "send-button");
     			button.disabled = button_disabled_value = /*dataSent*/ ctx[4] && !/*imageLoaded*/ ctx[3];
-    			add_location(button, file, 85, 2, 2317);
-    			attr_dev(div, "class", div_class_value = "" + (null_to_empty(/*dataSent*/ ctx[4] ? "container sent" : "container") + " svelte-uy0ir4"));
-    			add_location(div, file, 77, 0, 2119);
-    			add_location(p, file, 88, 0, 2445);
+    			add_location(button, file, 106, 4, 4088);
+    			attr_dev(div0, "class", "input-container");
+    			add_location(div0, file, 98, 2, 3908);
+    			attr_dev(div1, "class", div1_class_value = /*dataSent*/ ctx[4] ? "container sent" : "container");
+    			add_location(div1, file, 97, 0, 3850);
+    			add_location(p, file, 122, 0, 4472);
     		},
     		l: function claim(nodes) {
     			throw new Error_1("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, div, anchor);
-    			append_dev(div, input);
+    			insert_dev(target, head, anchor);
+    			append_dev(head, link);
+    			insert_dev(target, t0, anchor);
+    			insert_dev(target, div1, anchor);
+    			append_dev(div1, div0);
+    			append_dev(div0, input);
     			set_input_value(input, /*prompt*/ ctx[0]);
-    			append_dev(div, t0);
-    			append_dev(div, button);
-    			append_dev(button, t1);
+    			append_dev(div0, t1);
+    			append_dev(div0, button);
+    			append_dev(button, img);
     			insert_dev(target, t2, anchor);
-    			insert_dev(target, p, anchor);
-    			insert_dev(target, t4, anchor);
     			if (if_block0) if_block0.m(target, anchor);
+    			insert_dev(target, t3, anchor);
+    			insert_dev(target, p, anchor);
     			insert_dev(target, t5, anchor);
     			if (if_block1) if_block1.m(target, anchor);
     			insert_dev(target, t6, anchor);
@@ -678,8 +698,8 @@ var app = (function () {
     				prop_dev(button, "disabled", button_disabled_value);
     			}
 
-    			if (dirty & /*dataSent*/ 16 && div_class_value !== (div_class_value = "" + (null_to_empty(/*dataSent*/ ctx[4] ? "container sent" : "container") + " svelte-uy0ir4"))) {
-    				attr_dev(div, "class", div_class_value);
+    			if (dirty & /*dataSent*/ 16 && div1_class_value !== (div1_class_value = /*dataSent*/ ctx[4] ? "container sent" : "container")) {
+    				attr_dev(div1, "class", div1_class_value);
     			}
 
     			if (/*imageData*/ ctx[1]) {
@@ -688,7 +708,7 @@ var app = (function () {
     				} else {
     					if_block0 = create_if_block_2(ctx);
     					if_block0.c();
-    					if_block0.m(t5.parentNode, t5);
+    					if_block0.m(t3.parentNode, t3);
     				}
     			} else if (if_block0) {
     				if_block0.d(1);
@@ -724,11 +744,13 @@ var app = (function () {
     		i: noop,
     		o: noop,
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div);
+    			if (detaching) detach_dev(head);
+    			if (detaching) detach_dev(t0);
+    			if (detaching) detach_dev(div1);
     			if (detaching) detach_dev(t2);
-    			if (detaching) detach_dev(p);
-    			if (detaching) detach_dev(t4);
     			if (if_block0) if_block0.d(detaching);
+    			if (detaching) detach_dev(t3);
+    			if (detaching) detach_dev(p);
     			if (detaching) detach_dev(t5);
     			if (if_block1) if_block1.d(detaching);
     			if (detaching) detach_dev(t6);
@@ -779,20 +801,31 @@ var app = (function () {
 
     		// If progress is not complete, fetch again
     		if (result.progress < 100) {
+    			$$invalidate(3, imageLoaded = true);
     			setTimeout(fetchProgress, 1000);
     		}
     	}
 
     	async function sendData() {
+    		console.log("sendData called, initial imageLoaded:", imageLoaded);
+    		$$invalidate(3, imageLoaded = false);
     		$$invalidate(4, dataSent = true);
-    		let tempPrompt = prompt.replace(/corey/gi, "<lora:crzx_v09:1> ohwx man");
+    		let tempPrompt = prompt.replace(/corey/gi, "<lora:crzx_v09:1> (ohwx:1.4) man");
+    		tempPrompt += " (excited:.1), epic composition, renaissance composition, rule of thirds, clarity, award winning, blonde curly hair and beard <lora:actionshot:1>";
 
     		// ADDED: Moved the fetch operation into a separate variable
     		const responsePromise = fetch("https://ai.ericbacus.com/sdapi/v1/txt2img", {
     			method: "POST",
     			headers: { "Content-Type": "application/json" },
     			mode: "cors",
-    			body: JSON.stringify({ prompt: tempPrompt, steps: 64 })
+    			body: JSON.stringify({
+    				cfg_scale: 7,
+    				prompt: tempPrompt,
+    				negative_prompt: "nsfw CyberRealistic_Negative-neg realisticvision-negative-embedding, nsfw, canvas frame, cartoon, 3d, ((disfigured)), ((bad art)), ((deformed)),((extra limbs)),((close up)),((b&w)), wierd colors, blurry, (((duplicate))), ((morbid)), ((mutilated)), [out of frame], extra fingers, mutated hands, ((poorly drawn hands)), ((poorly drawn face)), (((mutation))), (((deformed))), ((ugly)), blurry, ((bad anatomy)), (((bad proportions))), ((extra limbs)), cloned face, (((disfigured))), out of frame, ugly, extra limbs, (bad anatomy), gross proportions, (malformed limbs), ((missing arms)), ((missing legs)), (((extra arms))), (((extra legs))), mutated hands, (fused fingers), (too many fingers), (((long neck))), Photoshop, video game, ugly, tiling, poorly drawn hands, poorly drawn feet, poorly drawn face, out of frame, mutation, mutated, extra limbs, extra legs, extra arms, disfigured, deformed, cross-eye, body out of frame, blurry, bad art, bad anatomy, 3d render, (skinny:1.3), muscular, eyeliner, defined curls, mullet, quaffed, stylish, sharp pointy teeth, bow in hair, vampire, fade, flat top, cheek crease, dimples, (closeup:1.5), portrait, old, handsome",
+    				steps: 50,
+    				sampler_name: "DPM++ 2M SDE Karras",
+    				restore_faces: true
+    			})
     		});
 
     		// ADDED: Start fetching progress immediately after sending the request
@@ -808,6 +841,8 @@ var app = (function () {
     		const result = await response.json();
     		console.log(result);
     		$$invalidate(1, imageData = `data:image/png;base64,${result.images[0]}`);
+    		$$invalidate(3, imageLoaded = true);
+    		console.log("Data Sent, imageLoaded:", imageLoaded);
     	}
 
     	afterUpdate(() => {

@@ -28,13 +28,21 @@
 
     // If progress is not complete, fetch again
     if (result.progress < 100) {
+      imageLoaded = true;
       setTimeout(fetchProgress, 1000);
     }
   }
 
   async function sendData() {
+    console.log("sendData called, initial imageLoaded:", imageLoaded);
+    imageLoaded = false;
     dataSent = true;
-    let tempPrompt = prompt.replace(/corey/gi, "<lora:crzx_v09:1> ohwx man");
+    let tempPrompt = prompt.replace(
+      /corey/gi,
+      "<lora:crzx_v09:1> (ohwx:1.4) man"
+    );
+    tempPrompt +=
+      " (excited:.1), epic composition, renaissance composition, rule of thirds, clarity, award winning, blonde curly hair and beard <lora:actionshot:1>";
 
     // ADDED: Moved the fetch operation into a separate variable
     const responsePromise = fetch("https://ai.ericbacus.com/sdapi/v1/txt2img", {
@@ -44,8 +52,13 @@
       },
       mode: "cors",
       body: JSON.stringify({
+        cfg_scale: 7,
         prompt: tempPrompt,
-        steps: 64,
+        negative_prompt:
+          "nsfw CyberRealistic_Negative-neg realisticvision-negative-embedding, nsfw, canvas frame, cartoon, 3d, ((disfigured)), ((bad art)), ((deformed)),((extra limbs)),((close up)),((b&w)), wierd colors, blurry, (((duplicate))), ((morbid)), ((mutilated)), [out of frame], extra fingers, mutated hands, ((poorly drawn hands)), ((poorly drawn face)), (((mutation))), (((deformed))), ((ugly)), blurry, ((bad anatomy)), (((bad proportions))), ((extra limbs)), cloned face, (((disfigured))), out of frame, ugly, extra limbs, (bad anatomy), gross proportions, (malformed limbs), ((missing arms)), ((missing legs)), (((extra arms))), (((extra legs))), mutated hands, (fused fingers), (too many fingers), (((long neck))), Photoshop, video game, ugly, tiling, poorly drawn hands, poorly drawn feet, poorly drawn face, out of frame, mutation, mutated, extra limbs, extra legs, extra arms, disfigured, deformed, cross-eye, body out of frame, blurry, bad art, bad anatomy, 3d render, (skinny:1.3), muscular, eyeliner, defined curls, mullet, quaffed, stylish, sharp pointy teeth, bow in hair, vampire, fade, flat top, cheek crease, dimples, (closeup:1.5), portrait, old, handsome",
+        steps: 50,
+        sampler_name: "DPM++ 2M SDE Karras",
+        restore_faces: true,
       }),
     });
 
@@ -62,6 +75,8 @@
     const result = await response.json();
     console.log(result);
     imageData = `data:image/png;base64,${result.images[0]}`;
+    imageLoaded = true;
+    console.log("Data Sent, imageLoaded:", imageLoaded);
   }
 
   afterUpdate(() => {
@@ -75,23 +90,37 @@
   });
 </script>
 
+<head>
+  <link rel="stylesheet" href="./AppStyle.css" />
+</head>
+
+<!--this section is where the image will load-->
 <div class={dataSent ? "container sent" : "container"}>
-  <input
-    bind:value={prompt}
-    placeholder="Corey..."
-    on:click={() => {
-      if (!prompt) prompt = "Corey ";
-    }}
-  />
-  <button on:click={sendData} disabled={dataSent && !imageLoaded}>Send</button>
+  <div class="input-container">
+    <input
+      bind:value={prompt}
+      placeholder="Corey..."
+      on:click={() => {
+        if (!prompt) prompt = "Corey ";
+      }}
+    />
+    <button
+      class="send-button"
+      on:click={sendData}
+      disabled={dataSent && !imageLoaded}
+      ><img src="/send.svg" alt="Send" class="arrow-icon" /></button
+    >
+  </div>
   <!-- Here is the corrected change -->
 </div>
-<p>alpha v0.02</p>
 {#if imageData}
   <div class="image-container">
     <img src={imageData} alt="" class={imageLoaded ? "fade-in" : ""} />
   </div>
 {/if}
+
+<!--version-->
+<p>alpha v0.0.3</p>
 
 {#if currentImageData}
   <div class="current-image-container">
@@ -112,50 +141,3 @@
     <!-- Display more progress data as needed -->
   </div>
 {/if}
-
-<style>
-  .container {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%);
-    transition: top 0.5s ease-in-out;
-  }
-
-  .container.sent {
-    top: calc(50% + (512px / 2 + 32px));
-  }
-
-  input {
-    border-radius: 25px;
-    width: 200px;
-    height: 25px;
-    text-align: center;
-  }
-
-  .image-container,
-  .progress-container,
-  .current-image-container {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .current-image-container img {
-    width: 512px;
-    height: 512px;
-    object-fit: cover;
-  }
-
-  img {
-    opacity: 0;
-    animation: fadeIn 1s ease-in-out forwards;
-  }
-
-  @keyframes fadeIn {
-    to {
-      opacity: 1;
-    }
-  }
-</style>
