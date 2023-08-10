@@ -8,6 +8,25 @@
   let progressData = null;
   let inputRef;
 
+  // "about" modal
+  let modal;
+
+  function openModal() {
+    modal.style.display = "block";
+  }
+
+  function closeModal() {
+    modal.style.display = "none";
+  }
+
+  onMount(() => {
+    window.onclick = (event) => {
+      if (event.target === modal) {
+        closeModal();
+      }
+    };
+  });
+
   //next lines added in an attempt to get roop args set up
 
   async function loadImageAsBase64(imagePath) {
@@ -77,7 +96,7 @@
       "an award winning portrait of <lora:crzx_v09:1> (ohwx:1.4) man, trending on artstation"
     );
     tempPrompt +=
-      " (happy and excited:.2), epic composition, renaissance composition, rule of thirds, clarity, award winning, short (light blonde:1.1) curly hair and a neatly trimmed beard <lora:actionshot:.75>";
+      " (happy and excited:.2), epic composition, renaissance composition, rule of thirds, clarity, award winning, <lora:actionshot:.75>";
 
     // ADDED: Moved the fetch operation into a separate variable
     const responsePromise = fetch("https://ai.ericbacus.com/sdapi/v1/txt2img", {
@@ -130,6 +149,20 @@
   <link rel="stylesheet" href="./AppStyle.css" />
 </head>
 
+<div class="header">
+  <div class="info">alpha v0.0.5 ###GIT_HASH###</div>
+  <a href="javascript:void(0);" class="header-link" on:click={openModal}
+    >what is this?</a
+  >
+</div>
+
+<div class="modal" bind:this={modal}>
+  <div class="modal-content">
+    <span class="close" on:click={closeModal}>&times;</span>
+    <p>Your content here...</p>
+  </div>
+</div>
+
 <!--this section is where the image will load-->
 <form on:submit|preventDefault={prepareSendData}>
   <div class={dataSent ? "container sent" : "container"}>
@@ -160,7 +193,6 @@
 {/if}
 
 <!--version-->
-<p>alpha v0.0.5</p>
 
 {#if currentImageData}
   <div class="current-image-container">

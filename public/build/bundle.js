@@ -448,7 +448,7 @@ var app = (function () {
     const { Error: Error_1, console: console_1 } = globals;
     const file = "src\\App.svelte";
 
-    // (156:0) {#if imageData}
+    // (189:0) {#if imageData}
     function create_if_block_2(ctx) {
     	let div;
     	let img;
@@ -462,9 +462,9 @@ var app = (function () {
     			if (!src_url_equal(img.src, img_src_value = /*imageData*/ ctx[1])) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "");
     			attr_dev(img, "class", img_class_value = /*imageLoaded*/ ctx[3] ? "fade-in" : "");
-    			add_location(img, file, 157, 4, 5658);
+    			add_location(img, file, 190, 4, 6283);
     			attr_dev(div, "class", "image-container");
-    			add_location(div, file, 156, 2, 5623);
+    			add_location(div, file, 189, 2, 6248);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -488,14 +488,14 @@ var app = (function () {
     		block,
     		id: create_if_block_2.name,
     		type: "if",
-    		source: "(156:0) {#if imageData}",
+    		source: "(189:0) {#if imageData}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (165:0) {#if currentImageData}
+    // (197:0) {#if currentImageData}
     function create_if_block_1(ctx) {
     	let div;
     	let img;
@@ -511,16 +511,16 @@ var app = (function () {
     			if (!src_url_equal(img.src, img_src_value = /*currentImageData*/ ctx[2])) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "output");
     			attr_dev(img, "class", img_class_value = /*imageLoaded*/ ctx[3] ? "fade-in" : "");
-    			add_location(img, file, 166, 4, 5854);
+    			add_location(img, file, 198, 4, 6458);
     			attr_dev(div, "class", "current-image-container");
-    			add_location(div, file, 165, 2, 5811);
+    			add_location(div, file, 197, 2, 6415);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
     			append_dev(div, img);
 
     			if (!mounted) {
-    				dispose = listen_dev(img, "error", /*error_handler*/ ctx[11], false, false, false, false);
+    				dispose = listen_dev(img, "error", /*error_handler*/ ctx[15], false, false, false, false);
     				mounted = true;
     			}
     		},
@@ -544,14 +544,14 @@ var app = (function () {
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(165:0) {#if currentImageData}",
+    		source: "(197:0) {#if currentImageData}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (176:0) {#if progressData && !imageLoaded}
+    // (208:0) {#if progressData && !imageLoaded}
     function create_if_block(ctx) {
     	let div;
     	let p;
@@ -567,9 +567,9 @@ var app = (function () {
     			t0 = text("Progress: ");
     			t1 = text(t1_value);
     			t2 = text("%");
-    			add_location(p, file, 178, 4, 6148);
+    			add_location(p, file, 210, 4, 6752);
     			attr_dev(div, "class", "progress-container");
-    			add_location(div, file, 177, 2, 6110);
+    			add_location(div, file, 209, 2, 6714);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -590,7 +590,7 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(176:0) {#if progressData && !imageLoaded}",
+    		source: "(208:0) {#if progressData && !imageLoaded}",
     		ctx
     	});
 
@@ -601,21 +601,30 @@ var app = (function () {
     	let head;
     	let link;
     	let t0;
-    	let form;
     	let div1;
     	let div0;
+    	let t2;
+    	let a;
+    	let t4;
+    	let div3;
+    	let div2;
+    	let span;
+    	let t6;
+    	let p;
+    	let t8;
+    	let form;
+    	let div5;
+    	let div4;
     	let input;
-    	let t1;
+    	let t9;
     	let button;
     	let img;
     	let img_src_value;
     	let button_disabled_value;
-    	let div1_class_value;
-    	let t2;
-    	let t3;
-    	let p;
-    	let t5;
-    	let t6;
+    	let div5_class_value;
+    	let t10;
+    	let t11;
+    	let t12;
     	let if_block2_anchor;
     	let mounted;
     	let dispose;
@@ -628,43 +637,68 @@ var app = (function () {
     			head = element("head");
     			link = element("link");
     			t0 = space();
-    			form = element("form");
     			div1 = element("div");
     			div0 = element("div");
+    			div0.textContent = "alpha v0.0.5 ###GIT_HASH###";
+    			t2 = space();
+    			a = element("a");
+    			a.textContent = "what is this?";
+    			t4 = space();
+    			div3 = element("div");
+    			div2 = element("div");
+    			span = element("span");
+    			span.textContent = "×";
+    			t6 = space();
+    			p = element("p");
+    			p.textContent = "Your content here...";
+    			t8 = space();
+    			form = element("form");
+    			div5 = element("div");
+    			div4 = element("div");
     			input = element("input");
-    			t1 = space();
+    			t9 = space();
     			button = element("button");
     			img = element("img");
-    			t2 = space();
+    			t10 = space();
     			if (if_block0) if_block0.c();
-    			t3 = space();
-    			p = element("p");
-    			p.textContent = "alpha v0.0.5";
-    			t5 = space();
+    			t11 = space();
     			if (if_block1) if_block1.c();
-    			t6 = space();
+    			t12 = space();
     			if (if_block2) if_block2.c();
     			if_block2_anchor = empty();
     			attr_dev(link, "rel", "stylesheet");
     			attr_dev(link, "href", "./AppStyle.css");
-    			add_location(link, file, 129, 2, 4882);
-    			add_location(head, file, 128, 0, 4872);
+    			add_location(link, file, 148, 2, 5133);
+    			add_location(head, file, 147, 0, 5123);
+    			attr_dev(div0, "class", "info");
+    			add_location(div0, file, 152, 2, 5217);
+    			attr_dev(a, "href", "javascript:void(0);");
+    			attr_dev(a, "class", "header-link");
+    			add_location(a, file, 153, 2, 5272);
+    			attr_dev(div1, "class", "header");
+    			add_location(div1, file, 151, 0, 5193);
+    			attr_dev(span, "class", "close");
+    			add_location(span, file, 160, 4, 5456);
+    			add_location(p, file, 161, 4, 5518);
+    			attr_dev(div2, "class", "modal-content");
+    			add_location(div2, file, 159, 2, 5423);
+    			attr_dev(div3, "class", "modal");
+    			add_location(div3, file, 158, 0, 5382);
     			attr_dev(input, "placeholder", "Corey...");
-    			add_location(input, file, 136, 6, 5143);
+    			add_location(input, file, 169, 6, 5768);
     			if (!src_url_equal(img.src, img_src_value = "./send.svg")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "Send");
     			attr_dev(img, "class", "arrow-icon");
-    			add_location(img, file, 148, 9, 5455);
+    			add_location(img, file, 181, 9, 6080);
     			attr_dev(button, "class", "send-button");
     			attr_dev(button, "type", "submit");
     			button.disabled = button_disabled_value = /*dataSent*/ ctx[4] && !/*imageLoaded*/ ctx[3];
-    			add_location(button, file, 144, 6, 5340);
-    			attr_dev(div0, "class", "input-container");
-    			add_location(div0, file, 135, 4, 5106);
-    			attr_dev(div1, "class", div1_class_value = /*dataSent*/ ctx[4] ? "container sent" : "container");
-    			add_location(div1, file, 134, 2, 5045);
-    			add_location(form, file, 133, 0, 4992);
-    			add_location(p, file, 162, 0, 5762);
+    			add_location(button, file, 177, 6, 5965);
+    			attr_dev(div4, "class", "input-container");
+    			add_location(div4, file, 168, 4, 5731);
+    			attr_dev(div5, "class", div5_class_value = /*dataSent*/ ctx[4] ? "container sent" : "container");
+    			add_location(div5, file, 167, 2, 5670);
+    			add_location(form, file, 166, 0, 5617);
     		},
     		l: function claim(nodes) {
     			throw new Error_1("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -673,30 +707,42 @@ var app = (function () {
     			insert_dev(target, head, anchor);
     			append_dev(head, link);
     			insert_dev(target, t0, anchor);
-    			insert_dev(target, form, anchor);
-    			append_dev(form, div1);
+    			insert_dev(target, div1, anchor);
     			append_dev(div1, div0);
-    			append_dev(div0, input);
-    			/*input_binding*/ ctx[8](input);
+    			append_dev(div1, t2);
+    			append_dev(div1, a);
+    			insert_dev(target, t4, anchor);
+    			insert_dev(target, div3, anchor);
+    			append_dev(div3, div2);
+    			append_dev(div2, span);
+    			append_dev(div2, t6);
+    			append_dev(div2, p);
+    			/*div3_binding*/ ctx[11](div3);
+    			insert_dev(target, t8, anchor);
+    			insert_dev(target, form, anchor);
+    			append_dev(form, div5);
+    			append_dev(div5, div4);
+    			append_dev(div4, input);
+    			/*input_binding*/ ctx[12](input);
     			set_input_value(input, /*prompt*/ ctx[0]);
-    			append_dev(div0, t1);
-    			append_dev(div0, button);
+    			append_dev(div4, t9);
+    			append_dev(div4, button);
     			append_dev(button, img);
-    			insert_dev(target, t2, anchor);
+    			insert_dev(target, t10, anchor);
     			if (if_block0) if_block0.m(target, anchor);
-    			insert_dev(target, t3, anchor);
-    			insert_dev(target, p, anchor);
-    			insert_dev(target, t5, anchor);
+    			insert_dev(target, t11, anchor);
     			if (if_block1) if_block1.m(target, anchor);
-    			insert_dev(target, t6, anchor);
+    			insert_dev(target, t12, anchor);
     			if (if_block2) if_block2.m(target, anchor);
     			insert_dev(target, if_block2_anchor, anchor);
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(input, "input", /*input_input_handler*/ ctx[9]),
-    					listen_dev(input, "click", /*click_handler*/ ctx[10], false, false, false, false),
-    					listen_dev(form, "submit", prevent_default(/*prepareSendData*/ ctx[7]), false, true, false, false)
+    					listen_dev(a, "click", /*openModal*/ ctx[8], false, false, false, false),
+    					listen_dev(span, "click", /*closeModal*/ ctx[9], false, false, false, false),
+    					listen_dev(input, "input", /*input_input_handler*/ ctx[13]),
+    					listen_dev(input, "click", /*click_handler*/ ctx[14], false, false, false, false),
+    					listen_dev(form, "submit", prevent_default(/*prepareSendData*/ ctx[10]), false, true, false, false)
     				];
 
     				mounted = true;
@@ -711,8 +757,8 @@ var app = (function () {
     				prop_dev(button, "disabled", button_disabled_value);
     			}
 
-    			if (dirty & /*dataSent*/ 16 && div1_class_value !== (div1_class_value = /*dataSent*/ ctx[4] ? "container sent" : "container")) {
-    				attr_dev(div1, "class", div1_class_value);
+    			if (dirty & /*dataSent*/ 16 && div5_class_value !== (div5_class_value = /*dataSent*/ ctx[4] ? "container sent" : "container")) {
+    				attr_dev(div5, "class", div5_class_value);
     			}
 
     			if (/*imageData*/ ctx[1]) {
@@ -721,7 +767,7 @@ var app = (function () {
     				} else {
     					if_block0 = create_if_block_2(ctx);
     					if_block0.c();
-    					if_block0.m(t3.parentNode, t3);
+    					if_block0.m(t11.parentNode, t11);
     				}
     			} else if (if_block0) {
     				if_block0.d(1);
@@ -734,7 +780,7 @@ var app = (function () {
     				} else {
     					if_block1 = create_if_block_1(ctx);
     					if_block1.c();
-    					if_block1.m(t6.parentNode, t6);
+    					if_block1.m(t12.parentNode, t12);
     				}
     			} else if (if_block1) {
     				if_block1.d(1);
@@ -759,15 +805,18 @@ var app = (function () {
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(head);
     			if (detaching) detach_dev(t0);
+    			if (detaching) detach_dev(div1);
+    			if (detaching) detach_dev(t4);
+    			if (detaching) detach_dev(div3);
+    			/*div3_binding*/ ctx[11](null);
+    			if (detaching) detach_dev(t8);
     			if (detaching) detach_dev(form);
-    			/*input_binding*/ ctx[8](null);
-    			if (detaching) detach_dev(t2);
+    			/*input_binding*/ ctx[12](null);
+    			if (detaching) detach_dev(t10);
     			if (if_block0) if_block0.d(detaching);
-    			if (detaching) detach_dev(t3);
-    			if (detaching) detach_dev(p);
-    			if (detaching) detach_dev(t5);
+    			if (detaching) detach_dev(t11);
     			if (if_block1) if_block1.d(detaching);
-    			if (detaching) detach_dev(t6);
+    			if (detaching) detach_dev(t12);
     			if (if_block2) if_block2.d(detaching);
     			if (detaching) detach_dev(if_block2_anchor);
     			mounted = false;
@@ -807,6 +856,25 @@ var app = (function () {
     	let dataSent = false;
     	let progressData = null;
     	let inputRef;
+
+    	// "about" modal
+    	let modal;
+
+    	function openModal() {
+    		$$invalidate(7, modal.style.display = "block", modal);
+    	}
+
+    	function closeModal() {
+    		$$invalidate(7, modal.style.display = "none", modal);
+    	}
+
+    	onMount(() => {
+    		window.onclick = event => {
+    			if (event.target === modal) {
+    				closeModal();
+    			}
+    		};
+    	});
 
     	async function prepareSendData() {
     		let imagePath = "./roop.png";
@@ -862,7 +930,7 @@ var app = (function () {
     		$$invalidate(3, imageLoaded = false);
     		$$invalidate(4, dataSent = true);
     		let tempPrompt = prompt.replace(/corey/gi, "an award winning portrait of <lora:crzx_v09:1> (ohwx:1.4) man, trending on artstation");
-    		tempPrompt += " (happy and excited:.2), epic composition, renaissance composition, rule of thirds, clarity, award winning, short (light blonde:1.1) curly hair and a neatly trimmed beard <lora:actionshot:.75>";
+    		tempPrompt += " (happy and excited:.2), epic composition, renaissance composition, rule of thirds, clarity, award winning, <lora:actionshot:.75>";
 
     		// ADDED: Moved the fetch operation into a separate variable
     		const responsePromise = fetch("https://ai.ericbacus.com/sdapi/v1/txt2img", {
@@ -914,6 +982,13 @@ var app = (function () {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console_1.warn(`<App> was created with unknown prop '${key}'`);
     	});
 
+    	function div3_binding($$value) {
+    		binding_callbacks[$$value ? 'unshift' : 'push'](() => {
+    			modal = $$value;
+    			$$invalidate(7, modal);
+    		});
+    	}
+
     	function input_binding($$value) {
     		binding_callbacks[$$value ? 'unshift' : 'push'](() => {
     			inputRef = $$value;
@@ -942,6 +1017,9 @@ var app = (function () {
     		dataSent,
     		progressData,
     		inputRef,
+    		modal,
+    		openModal,
+    		closeModal,
     		loadImageAsBase64,
     		prepareSendData,
     		fetchProgress,
@@ -956,6 +1034,7 @@ var app = (function () {
     		if ('dataSent' in $$props) $$invalidate(4, dataSent = $$props.dataSent);
     		if ('progressData' in $$props) $$invalidate(5, progressData = $$props.progressData);
     		if ('inputRef' in $$props) $$invalidate(6, inputRef = $$props.inputRef);
+    		if ('modal' in $$props) $$invalidate(7, modal = $$props.modal);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -970,7 +1049,11 @@ var app = (function () {
     		dataSent,
     		progressData,
     		inputRef,
+    		modal,
+    		openModal,
+    		closeModal,
     		prepareSendData,
+    		div3_binding,
     		input_binding,
     		input_input_handler,
     		click_handler,
