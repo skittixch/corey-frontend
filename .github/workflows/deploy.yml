@@ -12,6 +12,14 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+      
+    - name: Increment version number
+      run: |
+        sed -i "s/alpha v\(.*\)/alpha v$((\1 + 1))/g" src/app.svelte
+
+    - name: Replace GIT_HASH placeholder with commit hash
+      run: |
+        sed -i "s/###GIT_HASH###/${GITHUB_SHA}/g" src/app.svelte
 
     - name: Use Node.js
       uses: actions/setup-node@v2
