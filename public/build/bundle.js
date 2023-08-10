@@ -448,7 +448,7 @@ var app = (function () {
     const { Error: Error_1, console: console_1 } = globals;
     const file = "src\\App.svelte";
 
-    // (189:0) {#if imageData}
+    // (193:0) {#if imageData}
     function create_if_block_2(ctx) {
     	let div;
     	let img;
@@ -462,9 +462,9 @@ var app = (function () {
     			if (!src_url_equal(img.src, img_src_value = /*imageData*/ ctx[1])) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "");
     			attr_dev(img, "class", img_class_value = /*imageLoaded*/ ctx[3] ? "fade-in" : "");
-    			add_location(img, file, 190, 4, 6283);
+    			add_location(img, file, 194, 4, 6462);
     			attr_dev(div, "class", "image-container");
-    			add_location(div, file, 189, 2, 6248);
+    			add_location(div, file, 193, 2, 6427);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -488,14 +488,14 @@ var app = (function () {
     		block,
     		id: create_if_block_2.name,
     		type: "if",
-    		source: "(189:0) {#if imageData}",
+    		source: "(193:0) {#if imageData}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (197:0) {#if currentImageData}
+    // (201:0) {#if currentImageData}
     function create_if_block_1(ctx) {
     	let div;
     	let img;
@@ -511,9 +511,9 @@ var app = (function () {
     			if (!src_url_equal(img.src, img_src_value = /*currentImageData*/ ctx[2])) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "output");
     			attr_dev(img, "class", img_class_value = /*imageLoaded*/ ctx[3] ? "fade-in" : "");
-    			add_location(img, file, 198, 4, 6458);
+    			add_location(img, file, 202, 4, 6637);
     			attr_dev(div, "class", "current-image-container");
-    			add_location(div, file, 197, 2, 6415);
+    			add_location(div, file, 201, 2, 6594);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -544,14 +544,14 @@ var app = (function () {
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(197:0) {#if currentImageData}",
+    		source: "(201:0) {#if currentImageData}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (208:0) {#if progressData && !imageLoaded}
+    // (212:0) {#if progressData && !imageLoaded}
     function create_if_block(ctx) {
     	let div;
     	let p;
@@ -567,9 +567,9 @@ var app = (function () {
     			t0 = text("Progress: ");
     			t1 = text(t1_value);
     			t2 = text("%");
-    			add_location(p, file, 210, 4, 6752);
+    			add_location(p, file, 214, 4, 6931);
     			attr_dev(div, "class", "progress-container");
-    			add_location(div, file, 209, 2, 6714);
+    			add_location(div, file, 213, 2, 6893);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -590,7 +590,7 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(208:0) {#if progressData && !imageLoaded}",
+    		source: "(212:0) {#if progressData && !imageLoaded}",
     		ctx
     	});
 
@@ -650,7 +650,7 @@ var app = (function () {
     			span.textContent = "×";
     			t6 = space();
     			p = element("p");
-    			p.textContent = "Your content here...";
+    			p.textContent = "My best friend Corey passed away on April 15th, 2023. He left me a whole\r\n      bunch of computer shit, and this is what I'm doing with it to keep his\r\n      memory alive. Miss you bro.";
     			t8 = space();
     			form = element("form");
     			div5 = element("div");
@@ -685,20 +685,20 @@ var app = (function () {
     			attr_dev(div3, "class", "modal");
     			add_location(div3, file, 158, 0, 5382);
     			attr_dev(input, "placeholder", "Corey...");
-    			add_location(input, file, 169, 6, 5768);
+    			add_location(input, file, 173, 6, 5947);
     			if (!src_url_equal(img.src, img_src_value = "./send.svg")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "Send");
     			attr_dev(img, "class", "arrow-icon");
-    			add_location(img, file, 181, 9, 6080);
+    			add_location(img, file, 185, 9, 6259);
     			attr_dev(button, "class", "send-button");
     			attr_dev(button, "type", "submit");
     			button.disabled = button_disabled_value = /*dataSent*/ ctx[4] && !/*imageLoaded*/ ctx[3];
-    			add_location(button, file, 177, 6, 5965);
+    			add_location(button, file, 181, 6, 6144);
     			attr_dev(div4, "class", "input-container");
-    			add_location(div4, file, 168, 4, 5731);
+    			add_location(div4, file, 172, 4, 5910);
     			attr_dev(div5, "class", div5_class_value = /*dataSent*/ ctx[4] ? "container sent" : "container");
-    			add_location(div5, file, 167, 2, 5670);
-    			add_location(form, file, 166, 0, 5617);
+    			add_location(div5, file, 171, 2, 5849);
+    			add_location(form, file, 170, 0, 5796);
     		},
     		l: function claim(nodes) {
     			throw new Error_1("options.hydrate only works if the component was compiled with the `hydratable: true` option");

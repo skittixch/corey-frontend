@@ -10,47 +10,47 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-      
-    - name: Print directory structure
-      run: ls -R
-      
-    - name: Update version number
-      run: |
-        VERSION=$(grep -o 'alpha v[0-9.]*' ./src/App.svelte)
-        NEW_VERSION="alpha v$(echo $VERSION | awk -F. '{$NF = $NF + 1;} 1' OFS=.)"
-        sed -i "s/$VERSION/$NEW_VERSION/g" ./src/App.svelte
-        
-    - name: Replace GIT_HASH placeholder with commit hash
-      run: |
-        sed -i "s/###GIT_HASH###/${GITHUB_SHA}/g" ./src/App.svelte
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Use Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '16'
+      - name: Print directory structure
+        run: ls -R
 
-    - name: Install dependencies and build
-      run: |
-        npm install
-        npm install -g rollup
-        npm run build
+      - name: Update version number
+        run: |
+          VERSION=$(grep -o 'alpha v[0-9.]*' ./src/App.svelte)
+          NEW_VERSION="alpha v$(echo $VERSION | awk -F. '{$NF = $NF + 1;} 1' OFS=.)"
+          sed -i "s/$NEW_VERSION/g" ./src/App.svelte
 
-    - name: Deploy to server
-      uses: appleboy/scp-action@master
-      with:
-        host: ${{ secrets.SERVER_HOST }}
-        username: ${{ secrets.SERVER_USERNAME }}
-        key: ${{ secrets.SERVER_SSH_KEY }}
-        source: "public/."
-        target: "/var/www/html"
+      - name: Replace GIT_HASH placeholder with commit hash
+        run: |
+          sed -i "s/###GIT_HASH###/${GITHUB_SHA}/g" ./src/App.svelte
 
-    - name: Rename folder on server
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.SERVER_HOST }}
-        username: ${{ secrets.SERVER_USERNAME }}
-        key: ${{ secrets.SERVER_SSH_KEY }}
-        script: |
-          rm -rf /var/www/html/corey && mv /var/www/html/public /var/www/html/corey
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+
+      - name: Install dependencies and build
+        run: |
+          npm install
+          npm install -g rollup
+          npm run build
+
+      - name: Deploy to server
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          source: "public/."
+          target: "/var/www/html"
+
+      - name: Rename folder on server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          script: |
+            rm -rf /var/www/html/corey && mv /var/www/html/public /var/www/html/corey
