@@ -15,8 +15,10 @@ jobs:
       
     - name: Increment version number
       run: |
-        sed -i "s/alpha v\(.*\)/alpha v$((\1 + 1))/g" src/app.svelte
-
+        VERSION=$(grep -o 'alpha v[0-9.]*' src/app.svelte)
+        NEW_VERSION="alpha v$(echo $VERSION | awk -F. '{$NF = $NF + 1;} 1' OFS=.)"
+        sed -i "s/$VERSION/$NEW_VERSION/g" src/app.svelte
+        
     - name: Replace GIT_HASH placeholder with commit hash
       run: |
         sed -i "s/###GIT_HASH###/${GITHUB_SHA}/g" src/app.svelte
