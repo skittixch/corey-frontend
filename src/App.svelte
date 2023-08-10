@@ -7,6 +7,36 @@
   let dataSent = false;
   let progressData = null;
 
+  //next lines added in an attempt to get roop args set up
+
+  async function loadImageAsBase64(imagePath) {
+    const response = await fetch(imagePath);
+    const blob = await response.blob();
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result.split(",")[1]);
+      reader.readAsDataURL(blob);
+    });
+  }
+  async function prepareSendData() {
+    let imagePath = "./roop.png";
+    let img_base64 = await loadImageAsBase64(imagePath);
+    let args = [
+      img_base64,
+      true,
+      "0",
+      "/usr/src/app/models/roop/inswapper_128.onnx",
+      "CodeFormer",
+      1,
+      "None",
+      1,
+      "None",
+      false,
+      true,
+    ];
+    sendData(args); // Call sendData with the prepared args
+  }
+
   async function fetchProgress() {
     const response = await fetch("https://ai.ericbacus.com/sdapi/v1/progress", {
       method: "GET",
@@ -33,7 +63,7 @@
     }
   }
 
-  async function sendData() {
+  async function sendData(args) {
     console.log("sendData called, initial imageLoaded:", imageLoaded);
     imageLoaded = false;
     dataSent = true;
@@ -59,6 +89,7 @@
         steps: 50,
         sampler_name: "DPM++ 2M SDE Karras",
         restore_faces: true,
+        alwayson_scripts: { roop: { args: args } },
       }),
     });
 
@@ -106,7 +137,7 @@
     />
     <button
       class="send-button"
-      on:click={sendData}
+      on:click={prepareSendData}
       disabled={dataSent && !imageLoaded}
       ><img src="./send.svg" alt="Send" class="arrow-icon" /></button
     >

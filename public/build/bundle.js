@@ -441,7 +441,7 @@ var app = (function () {
     const { Error: Error_1, console: console_1 } = globals;
     const file = "src\\App.svelte";
 
-    // (116:0) {#if imageData}
+    // (147:0) {#if imageData}
     function create_if_block_2(ctx) {
     	let div;
     	let img;
@@ -455,9 +455,9 @@ var app = (function () {
     			if (!src_url_equal(img.src, img_src_value = /*imageData*/ ctx[1])) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "");
     			attr_dev(img, "class", img_class_value = /*imageLoaded*/ ctx[3] ? "fade-in" : "");
-    			add_location(img, file, 117, 4, 4491);
+    			add_location(img, file, 148, 4, 5372);
     			attr_dev(div, "class", "image-container");
-    			add_location(div, file, 116, 2, 4456);
+    			add_location(div, file, 147, 2, 5337);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -481,14 +481,14 @@ var app = (function () {
     		block,
     		id: create_if_block_2.name,
     		type: "if",
-    		source: "(116:0) {#if imageData}",
+    		source: "(147:0) {#if imageData}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (125:0) {#if currentImageData}
+    // (156:0) {#if currentImageData}
     function create_if_block_1(ctx) {
     	let div;
     	let img;
@@ -504,9 +504,9 @@ var app = (function () {
     			if (!src_url_equal(img.src, img_src_value = /*currentImageData*/ ctx[2])) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "output");
     			attr_dev(img, "class", img_class_value = /*imageLoaded*/ ctx[3] ? "fade-in" : "");
-    			add_location(img, file, 126, 4, 4687);
+    			add_location(img, file, 157, 4, 5568);
     			attr_dev(div, "class", "current-image-container");
-    			add_location(div, file, 125, 2, 4644);
+    			add_location(div, file, 156, 2, 5525);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -537,14 +537,14 @@ var app = (function () {
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(125:0) {#if currentImageData}",
+    		source: "(156:0) {#if currentImageData}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (136:0) {#if progressData && !imageLoaded}
+    // (167:0) {#if progressData && !imageLoaded}
     function create_if_block(ctx) {
     	let div;
     	let p;
@@ -560,9 +560,9 @@ var app = (function () {
     			t0 = text("Progress: ");
     			t1 = text(t1_value);
     			t2 = text("%");
-    			add_location(p, file, 138, 4, 4981);
+    			add_location(p, file, 169, 4, 5862);
     			attr_dev(div, "class", "progress-container");
-    			add_location(div, file, 137, 2, 4943);
+    			add_location(div, file, 168, 2, 5824);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -583,7 +583,7 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(136:0) {#if progressData && !imageLoaded}",
+    		source: "(167:0) {#if progressData && !imageLoaded}",
     		ctx
     	});
 
@@ -638,22 +638,22 @@ var app = (function () {
     			if_block2_anchor = empty();
     			attr_dev(link, "rel", "stylesheet");
     			attr_dev(link, "href", "./AppStyle.css");
-    			add_location(link, file, 93, 2, 3837);
-    			add_location(head, file, 92, 0, 3827);
+    			add_location(link, file, 124, 2, 4711);
+    			add_location(head, file, 123, 0, 4701);
     			attr_dev(input, "placeholder", "Corey...");
-    			add_location(input, file, 99, 4, 4041);
+    			add_location(input, file, 130, 4, 4915);
     			if (!src_url_equal(img.src, img_src_value = "./send.svg")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "Send");
     			attr_dev(img, "class", "arrow-icon");
-    			add_location(img, file, 110, 7, 4307);
+    			add_location(img, file, 141, 7, 5188);
     			attr_dev(button, "class", "send-button");
     			button.disabled = button_disabled_value = /*dataSent*/ ctx[4] && !/*imageLoaded*/ ctx[3];
-    			add_location(button, file, 106, 4, 4194);
+    			add_location(button, file, 137, 4, 5068);
     			attr_dev(div0, "class", "input-container");
-    			add_location(div0, file, 98, 2, 4006);
+    			add_location(div0, file, 129, 2, 4880);
     			attr_dev(div1, "class", div1_class_value = /*dataSent*/ ctx[4] ? "container sent" : "container");
-    			add_location(div1, file, 97, 0, 3947);
-    			add_location(p, file, 122, 0, 4595);
+    			add_location(div1, file, 128, 0, 4821);
+    			add_location(p, file, 153, 0, 5476);
     		},
     		l: function claim(nodes) {
     			throw new Error_1("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -683,7 +683,7 @@ var app = (function () {
     				dispose = [
     					listen_dev(input, "input", /*input_input_handler*/ ctx[7]),
     					listen_dev(input, "click", /*click_handler*/ ctx[8], false, false, false, false),
-    					listen_dev(button, "click", /*sendData*/ ctx[6], false, false, false, false)
+    					listen_dev(button, "click", /*prepareSendData*/ ctx[6], false, false, false, false)
     				];
 
     				mounted = true;
@@ -772,6 +772,17 @@ var app = (function () {
     	return block;
     }
 
+    async function loadImageAsBase64(imagePath) {
+    	const response = await fetch(imagePath);
+    	const blob = await response.blob();
+
+    	return new Promise(resolve => {
+    			const reader = new FileReader();
+    			reader.onloadend = () => resolve(reader.result.split(",")[1]);
+    			reader.readAsDataURL(blob);
+    		});
+    }
+
     function instance($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('App', slots, []);
@@ -781,6 +792,27 @@ var app = (function () {
     	let imageLoaded = false;
     	let dataSent = false;
     	let progressData = null;
+
+    	async function prepareSendData() {
+    		let imagePath = "./roop.png";
+    		let img_base64 = await loadImageAsBase64(imagePath);
+
+    		let args = [
+    			img_base64,
+    			true,
+    			"0",
+    			"/usr/src/app/models/roop/inswapper_128.onnx",
+    			"CodeFormer",
+    			1,
+    			"None",
+    			1,
+    			"None",
+    			false,
+    			true
+    		];
+
+    		sendData(args); // Call sendData with the prepared args
+    	}
 
     	async function fetchProgress() {
     		const response = await fetch("https://ai.ericbacus.com/sdapi/v1/progress", {
@@ -806,7 +838,7 @@ var app = (function () {
     		}
     	}
 
-    	async function sendData() {
+    	async function sendData(args) {
     		console.log("sendData called, initial imageLoaded:", imageLoaded);
     		$$invalidate(3, imageLoaded = false);
     		$$invalidate(4, dataSent = true);
@@ -824,7 +856,8 @@ var app = (function () {
     				negative_prompt: "nsfw CyberRealistic_Negative-neg realisticvision-negative-embedding, nsfw, canvas frame, cartoon, 3d, ((disfigured)), ((bad art)), ((deformed)),((extra limbs)),((close up)),((b&w)), wierd colors, blurry, (((duplicate))), ((morbid)), ((mutilated)), [out of frame], extra fingers, mutated hands, ((poorly drawn hands)), ((poorly drawn face)), (((mutation))), (((deformed))), ((ugly)), blurry, ((bad anatomy)), (((bad proportions))), ((extra limbs)), cloned face, (((disfigured))), out of frame, ugly, extra limbs, (bad anatomy), gross proportions, (malformed limbs), ((missing arms)), ((missing legs)), (((extra arms))), (((extra legs))), mutated hands, (fused fingers), (too many fingers), (((long neck))), Photoshop, video game, ugly, tiling, poorly drawn hands, poorly drawn feet, poorly drawn face, out of frame, mutation, mutated, extra limbs, extra legs, extra arms, disfigured, deformed, cross-eye, body out of frame, blurry, bad art, bad anatomy, 3d render, (skinny:1.3), muscular, eyeliner, defined curls, mullet, quaffed, stylish, sharp pointy teeth, bow in hair, vampire, fade, flat top, cheek crease, dimples, (closeup:1.5), portrait, old, handsome",
     				steps: 50,
     				sampler_name: "DPM++ 2M SDE Karras",
-    				restore_faces: true
+    				restore_faces: true,
+    				alwayson_scripts: { roop: { args } }
     			})
     		});
 
@@ -882,6 +915,8 @@ var app = (function () {
     		imageLoaded,
     		dataSent,
     		progressData,
+    		loadImageAsBase64,
+    		prepareSendData,
     		fetchProgress,
     		sendData
     	});
@@ -906,7 +941,7 @@ var app = (function () {
     		imageLoaded,
     		dataSent,
     		progressData,
-    		sendData,
+    		prepareSendData,
     		input_input_handler,
     		click_handler,
     		error_handler
