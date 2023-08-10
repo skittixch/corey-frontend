@@ -15,7 +15,7 @@ jobs:
       
     - name: Increment version number
       run: |
-        VERSION=$(grep -o 'alpha v[0-9.]*' src/app.svelte)
+        VERSION=$(grep -o 'alpha v[0-9.]*' /usr/src/app.svelte)
         NEW_VERSION="alpha v$(echo $VERSION | awk -F. '{$NF = $NF + 1;} 1' OFS=.)"
         sed -i "s/$VERSION/$NEW_VERSION/g" /usr/src/app.svelte
         
