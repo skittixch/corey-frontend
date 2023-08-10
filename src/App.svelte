@@ -108,7 +108,7 @@
       class="send-button"
       on:click={sendData}
       disabled={dataSent && !imageLoaded}
-      ><img src="/send.svg" alt="Send" class="arrow-icon" /></button
+      ><img src="./send.svg" alt="Send" class="arrow-icon" /></button
     >
   </div>
   <!-- Here is the corrected change -->

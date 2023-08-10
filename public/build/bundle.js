@@ -455,9 +455,9 @@ var app = (function () {
     			if (!src_url_equal(img.src, img_src_value = /*imageData*/ ctx[1])) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "");
     			attr_dev(img, "class", img_class_value = /*imageLoaded*/ ctx[3] ? "fade-in" : "");
-    			add_location(img, file, 117, 4, 4373);
+    			add_location(img, file, 117, 4, 4491);
     			attr_dev(div, "class", "image-container");
-    			add_location(div, file, 116, 2, 4339);
+    			add_location(div, file, 116, 2, 4456);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -504,9 +504,9 @@ var app = (function () {
     			if (!src_url_equal(img.src, img_src_value = /*currentImageData*/ ctx[2])) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "output");
     			attr_dev(img, "class", img_class_value = /*imageLoaded*/ ctx[3] ? "fade-in" : "");
-    			add_location(img, file, 126, 4, 4560);
+    			add_location(img, file, 126, 4, 4687);
     			attr_dev(div, "class", "current-image-container");
-    			add_location(div, file, 125, 2, 4518);
+    			add_location(div, file, 125, 2, 4644);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -560,9 +560,9 @@ var app = (function () {
     			t0 = text("Progress: ");
     			t1 = text(t1_value);
     			t2 = text("%");
-    			add_location(p, file, 138, 4, 4842);
+    			add_location(p, file, 138, 4, 4981);
     			attr_dev(div, "class", "progress-container");
-    			add_location(div, file, 137, 2, 4805);
+    			add_location(div, file, 137, 2, 4943);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -638,22 +638,22 @@ var app = (function () {
     			if_block2_anchor = empty();
     			attr_dev(link, "rel", "stylesheet");
     			attr_dev(link, "href", "./AppStyle.css");
-    			add_location(link, file, 93, 2, 3744);
-    			add_location(head, file, 92, 0, 3735);
+    			add_location(link, file, 93, 2, 3837);
+    			add_location(head, file, 92, 0, 3827);
     			attr_dev(input, "placeholder", "Corey...");
-    			add_location(input, file, 99, 4, 3942);
-    			if (!src_url_equal(img.src, img_src_value = "/send.svg")) attr_dev(img, "src", img_src_value);
+    			add_location(input, file, 99, 4, 4041);
+    			if (!src_url_equal(img.src, img_src_value = "./send.svg")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "Send");
     			attr_dev(img, "class", "arrow-icon");
-    			add_location(img, file, 110, 7, 4197);
+    			add_location(img, file, 110, 7, 4307);
     			attr_dev(button, "class", "send-button");
     			button.disabled = button_disabled_value = /*dataSent*/ ctx[4] && !/*imageLoaded*/ ctx[3];
-    			add_location(button, file, 106, 4, 4088);
+    			add_location(button, file, 106, 4, 4194);
     			attr_dev(div0, "class", "input-container");
-    			add_location(div0, file, 98, 2, 3908);
+    			add_location(div0, file, 98, 2, 4006);
     			attr_dev(div1, "class", div1_class_value = /*dataSent*/ ctx[4] ? "container sent" : "container");
-    			add_location(div1, file, 97, 0, 3850);
-    			add_location(p, file, 122, 0, 4472);
+    			add_location(div1, file, 97, 0, 3947);
+    			add_location(p, file, 122, 0, 4595);
     		},
     		l: function claim(nodes) {
     			throw new Error_1("options.hydrate only works if the component was compiled with the `hydratable: true` option");
