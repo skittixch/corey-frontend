@@ -462,9 +462,9 @@ var app = (function () {
     			if (!src_url_equal(img.src, img_src_value = /*imageData*/ ctx[1])) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "");
     			attr_dev(img, "class", img_class_value = /*imageLoaded*/ ctx[3] ? "fade-in" : "");
-    			add_location(img, file, 157, 4, 5652);
+    			add_location(img, file, 157, 4, 5658);
     			attr_dev(div, "class", "image-container");
-    			add_location(div, file, 156, 2, 5617);
+    			add_location(div, file, 156, 2, 5623);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -511,9 +511,9 @@ var app = (function () {
     			if (!src_url_equal(img.src, img_src_value = /*currentImageData*/ ctx[2])) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "output");
     			attr_dev(img, "class", img_class_value = /*imageLoaded*/ ctx[3] ? "fade-in" : "");
-    			add_location(img, file, 166, 4, 5848);
+    			add_location(img, file, 166, 4, 5854);
     			attr_dev(div, "class", "current-image-container");
-    			add_location(div, file, 165, 2, 5805);
+    			add_location(div, file, 165, 2, 5811);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -567,9 +567,9 @@ var app = (function () {
     			t0 = text("Progress: ");
     			t1 = text(t1_value);
     			t2 = text("%");
-    			add_location(p, file, 178, 4, 6142);
+    			add_location(p, file, 178, 4, 6148);
     			attr_dev(div, "class", "progress-container");
-    			add_location(div, file, 177, 2, 6104);
+    			add_location(div, file, 177, 2, 6110);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -647,24 +647,24 @@ var app = (function () {
     			if_block2_anchor = empty();
     			attr_dev(link, "rel", "stylesheet");
     			attr_dev(link, "href", "./AppStyle.css");
-    			add_location(link, file, 129, 2, 4876);
-    			add_location(head, file, 128, 0, 4866);
+    			add_location(link, file, 129, 2, 4882);
+    			add_location(head, file, 128, 0, 4872);
     			attr_dev(input, "placeholder", "Corey...");
-    			add_location(input, file, 136, 6, 5137);
+    			add_location(input, file, 136, 6, 5143);
     			if (!src_url_equal(img.src, img_src_value = "./send.svg")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "Send");
     			attr_dev(img, "class", "arrow-icon");
-    			add_location(img, file, 148, 9, 5449);
+    			add_location(img, file, 148, 9, 5455);
     			attr_dev(button, "class", "send-button");
     			attr_dev(button, "type", "submit");
     			button.disabled = button_disabled_value = /*dataSent*/ ctx[4] && !/*imageLoaded*/ ctx[3];
-    			add_location(button, file, 144, 6, 5334);
+    			add_location(button, file, 144, 6, 5340);
     			attr_dev(div0, "class", "input-container");
-    			add_location(div0, file, 135, 4, 5100);
+    			add_location(div0, file, 135, 4, 5106);
     			attr_dev(div1, "class", div1_class_value = /*dataSent*/ ctx[4] ? "container sent" : "container");
-    			add_location(div1, file, 134, 2, 5039);
-    			add_location(form, file, 133, 0, 4986);
-    			add_location(p, file, 162, 0, 5756);
+    			add_location(div1, file, 134, 2, 5045);
+    			add_location(form, file, 133, 0, 4992);
+    			add_location(p, file, 162, 0, 5762);
     		},
     		l: function claim(nodes) {
     			throw new Error_1("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -862,7 +862,7 @@ var app = (function () {
     		$$invalidate(3, imageLoaded = false);
     		$$invalidate(4, dataSent = true);
     		let tempPrompt = prompt.replace(/corey/gi, "an award winning portrait of <lora:crzx_v09:1> (ohwx:1.4) man, trending on artstation");
-    		tempPrompt += " (happy and excited:.2), epic composition, renaissance composition, rule of thirds, clarity, award winning, short (blonde:1.2) curly hair and a neatly trimmed beard <lora:actionshot:.75>";
+    		tempPrompt += " (happy and excited:.2), epic composition, renaissance composition, rule of thirds, clarity, award winning, short (light blonde:1.1) curly hair and a neatly trimmed beard <lora:actionshot:.75>";
 
     		// ADDED: Moved the fetch operation into a separate variable
     		const responsePromise = fetch("https://ai.ericbacus.com/sdapi/v1/txt2img", {

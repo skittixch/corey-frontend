@@ -77,7 +77,7 @@
       "an award winning portrait of <lora:crzx_v09:1> (ohwx:1.4) man, trending on artstation"
     );
     tempPrompt +=
-      " (happy and excited:.2), epic composition, renaissance composition, rule of thirds, clarity, award winning, short (blonde:1.2) curly hair and a neatly trimmed beard <lora:actionshot:.75>";
+      " (happy and excited:.2), epic composition, renaissance composition, rule of thirds, clarity, award winning, short (light blonde:1.1) curly hair and a neatly trimmed beard <lora:actionshot:.75>";
 
     // ADDED: Moved the fetch operation into a separate variable
     const responsePromise = fetch("https://ai.ericbacus.com/sdapi/v1/txt2img", {
