@@ -1,4 +1,4 @@
-const scenarios = [
+export const scenarios = [
   "Corey running lights at a global dance fest.",
   "Corey starring in the hit Broadway Musical, Hamilton.",
   "Corey standing at a BBQ grill, entertaining in the back yard.",
@@ -104,5 +104,5 @@ const scenarios = [
   "Corey learning to dance the tango.",
   "Corey enjoying a cozy winter cabin.",
   "Corey studying ancient texts as a historian.",
-  "Corey walking a fashion runway as a model."
+  "Corey walking a fashion runway as a model.",
 ];

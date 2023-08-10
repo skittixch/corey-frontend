@@ -87,6 +87,14 @@ var app = (function () {
     function set_input_value(input, value) {
         input.value = value == null ? '' : value;
     }
+    function set_style(node, key, value, important) {
+        if (value == null) {
+            node.style.removeProperty(key);
+        }
+        else {
+            node.style.setProperty(key, value, important ? 'important' : '');
+        }
+    }
     function custom_event(type, detail, { bubbles = false, cancelable = false } = {}) {
         const e = document.createEvent('CustomEvent');
         e.initCustomEvent(type, bubbles, cancelable, detail);
@@ -448,7 +456,7 @@ var app = (function () {
     const { Error: Error_1, console: console_1 } = globals;
     const file = "src\\App.svelte";
 
-    // (193:0) {#if imageData}
+    // (242:0) {#if imageData}
     function create_if_block_2(ctx) {
     	let div;
     	let img;
@@ -459,23 +467,23 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			img = element("img");
-    			if (!src_url_equal(img.src, img_src_value = /*imageData*/ ctx[1])) attr_dev(img, "src", img_src_value);
+    			if (!src_url_equal(img.src, img_src_value = /*imageData*/ ctx[2])) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "");
-    			attr_dev(img, "class", img_class_value = /*imageLoaded*/ ctx[3] ? "fade-in" : "");
-    			add_location(img, file, 194, 4, 6463);
+    			attr_dev(img, "class", img_class_value = /*imageLoaded*/ ctx[4] ? "fade-in" : "");
+    			add_location(img, file, 243, 4, 8046);
     			attr_dev(div, "class", "image-container");
-    			add_location(div, file, 193, 2, 6428);
+    			add_location(div, file, 242, 2, 8011);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
     			append_dev(div, img);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*imageData*/ 2 && !src_url_equal(img.src, img_src_value = /*imageData*/ ctx[1])) {
+    			if (dirty & /*imageData*/ 4 && !src_url_equal(img.src, img_src_value = /*imageData*/ ctx[2])) {
     				attr_dev(img, "src", img_src_value);
     			}
 
-    			if (dirty & /*imageLoaded*/ 8 && img_class_value !== (img_class_value = /*imageLoaded*/ ctx[3] ? "fade-in" : "")) {
+    			if (dirty & /*imageLoaded*/ 16 && img_class_value !== (img_class_value = /*imageLoaded*/ ctx[4] ? "fade-in" : "")) {
     				attr_dev(img, "class", img_class_value);
     			}
     		},
@@ -488,14 +496,14 @@ var app = (function () {
     		block,
     		id: create_if_block_2.name,
     		type: "if",
-    		source: "(193:0) {#if imageData}",
+    		source: "(242:0) {#if imageData}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (201:0) {#if currentImageData}
+    // (250:0) {#if currentImageData}
     function create_if_block_1(ctx) {
     	let div;
     	let img;
@@ -508,28 +516,28 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			img = element("img");
-    			if (!src_url_equal(img.src, img_src_value = /*currentImageData*/ ctx[2])) attr_dev(img, "src", img_src_value);
+    			if (!src_url_equal(img.src, img_src_value = /*currentImageData*/ ctx[3])) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "output");
-    			attr_dev(img, "class", img_class_value = /*imageLoaded*/ ctx[3] ? "fade-in" : "");
-    			add_location(img, file, 202, 4, 6638);
+    			attr_dev(img, "class", img_class_value = /*imageLoaded*/ ctx[4] ? "fade-in" : "");
+    			add_location(img, file, 251, 4, 8221);
     			attr_dev(div, "class", "current-image-container");
-    			add_location(div, file, 201, 2, 6595);
+    			add_location(div, file, 250, 2, 8178);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
     			append_dev(div, img);
 
     			if (!mounted) {
-    				dispose = listen_dev(img, "error", /*error_handler*/ ctx[15], false, false, false, false);
+    				dispose = listen_dev(img, "error", /*error_handler*/ ctx[16], false, false, false, false);
     				mounted = true;
     			}
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*currentImageData*/ 4 && !src_url_equal(img.src, img_src_value = /*currentImageData*/ ctx[2])) {
+    			if (dirty & /*currentImageData*/ 8 && !src_url_equal(img.src, img_src_value = /*currentImageData*/ ctx[3])) {
     				attr_dev(img, "src", img_src_value);
     			}
 
-    			if (dirty & /*imageLoaded*/ 8 && img_class_value !== (img_class_value = /*imageLoaded*/ ctx[3] ? "fade-in" : "")) {
+    			if (dirty & /*imageLoaded*/ 16 && img_class_value !== (img_class_value = /*imageLoaded*/ ctx[4] ? "fade-in" : "")) {
     				attr_dev(img, "class", img_class_value);
     			}
     		},
@@ -544,19 +552,19 @@ var app = (function () {
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(201:0) {#if currentImageData}",
+    		source: "(250:0) {#if currentImageData}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (212:0) {#if progressData && !imageLoaded}
+    // (261:0) {#if progressData && !imageLoaded}
     function create_if_block(ctx) {
     	let div;
     	let p;
     	let t0;
-    	let t1_value = /*progressData*/ ctx[5].progress * 100 + "";
+    	let t1_value = /*progressData*/ ctx[6].progress * 100 + "";
     	let t1;
     	let t2;
 
@@ -567,9 +575,9 @@ var app = (function () {
     			t0 = text("Progress: ");
     			t1 = text(t1_value);
     			t2 = text("%");
-    			add_location(p, file, 214, 4, 6932);
+    			add_location(p, file, 263, 4, 8515);
     			attr_dev(div, "class", "progress-container");
-    			add_location(div, file, 213, 2, 6894);
+    			add_location(div, file, 262, 2, 8477);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -579,7 +587,7 @@ var app = (function () {
     			append_dev(p, t2);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*progressData*/ 32 && t1_value !== (t1_value = /*progressData*/ ctx[5].progress * 100 + "")) set_data_dev(t1, t1_value);
+    			if (dirty & /*progressData*/ 64 && t1_value !== (t1_value = /*progressData*/ ctx[6].progress * 100 + "")) set_data_dev(t1, t1_value);
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div);
@@ -590,7 +598,7 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(212:0) {#if progressData && !imageLoaded}",
+    		source: "(261:0) {#if progressData && !imageLoaded}",
     		ctx
     	});
 
@@ -615,7 +623,7 @@ var app = (function () {
     	let form;
     	let div5;
     	let div4;
-    	let input;
+    	let input_1;
     	let t9;
     	let button;
     	let img;
@@ -628,9 +636,9 @@ var app = (function () {
     	let if_block2_anchor;
     	let mounted;
     	let dispose;
-    	let if_block0 = /*imageData*/ ctx[1] && create_if_block_2(ctx);
-    	let if_block1 = /*currentImageData*/ ctx[2] && create_if_block_1(ctx);
-    	let if_block2 = /*progressData*/ ctx[5] && !/*imageLoaded*/ ctx[3] && create_if_block(ctx);
+    	let if_block0 = /*imageData*/ ctx[2] && create_if_block_2(ctx);
+    	let if_block1 = /*currentImageData*/ ctx[3] && create_if_block_1(ctx);
+    	let if_block2 = /*progressData*/ ctx[6] && !/*imageLoaded*/ ctx[4] && create_if_block(ctx);
 
     	const block = {
     		c: function create() {
@@ -655,7 +663,7 @@ var app = (function () {
     			form = element("form");
     			div5 = element("div");
     			div4 = element("div");
-    			input = element("input");
+    			input_1 = element("input");
     			t9 = space();
     			button = element("button");
     			img = element("img");
@@ -668,37 +676,38 @@ var app = (function () {
     			if_block2_anchor = empty();
     			attr_dev(link, "rel", "stylesheet");
     			attr_dev(link, "href", "./AppStyle.css");
-    			add_location(link, file, 148, 2, 5133);
-    			add_location(head, file, 147, 0, 5123);
+    			add_location(link, file, 196, 2, 6678);
+    			add_location(head, file, 195, 0, 6668);
     			attr_dev(div0, "class", "info");
-    			add_location(div0, file, 152, 2, 5217);
+    			add_location(div0, file, 200, 2, 6762);
     			attr_dev(a, "href", "javascript:void(0);");
     			attr_dev(a, "class", "header-link");
-    			add_location(a, file, 153, 2, 5272);
+    			add_location(a, file, 201, 2, 6817);
     			attr_dev(div1, "class", "header");
-    			add_location(div1, file, 151, 0, 5193);
+    			add_location(div1, file, 199, 0, 6738);
     			attr_dev(span, "class", "close");
-    			add_location(span, file, 160, 4, 5457);
-    			add_location(p, file, 161, 4, 5519);
+    			add_location(span, file, 208, 4, 7002);
+    			add_location(p, file, 209, 4, 7064);
     			attr_dev(div2, "class", "modal-content");
-    			add_location(div2, file, 159, 2, 5424);
+    			add_location(div2, file, 207, 2, 6969);
     			attr_dev(div3, "class", "modal");
-    			add_location(div3, file, 158, 0, 5383);
-    			attr_dev(input, "placeholder", "Corey...");
-    			add_location(input, file, 173, 6, 5948);
+    			add_location(div3, file, 206, 0, 6928);
+    			attr_dev(input_1, "placeholder", "Corey...");
+    			set_style(input_1, "width", /*inputWidth*/ ctx[7]);
+    			add_location(input_1, file, 221, 6, 7493);
     			if (!src_url_equal(img.src, img_src_value = "./send.svg")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "Send");
     			attr_dev(img, "class", "arrow-icon");
-    			add_location(img, file, 185, 9, 6260);
+    			add_location(img, file, 234, 9, 7843);
     			attr_dev(button, "class", "send-button");
     			attr_dev(button, "type", "submit");
-    			button.disabled = button_disabled_value = /*dataSent*/ ctx[4] && !/*imageLoaded*/ ctx[3];
-    			add_location(button, file, 181, 6, 6145);
+    			button.disabled = button_disabled_value = /*dataSent*/ ctx[5] && !/*imageLoaded*/ ctx[4];
+    			add_location(button, file, 230, 6, 7728);
     			attr_dev(div4, "class", "input-container");
-    			add_location(div4, file, 172, 4, 5911);
-    			attr_dev(div5, "class", div5_class_value = /*dataSent*/ ctx[4] ? "container sent" : "container");
-    			add_location(div5, file, 171, 2, 5850);
-    			add_location(form, file, 170, 0, 5797);
+    			add_location(div4, file, 220, 4, 7456);
+    			attr_dev(div5, "class", div5_class_value = /*dataSent*/ ctx[5] ? "container sent" : "container");
+    			add_location(div5, file, 219, 2, 7395);
+    			add_location(form, file, 218, 0, 7342);
     		},
     		l: function claim(nodes) {
     			throw new Error_1("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -717,14 +726,14 @@ var app = (function () {
     			append_dev(div2, span);
     			append_dev(div2, t6);
     			append_dev(div2, p);
-    			/*div3_binding*/ ctx[11](div3);
+    			/*div3_binding*/ ctx[12](div3);
     			insert_dev(target, t8, anchor);
     			insert_dev(target, form, anchor);
     			append_dev(form, div5);
     			append_dev(div5, div4);
-    			append_dev(div4, input);
-    			/*input_binding*/ ctx[12](input);
-    			set_input_value(input, /*prompt*/ ctx[0]);
+    			append_dev(div4, input_1);
+    			/*input_1_binding*/ ctx[13](input_1);
+    			set_input_value(input_1, /*prompt*/ ctx[0]);
     			append_dev(div4, t9);
     			append_dev(div4, button);
     			append_dev(button, img);
@@ -738,30 +747,34 @@ var app = (function () {
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(a, "click", /*openModal*/ ctx[8], false, false, false, false),
-    					listen_dev(span, "click", /*closeModal*/ ctx[9], false, false, false, false),
-    					listen_dev(input, "input", /*input_input_handler*/ ctx[13]),
-    					listen_dev(input, "click", /*click_handler*/ ctx[14], false, false, false, false),
-    					listen_dev(form, "submit", prevent_default(/*prepareSendData*/ ctx[10]), false, true, false, false)
+    					listen_dev(a, "click", /*openModal*/ ctx[9], false, false, false, false),
+    					listen_dev(span, "click", /*closeModal*/ ctx[10], false, false, false, false),
+    					listen_dev(input_1, "input", /*input_1_input_handler*/ ctx[14]),
+    					listen_dev(input_1, "click", /*click_handler*/ ctx[15], false, false, false, false),
+    					listen_dev(form, "submit", prevent_default(/*prepareSendData*/ ctx[11]), false, true, false, false)
     				];
 
     				mounted = true;
     			}
     		},
     		p: function update(ctx, [dirty]) {
-    			if (dirty & /*prompt*/ 1 && input.value !== /*prompt*/ ctx[0]) {
-    				set_input_value(input, /*prompt*/ ctx[0]);
+    			if (dirty & /*inputWidth*/ 128) {
+    				set_style(input_1, "width", /*inputWidth*/ ctx[7]);
     			}
 
-    			if (dirty & /*dataSent, imageLoaded*/ 24 && button_disabled_value !== (button_disabled_value = /*dataSent*/ ctx[4] && !/*imageLoaded*/ ctx[3])) {
+    			if (dirty & /*prompt*/ 1 && input_1.value !== /*prompt*/ ctx[0]) {
+    				set_input_value(input_1, /*prompt*/ ctx[0]);
+    			}
+
+    			if (dirty & /*dataSent, imageLoaded*/ 48 && button_disabled_value !== (button_disabled_value = /*dataSent*/ ctx[5] && !/*imageLoaded*/ ctx[4])) {
     				prop_dev(button, "disabled", button_disabled_value);
     			}
 
-    			if (dirty & /*dataSent*/ 16 && div5_class_value !== (div5_class_value = /*dataSent*/ ctx[4] ? "container sent" : "container")) {
+    			if (dirty & /*dataSent*/ 32 && div5_class_value !== (div5_class_value = /*dataSent*/ ctx[5] ? "container sent" : "container")) {
     				attr_dev(div5, "class", div5_class_value);
     			}
 
-    			if (/*imageData*/ ctx[1]) {
+    			if (/*imageData*/ ctx[2]) {
     				if (if_block0) {
     					if_block0.p(ctx, dirty);
     				} else {
@@ -774,7 +787,7 @@ var app = (function () {
     				if_block0 = null;
     			}
 
-    			if (/*currentImageData*/ ctx[2]) {
+    			if (/*currentImageData*/ ctx[3]) {
     				if (if_block1) {
     					if_block1.p(ctx, dirty);
     				} else {
@@ -787,7 +800,7 @@ var app = (function () {
     				if_block1 = null;
     			}
 
-    			if (/*progressData*/ ctx[5] && !/*imageLoaded*/ ctx[3]) {
+    			if (/*progressData*/ ctx[6] && !/*imageLoaded*/ ctx[4]) {
     				if (if_block2) {
     					if_block2.p(ctx, dirty);
     				} else {
@@ -808,10 +821,10 @@ var app = (function () {
     			if (detaching) detach_dev(div1);
     			if (detaching) detach_dev(t4);
     			if (detaching) detach_dev(div3);
-    			/*div3_binding*/ ctx[11](null);
+    			/*div3_binding*/ ctx[12](null);
     			if (detaching) detach_dev(t8);
     			if (detaching) detach_dev(form);
-    			/*input_binding*/ ctx[12](null);
+    			/*input_1_binding*/ ctx[13](null);
     			if (detaching) detach_dev(t10);
     			if (if_block0) if_block0.d(detaching);
     			if (detaching) detach_dev(t11);
@@ -857,15 +870,18 @@ var app = (function () {
     	let progressData = null;
     	let inputRef;
 
+    	//dynamic input sizing
+    	let inputWidth = "100px";
+
     	// "about" modal
     	let modal;
 
     	function openModal() {
-    		$$invalidate(7, modal.style.display = "block", modal);
+    		$$invalidate(8, modal.style.display = "block", modal);
     	}
 
     	function closeModal() {
-    		$$invalidate(7, modal.style.display = "none", modal);
+    		$$invalidate(8, modal.style.display = "none", modal);
     	}
 
     	onMount(() => {
@@ -913,22 +929,22 @@ var app = (function () {
     		}
 
     		const result = await response.json();
-    		$$invalidate(5, progressData = result);
+    		$$invalidate(6, progressData = result);
 
     		// ADDED: Update currentImageData with the current_image data
-    		$$invalidate(2, currentImageData = `data:image/png;base64,${result.current_image}`);
+    		$$invalidate(3, currentImageData = `data:image/png;base64,${result.current_image}`);
 
     		// If progress is not complete, fetch again
     		if (result.progress < 100) {
-    			$$invalidate(3, imageLoaded = true);
+    			$$invalidate(4, imageLoaded = true);
     			setTimeout(fetchProgress, 1000);
     		}
     	}
 
     	async function sendData(args) {
     		console.log("sendData called, initial imageLoaded:", imageLoaded);
-    		$$invalidate(3, imageLoaded = false);
-    		$$invalidate(4, dataSent = true);
+    		$$invalidate(4, imageLoaded = false);
+    		$$invalidate(5, dataSent = true);
     		let tempPrompt = prompt.replace(/corey/gi, "an award winning portrait of <lora:crzx_v09:1> (ohwx:1.4) man, trending on artstation");
     		tempPrompt += " (happy and excited:.2), epic composition, renaissance composition, rule of thirds, clarity, award winning, <lora:actionshot:.75>";
 
@@ -960,8 +976,8 @@ var app = (function () {
 
     		const result = await response.json();
     		console.log(result);
-    		$$invalidate(1, imageData = `data:image/png;base64,${result.images[0]}`);
-    		$$invalidate(3, imageLoaded = true);
+    		$$invalidate(2, imageData = `data:image/png;base64,${result.images[0]}`);
+    		$$invalidate(4, imageLoaded = true);
     		console.log("Data Sent, imageLoaded:", imageLoaded);
     	}
 
@@ -971,10 +987,33 @@ var app = (function () {
     			img.src = imageData;
 
     			img.onload = () => {
-    				$$invalidate(3, imageLoaded = true);
+    				$$invalidate(4, imageLoaded = true);
     			};
     		}
     	});
+
+    	//making the input field resize dynamically
+    	let input;
+
+    	let width = "100px"; // Initial width
+
+    	function resizeInput() {
+    		const tempSpan = document.createElement("span");
+    		tempSpan.style.fontSize = window.getComputedStyle(input, null).getPropertyValue("font-size");
+    		tempSpan.style.fontFamily = window.getComputedStyle(input, null).getPropertyValue("font-family");
+    		tempSpan.style.visibility = "hidden";
+    		tempSpan.innerHTML = input.value;
+    		document.body.appendChild(tempSpan);
+
+    		// Add a little extra width to avoid cutting off text
+    		const newWidth = Math.min(Math.max(tempSpan.offsetWidth + 10, 50), 300);
+
+    		// Set the new width
+    		width = newWidth + "px";
+
+    		// Clean up the temporary span
+    		document.body.removeChild(tempSpan);
+    	}
 
     	const writable_props = [];
 
@@ -985,18 +1024,18 @@ var app = (function () {
     	function div3_binding($$value) {
     		binding_callbacks[$$value ? 'unshift' : 'push'](() => {
     			modal = $$value;
-    			$$invalidate(7, modal);
+    			$$invalidate(8, modal);
     		});
     	}
 
-    	function input_binding($$value) {
+    	function input_1_binding($$value) {
     		binding_callbacks[$$value ? 'unshift' : 'push'](() => {
     			inputRef = $$value;
-    			$$invalidate(6, inputRef);
+    			$$invalidate(1, inputRef);
     		});
     	}
 
-    	function input_input_handler() {
+    	function input_1_input_handler() {
     		prompt = this.value;
     		$$invalidate(0, prompt);
     	}
@@ -1005,7 +1044,7 @@ var app = (function () {
     		if (!prompt) $$invalidate(0, prompt = "Corey ");
     	};
 
-    	const error_handler = () => $$invalidate(2, currentImageData = null);
+    	const error_handler = () => $$invalidate(3, currentImageData = null);
 
     	$$self.$capture_state = () => ({
     		onMount,
@@ -1017,45 +1056,70 @@ var app = (function () {
     		dataSent,
     		progressData,
     		inputRef,
+    		inputWidth,
     		modal,
     		openModal,
     		closeModal,
     		loadImageAsBase64,
     		prepareSendData,
     		fetchProgress,
-    		sendData
+    		sendData,
+    		input,
+    		width,
+    		resizeInput
     	});
 
     	$$self.$inject_state = $$props => {
     		if ('prompt' in $$props) $$invalidate(0, prompt = $$props.prompt);
-    		if ('imageData' in $$props) $$invalidate(1, imageData = $$props.imageData);
-    		if ('currentImageData' in $$props) $$invalidate(2, currentImageData = $$props.currentImageData);
-    		if ('imageLoaded' in $$props) $$invalidate(3, imageLoaded = $$props.imageLoaded);
-    		if ('dataSent' in $$props) $$invalidate(4, dataSent = $$props.dataSent);
-    		if ('progressData' in $$props) $$invalidate(5, progressData = $$props.progressData);
-    		if ('inputRef' in $$props) $$invalidate(6, inputRef = $$props.inputRef);
-    		if ('modal' in $$props) $$invalidate(7, modal = $$props.modal);
+    		if ('imageData' in $$props) $$invalidate(2, imageData = $$props.imageData);
+    		if ('currentImageData' in $$props) $$invalidate(3, currentImageData = $$props.currentImageData);
+    		if ('imageLoaded' in $$props) $$invalidate(4, imageLoaded = $$props.imageLoaded);
+    		if ('dataSent' in $$props) $$invalidate(5, dataSent = $$props.dataSent);
+    		if ('progressData' in $$props) $$invalidate(6, progressData = $$props.progressData);
+    		if ('inputRef' in $$props) $$invalidate(1, inputRef = $$props.inputRef);
+    		if ('inputWidth' in $$props) $$invalidate(7, inputWidth = $$props.inputWidth);
+    		if ('modal' in $$props) $$invalidate(8, modal = $$props.modal);
+    		if ('input' in $$props) input = $$props.input;
+    		if ('width' in $$props) width = $$props.width;
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
+    	$$self.$$.update = () => {
+    		if ($$self.$$.dirty & /*inputRef, prompt*/ 3) {
+    			// Function to resize the input based on the text inside
+    			if (inputRef && prompt) {
+    				const tempSpan = document.createElement("span");
+    				tempSpan.style.fontSize = window.getComputedStyle(inputRef).getPropertyValue("font-size");
+    				tempSpan.style.fontFamily = window.getComputedStyle(inputRef).getPropertyValue("font-family");
+    				tempSpan.style.visibility = "hidden";
+    				tempSpan.innerHTML = prompt;
+    				document.body.appendChild(tempSpan);
+    				const newWidth = Math.min(Math.max(tempSpan.offsetWidth + 40, 150), 300);
+    				$$invalidate(7, inputWidth = newWidth + "px");
+    				document.body.removeChild(tempSpan);
+    			}
+    		}
+    	};
+
     	return [
     		prompt,
+    		inputRef,
     		imageData,
     		currentImageData,
     		imageLoaded,
     		dataSent,
     		progressData,
-    		inputRef,
+    		inputWidth,
     		modal,
     		openModal,
     		closeModal,
     		prepareSendData,
     		div3_binding,
-    		input_binding,
-    		input_input_handler,
+    		input_1_binding,
+    		input_1_input_handler,
     		click_handler,
     		error_handler
     	];

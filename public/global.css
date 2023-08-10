@@ -45,15 +45,22 @@ textarea {
   font-family: inherit;
   font-size: inherit;
   -webkit-padding: 0.4em 0;
-  padding: 0.4em;
+  padding: 0.6em;
   margin: 0 0 0.5em 0;
   box-sizing: border-box;
-  border: 1px solid #ccc;
+  border: 3px solid #eee;
   border-radius: 2px;
 }
 
 .input-container {
-  font-size: 16px;
+  font-size: 1.25em;
+  text-align: center;
+}
+
+.input-container input {
+  min-width: 50px; /* Minimum width */
+  max-width: 300px; /* Maximum width */
+  transition: width 0.3s; /* Optional: Smooth transition */
 }
 
 input:disabled {
@@ -84,14 +91,14 @@ button:focus {
   align-items: center;
   background-color: #f5f5f5; /* Background color for the header */
   padding: 5px 10px; /* Padding around the content */
-  font-size: 10px; /* Font size for the text */
+  font-size: 12px; /* Font size for the text */
   color: #aaa;
 }
 
 .header-link {
   color: #aaa; /* Link color */
   text-decoration: none; /* Remove underline */
-  font-size: 10px; /* Font size */
+  font-size: 12px; /* Font size */
   padding: 5px; /* Add some padding around the link */
 }
 

@@ -1,5 +1,6 @@
 <script>
   import { onMount, afterUpdate } from "svelte";
+
   let prompt = "";
   let imageData = "";
   let currentImageData = ""; // ADDED: Variable to hold the current image data
@@ -7,6 +8,26 @@
   let dataSent = false;
   let progressData = null;
   let inputRef;
+
+  //dynamic input sizing
+  let inputWidth = "100px";
+
+  // Function to resize the input based on the text inside
+  $: if (inputRef && prompt) {
+    const tempSpan = document.createElement("span");
+    tempSpan.style.fontSize = window
+      .getComputedStyle(inputRef)
+      .getPropertyValue("font-size");
+    tempSpan.style.fontFamily = window
+      .getComputedStyle(inputRef)
+      .getPropertyValue("font-family");
+    tempSpan.style.visibility = "hidden";
+    tempSpan.innerHTML = prompt;
+    document.body.appendChild(tempSpan);
+    const newWidth = Math.min(Math.max(tempSpan.offsetWidth + 40, 150), 300);
+    inputWidth = newWidth + "px";
+    document.body.removeChild(tempSpan);
+  }
 
   // "about" modal
   let modal;
@@ -143,6 +164,33 @@
       };
     }
   });
+
+  //making the input field resize dynamically
+
+  let input;
+  let width = "100px"; // Initial width
+
+  function resizeInput() {
+    const tempSpan = document.createElement("span");
+    tempSpan.style.fontSize = window
+      .getComputedStyle(input, null)
+      .getPropertyValue("font-size");
+    tempSpan.style.fontFamily = window
+      .getComputedStyle(input, null)
+      .getPropertyValue("font-family");
+    tempSpan.style.visibility = "hidden";
+    tempSpan.innerHTML = input.value;
+    document.body.appendChild(tempSpan);
+
+    // Add a little extra width to avoid cutting off text
+    const newWidth = Math.min(Math.max(tempSpan.offsetWidth + 10, 50), 300);
+
+    // Set the new width
+    width = newWidth + "px";
+
+    // Clean up the temporary span
+    document.body.removeChild(tempSpan);
+  }
 </script>
 
 <head>
@@ -175,6 +223,7 @@
         bind:this={inputRef}
         bind:value={prompt}
         placeholder="Corey..."
+        style="width: {inputWidth};"
         on:click={() => {
           if (!prompt) prompt = "Corey ";
         }}
