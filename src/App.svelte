@@ -152,7 +152,7 @@
 <div class="header">
   <div class="info">alpha v0.0.5 ###GIT_HASH###</div>
   <a href="javascript:void(0);" class="header-link" on:click={openModal}
-    >what is this?</a
+    >What is this?</a
   >
 </div>
 
