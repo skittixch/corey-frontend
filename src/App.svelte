@@ -6,6 +6,7 @@
   let imageLoaded = false;
   let dataSent = false;
   let progressData = null;
+  let inputRef;
 
   //next lines added in an attempt to get roop args set up
 
@@ -35,6 +36,10 @@
       true,
     ];
     sendData(args); // Call sendData with the prepared args
+
+    if (inputRef) {
+      inputRef.blur();
+    }
   }
 
   async function fetchProgress() {
@@ -69,10 +74,10 @@
     dataSent = true;
     let tempPrompt = prompt.replace(
       /corey/gi,
-      "<lora:crzx_v09:1> (ohwx:1.4) man"
+      "an award winning portrait of <lora:crzx_v09:1> (ohwx:1.4) man, trending on artstation"
     );
     tempPrompt +=
-      " (excited:.1), epic composition, renaissance composition, rule of thirds, clarity, award winning, blonde curly hair and beard <lora:actionshot:1>";
+      " (happy and excited:.2), epic composition, renaissance composition, rule of thirds, clarity, award winning, short (blonde:1.2) curly hair and a neatly trimmed beard <lora:actionshot:.75>";
 
     // ADDED: Moved the fetch operation into a separate variable
     const responsePromise = fetch("https://ai.ericbacus.com/sdapi/v1/txt2img", {
@@ -126,24 +131,28 @@
 </head>
 
 <!--this section is where the image will load-->
-<div class={dataSent ? "container sent" : "container"}>
-  <div class="input-container">
-    <input
-      bind:value={prompt}
-      placeholder="Corey..."
-      on:click={() => {
-        if (!prompt) prompt = "Corey ";
-      }}
-    />
-    <button
-      class="send-button"
-      on:click={prepareSendData}
-      disabled={dataSent && !imageLoaded}
-      ><img src="./send.svg" alt="Send" class="arrow-icon" /></button
-    >
+<form on:submit|preventDefault={prepareSendData}>
+  <div class={dataSent ? "container sent" : "container"}>
+    <div class="input-container">
+      <input
+        bind:this={inputRef}
+        bind:value={prompt}
+        placeholder="Corey..."
+        on:click={() => {
+          if (!prompt) prompt = "Corey ";
+        }}
+      />
+      <button
+        class="send-button"
+        type="submit"
+        disabled={dataSent && !imageLoaded}
+        ><img src="./send.svg" alt="Send" class="arrow-icon" /></button
+      >
+    </div>
+    <!-- Here is the corrected change -->
   </div>
-  <!-- Here is the corrected change -->
-</div>
+</form>
+
 {#if imageData}
   <div class="image-container">
     <img src={imageData} alt="" class={imageLoaded ? "fade-in" : ""} />
@@ -151,7 +160,7 @@
 {/if}
 
 <!--version-->
-<p>alpha v0.0.3</p>
+<p>alpha v0.0.5</p>
 
 {#if currentImageData}
   <div class="current-image-container">

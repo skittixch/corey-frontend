@@ -68,6 +68,13 @@ var app = (function () {
         node.addEventListener(event, handler, options);
         return () => node.removeEventListener(event, handler, options);
     }
+    function prevent_default(fn) {
+        return function (event) {
+            event.preventDefault();
+            // @ts-ignore
+            return fn.call(this, event);
+        };
+    }
     function attr(node, attribute, value) {
         if (value == null)
             node.removeAttribute(attribute);
@@ -441,7 +448,7 @@ var app = (function () {
     const { Error: Error_1, console: console_1 } = globals;
     const file = "src\\App.svelte";
 
-    // (147:0) {#if imageData}
+    // (156:0) {#if imageData}
     function create_if_block_2(ctx) {
     	let div;
     	let img;
@@ -455,9 +462,9 @@ var app = (function () {
     			if (!src_url_equal(img.src, img_src_value = /*imageData*/ ctx[1])) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "");
     			attr_dev(img, "class", img_class_value = /*imageLoaded*/ ctx[3] ? "fade-in" : "");
-    			add_location(img, file, 148, 4, 5372);
+    			add_location(img, file, 157, 4, 5652);
     			attr_dev(div, "class", "image-container");
-    			add_location(div, file, 147, 2, 5337);
+    			add_location(div, file, 156, 2, 5617);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -481,14 +488,14 @@ var app = (function () {
     		block,
     		id: create_if_block_2.name,
     		type: "if",
-    		source: "(147:0) {#if imageData}",
+    		source: "(156:0) {#if imageData}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (156:0) {#if currentImageData}
+    // (165:0) {#if currentImageData}
     function create_if_block_1(ctx) {
     	let div;
     	let img;
@@ -504,16 +511,16 @@ var app = (function () {
     			if (!src_url_equal(img.src, img_src_value = /*currentImageData*/ ctx[2])) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "output");
     			attr_dev(img, "class", img_class_value = /*imageLoaded*/ ctx[3] ? "fade-in" : "");
-    			add_location(img, file, 157, 4, 5568);
+    			add_location(img, file, 166, 4, 5848);
     			attr_dev(div, "class", "current-image-container");
-    			add_location(div, file, 156, 2, 5525);
+    			add_location(div, file, 165, 2, 5805);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
     			append_dev(div, img);
 
     			if (!mounted) {
-    				dispose = listen_dev(img, "error", /*error_handler*/ ctx[9], false, false, false, false);
+    				dispose = listen_dev(img, "error", /*error_handler*/ ctx[11], false, false, false, false);
     				mounted = true;
     			}
     		},
@@ -537,14 +544,14 @@ var app = (function () {
     		block,
     		id: create_if_block_1.name,
     		type: "if",
-    		source: "(156:0) {#if currentImageData}",
+    		source: "(165:0) {#if currentImageData}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (167:0) {#if progressData && !imageLoaded}
+    // (176:0) {#if progressData && !imageLoaded}
     function create_if_block(ctx) {
     	let div;
     	let p;
@@ -560,9 +567,9 @@ var app = (function () {
     			t0 = text("Progress: ");
     			t1 = text(t1_value);
     			t2 = text("%");
-    			add_location(p, file, 169, 4, 5862);
+    			add_location(p, file, 178, 4, 6142);
     			attr_dev(div, "class", "progress-container");
-    			add_location(div, file, 168, 2, 5824);
+    			add_location(div, file, 177, 2, 6104);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -583,7 +590,7 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(167:0) {#if progressData && !imageLoaded}",
+    		source: "(176:0) {#if progressData && !imageLoaded}",
     		ctx
     	});
 
@@ -594,6 +601,7 @@ var app = (function () {
     	let head;
     	let link;
     	let t0;
+    	let form;
     	let div1;
     	let div0;
     	let input;
@@ -620,6 +628,7 @@ var app = (function () {
     			head = element("head");
     			link = element("link");
     			t0 = space();
+    			form = element("form");
     			div1 = element("div");
     			div0 = element("div");
     			input = element("input");
@@ -630,7 +639,7 @@ var app = (function () {
     			if (if_block0) if_block0.c();
     			t3 = space();
     			p = element("p");
-    			p.textContent = "alpha v0.0.3";
+    			p.textContent = "alpha v0.0.5";
     			t5 = space();
     			if (if_block1) if_block1.c();
     			t6 = space();
@@ -638,22 +647,24 @@ var app = (function () {
     			if_block2_anchor = empty();
     			attr_dev(link, "rel", "stylesheet");
     			attr_dev(link, "href", "./AppStyle.css");
-    			add_location(link, file, 124, 2, 4711);
-    			add_location(head, file, 123, 0, 4701);
+    			add_location(link, file, 129, 2, 4876);
+    			add_location(head, file, 128, 0, 4866);
     			attr_dev(input, "placeholder", "Corey...");
-    			add_location(input, file, 130, 4, 4915);
+    			add_location(input, file, 136, 6, 5137);
     			if (!src_url_equal(img.src, img_src_value = "./send.svg")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "Send");
     			attr_dev(img, "class", "arrow-icon");
-    			add_location(img, file, 141, 7, 5188);
+    			add_location(img, file, 148, 9, 5449);
     			attr_dev(button, "class", "send-button");
+    			attr_dev(button, "type", "submit");
     			button.disabled = button_disabled_value = /*dataSent*/ ctx[4] && !/*imageLoaded*/ ctx[3];
-    			add_location(button, file, 137, 4, 5068);
+    			add_location(button, file, 144, 6, 5334);
     			attr_dev(div0, "class", "input-container");
-    			add_location(div0, file, 129, 2, 4880);
+    			add_location(div0, file, 135, 4, 5100);
     			attr_dev(div1, "class", div1_class_value = /*dataSent*/ ctx[4] ? "container sent" : "container");
-    			add_location(div1, file, 128, 0, 4821);
-    			add_location(p, file, 153, 0, 5476);
+    			add_location(div1, file, 134, 2, 5039);
+    			add_location(form, file, 133, 0, 4986);
+    			add_location(p, file, 162, 0, 5756);
     		},
     		l: function claim(nodes) {
     			throw new Error_1("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -662,9 +673,11 @@ var app = (function () {
     			insert_dev(target, head, anchor);
     			append_dev(head, link);
     			insert_dev(target, t0, anchor);
-    			insert_dev(target, div1, anchor);
+    			insert_dev(target, form, anchor);
+    			append_dev(form, div1);
     			append_dev(div1, div0);
     			append_dev(div0, input);
+    			/*input_binding*/ ctx[8](input);
     			set_input_value(input, /*prompt*/ ctx[0]);
     			append_dev(div0, t1);
     			append_dev(div0, button);
@@ -681,9 +694,9 @@ var app = (function () {
 
     			if (!mounted) {
     				dispose = [
-    					listen_dev(input, "input", /*input_input_handler*/ ctx[7]),
-    					listen_dev(input, "click", /*click_handler*/ ctx[8], false, false, false, false),
-    					listen_dev(button, "click", /*prepareSendData*/ ctx[6], false, false, false, false)
+    					listen_dev(input, "input", /*input_input_handler*/ ctx[9]),
+    					listen_dev(input, "click", /*click_handler*/ ctx[10], false, false, false, false),
+    					listen_dev(form, "submit", prevent_default(/*prepareSendData*/ ctx[7]), false, true, false, false)
     				];
 
     				mounted = true;
@@ -746,7 +759,8 @@ var app = (function () {
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(head);
     			if (detaching) detach_dev(t0);
-    			if (detaching) detach_dev(div1);
+    			if (detaching) detach_dev(form);
+    			/*input_binding*/ ctx[8](null);
     			if (detaching) detach_dev(t2);
     			if (if_block0) if_block0.d(detaching);
     			if (detaching) detach_dev(t3);
@@ -792,6 +806,7 @@ var app = (function () {
     	let imageLoaded = false;
     	let dataSent = false;
     	let progressData = null;
+    	let inputRef;
 
     	async function prepareSendData() {
     		let imagePath = "./roop.png";
@@ -812,6 +827,10 @@ var app = (function () {
     		];
 
     		sendData(args); // Call sendData with the prepared args
+
+    		if (inputRef) {
+    			inputRef.blur();
+    		}
     	}
 
     	async function fetchProgress() {
@@ -842,8 +861,8 @@ var app = (function () {
     		console.log("sendData called, initial imageLoaded:", imageLoaded);
     		$$invalidate(3, imageLoaded = false);
     		$$invalidate(4, dataSent = true);
-    		let tempPrompt = prompt.replace(/corey/gi, "<lora:crzx_v09:1> (ohwx:1.4) man");
-    		tempPrompt += " (excited:.1), epic composition, renaissance composition, rule of thirds, clarity, award winning, blonde curly hair and beard <lora:actionshot:1>";
+    		let tempPrompt = prompt.replace(/corey/gi, "an award winning portrait of <lora:crzx_v09:1> (ohwx:1.4) man, trending on artstation");
+    		tempPrompt += " (happy and excited:.2), epic composition, renaissance composition, rule of thirds, clarity, award winning, short (blonde:1.2) curly hair and a neatly trimmed beard <lora:actionshot:.75>";
 
     		// ADDED: Moved the fetch operation into a separate variable
     		const responsePromise = fetch("https://ai.ericbacus.com/sdapi/v1/txt2img", {
@@ -895,6 +914,13 @@ var app = (function () {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console_1.warn(`<App> was created with unknown prop '${key}'`);
     	});
 
+    	function input_binding($$value) {
+    		binding_callbacks[$$value ? 'unshift' : 'push'](() => {
+    			inputRef = $$value;
+    			$$invalidate(6, inputRef);
+    		});
+    	}
+
     	function input_input_handler() {
     		prompt = this.value;
     		$$invalidate(0, prompt);
@@ -915,6 +941,7 @@ var app = (function () {
     		imageLoaded,
     		dataSent,
     		progressData,
+    		inputRef,
     		loadImageAsBase64,
     		prepareSendData,
     		fetchProgress,
@@ -928,6 +955,7 @@ var app = (function () {
     		if ('imageLoaded' in $$props) $$invalidate(3, imageLoaded = $$props.imageLoaded);
     		if ('dataSent' in $$props) $$invalidate(4, dataSent = $$props.dataSent);
     		if ('progressData' in $$props) $$invalidate(5, progressData = $$props.progressData);
+    		if ('inputRef' in $$props) $$invalidate(6, inputRef = $$props.inputRef);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -941,7 +969,9 @@ var app = (function () {
     		imageLoaded,
     		dataSent,
     		progressData,
+    		inputRef,
     		prepareSendData,
+    		input_binding,
     		input_input_handler,
     		click_handler,
     		error_handler
