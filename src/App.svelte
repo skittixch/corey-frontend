@@ -1,5 +1,9 @@
 <script>
   import { onMount, afterUpdate } from "svelte";
+  import Header from "./Header.svelte";
+  import InputField from "./InputField.svelte";
+  import ImageDisplay from "./ImageDisplay.svelte";
+  import ProgressDisplay from "./ProgressDisplay.svelte";
 
   let prompt = "";
   let imageData = "";
@@ -7,48 +11,6 @@
   let imageLoaded = false;
   let dataSent = false;
   let progressData = null;
-  let inputRef;
-
-  //dynamic input sizing
-  let inputWidth = "100px";
-
-  // Function to resize the input based on the text inside
-  $: if (inputRef && prompt) {
-    const tempSpan = document.createElement("span");
-    tempSpan.style.fontSize = window
-      .getComputedStyle(inputRef)
-      .getPropertyValue("font-size");
-    tempSpan.style.fontFamily = window
-      .getComputedStyle(inputRef)
-      .getPropertyValue("font-family");
-    tempSpan.style.visibility = "hidden";
-    tempSpan.innerHTML = prompt;
-    document.body.appendChild(tempSpan);
-    const newWidth = Math.min(Math.max(tempSpan.offsetWidth + 40, 150), 300);
-    inputWidth = newWidth + "px";
-    document.body.removeChild(tempSpan);
-  }
-
-  // "about" modal
-  let modal;
-
-  function openModal() {
-    modal.style.display = "block";
-  }
-
-  function closeModal() {
-    modal.style.display = "none";
-  }
-
-  onMount(() => {
-    window.onclick = (event) => {
-      if (event.target === modal) {
-        closeModal();
-      }
-    };
-  });
-
-  //next lines added in an attempt to get roop args set up
 
   async function loadImageAsBase64(imagePath) {
     const response = await fetch(imagePath);
@@ -164,105 +126,17 @@
       };
     }
   });
-
-  //making the input field resize dynamically
-
-  let input;
-  let width = "100px"; // Initial width
-
-  function resizeInput() {
-    const tempSpan = document.createElement("span");
-    tempSpan.style.fontSize = window
-      .getComputedStyle(input, null)
-      .getPropertyValue("font-size");
-    tempSpan.style.fontFamily = window
-      .getComputedStyle(input, null)
-      .getPropertyValue("font-family");
-    tempSpan.style.visibility = "hidden";
-    tempSpan.innerHTML = input.value;
-    document.body.appendChild(tempSpan);
-
-    // Add a little extra width to avoid cutting off text
-    const newWidth = Math.min(Math.max(tempSpan.offsetWidth + 10, 50), 300);
-
-    // Set the new width
-    width = newWidth + "px";
-
-    // Clean up the temporary span
-    document.body.removeChild(tempSpan);
-  }
 </script>
 
 <head>
   <link rel="stylesheet" href="./AppStyle.css" />
 </head>
 
-<div class="header">
-  <div class="info">alpha v0.0.5 ###GIT_HASH###</div>
-  <a href="javascript:void(0);" class="header-link" on:click={openModal}
-    >What is this??</a
-  >
-</div>
-
-<div class="modal" bind:this={modal}>
-  <div class="modal-content">
-    <span class="close" on:click={closeModal}>&times;</span>
-    <p>
-      My best friend Corey passed away on April 15th, 2023. He left me a whole
-      bunch of computer shit, and this is what I'm doing with it to keep his
-      memory alive. Miss you bro.
-    </p>
-  </div>
-</div>
-
-<!--this section is where the image will load-->
+<Header />
 <form on:submit|preventDefault={prepareSendData}>
   <div class={dataSent ? "container sent" : "container"}>
-    <div class="input-container">
-      <input
-        bind:this={inputRef}
-        bind:value={prompt}
-        placeholder="Corey..."
-        style="width: {inputWidth};"
-        on:click={() => {
-          if (!prompt) prompt = "Corey ";
-        }}
-      />
-      <button
-        class="send-button"
-        type="submit"
-        disabled={dataSent && !imageLoaded}
-        ><img src="./send.svg" alt="Send" class="arrow-icon" /></button
-      >
-    </div>
-    <!-- Here is the corrected change -->
+    <InputField bind:prompt {dataSent} {imageLoaded} />
   </div>
 </form>
-
-{#if imageData}
-  <div class="image-container">
-    <img src={imageData} alt="" class={imageLoaded ? "fade-in" : ""} />
-  </div>
-{/if}
-
-<!--version-->
-
-{#if currentImageData}
-  <div class="current-image-container">
-    <img
-      src={currentImageData}
-      alt="output"
-      class={imageLoaded ? "fade-in" : ""}
-      on:error={() => (currentImageData = null)}
-    />
-  </div>
-{/if}
-
-{#if progressData && !imageLoaded}
-  <!-- Added !imageLoaded condition -->
-  <div class="progress-container">
-    <p>Progress: {progressData.progress * 100}%</p>
-    <!-- Multiply progress by 100 -->
-    <!-- Display more progress data as needed -->
-  </div>
-{/if}
+<ImageDisplay {imageData} {imageLoaded} />
+<ProgressDisplay {progressData} {imageLoaded} />

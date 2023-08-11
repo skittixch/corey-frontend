@@ -1,0 +1,81 @@
+
+.container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: top 0.5s ease-in-out;
+  }
+  
+  .container.sent {
+    top: calc(50% + (512px / 2 + 32px));
+  }
+  
+  $radius:25px;
+
+  input {
+    border-radius: $radius;
+    width: 200px;
+    height: $radius;
+    text-align: center;
+    font-size:16px;
+  }
+
+  /* Container for the input field and send button */
+.input-container {
+  display: flex;
+  align-items: center;
+}
+
+.send-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: $radius; /* Adjust to fit your SVG */
+  height: $radius; /* Same height as the input field */
+  position: relative;
+  overflow: hidden;
+  outline: none; /* Remove the outline */
+  line-height: 0; /* Remove extra space around the image */
+}
+
+.arrow-icon {
+  width: 100%;
+  height: 100%;
+  display: block; /* Remove extra space below the image */
+}
+
+/* Add a transition for the zoom effect */
+.arrow-icon.zoom {
+  transform: translateX(100%) scale(2);
+  transition: transform 0.5s ease-out;
+}
+
+  
+  .image-container,
+  .progress-container,
+  .current-image-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .current-image-container img {
+    width: 512px;
+    height: 512px;
+    object-fit: cover;
+  }
+  
+  img {
+    opacity: 0;
+    animation: fadeIn 1s ease-in-out forwards;
+  }
+  
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+  
