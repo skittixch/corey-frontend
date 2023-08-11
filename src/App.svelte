@@ -138,5 +138,5 @@
     <InputField bind:prompt {dataSent} {imageLoaded} />
   </div>
 </form>
-<ImageDisplay {imageData} {imageLoaded} />
+<ImageDisplay {imageData} {currentImageData} {imageLoaded} />
 <ProgressDisplay {progressData} {imageLoaded} />
