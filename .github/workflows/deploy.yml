@@ -16,14 +16,13 @@ jobs:
       - name: Print directory structure
         run: ls -R
 
-      - name: Update version number and Git hash
+      - name: Update version number with build number
         run: |
-          VERSION=$(grep -o 'alpha v[0-9.]*' ./src/App.svelte)
-          NEW_VERSION_NUMBER=$(echo $VERSION | awk -F. '{$NF = $NF + 1;} 1' OFS=.)
-          SHORT_GIT_HASH=$(echo ${GITHUB_SHA} | cut -c1-7)
-          COMMIT_LINK="https://github.com/skittixch/corey-frontend/commit/$SHORT_GIT_HASH"
-          NEW_VERSION_AND_LINK="alpha v$NEW_VERSION_NUMBER <a href=\"$COMMIT_LINK\">$SHORT_GIT_HASH<\/a>"
-          sed -i "s|$VERSION|$NEW_VERSION_AND_LINK|g" ./src/App.svelte
+          BUILD_NUMBER=${GITHUB_RUN_NUMBER}
+          VERSION="crai-0.0.x" # Change this to match the existing version string in your file
+          NEW_VERSION="crai-0.0.${BUILD_NUMBER}"
+          sed -i "s|$VERSION|$NEW_VERSION|g" ./src/Header.svelte
+
 
       - name: Use Node.js
         uses: actions/setup-node@v2
