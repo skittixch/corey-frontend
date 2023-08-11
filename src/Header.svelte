@@ -20,9 +20,9 @@
 </script>
 
 <div class="header">
-  <div class="info">alpha v0.0.5 ###GIT_HASH###</div>
+  <div class="info">crai-0.0.x</div>
   <a href="javascript:void(0);" class="header-link" on:click={openModal}
-    >What is this??</a
+    >What is this?</a
   >
 </div>
 

@@ -506,10 +506,10 @@ var app = (function () {
     		c: function create() {
     			div1 = element("div");
     			div0 = element("div");
-    			div0.textContent = "alpha v0.0.5 ###GIT_HASH###";
+    			div0.textContent = "crai-0.0.x";
     			t1 = space();
     			a = element("a");
-    			a.textContent = "What is this??";
+    			a.textContent = "What is this?";
     			t3 = space();
     			div3 = element("div");
     			div2 = element("div");
@@ -522,16 +522,16 @@ var app = (function () {
     			add_location(div0, file$4, 22, 2, 376);
     			attr_dev(a, "href", "javascript:void(0);");
     			attr_dev(a, "class", "header-link");
-    			add_location(a, file$4, 23, 2, 431);
+    			add_location(a, file$4, 23, 2, 414);
     			attr_dev(div1, "class", "header");
     			add_location(div1, file$4, 21, 0, 352);
     			attr_dev(span, "class", "close");
-    			add_location(span, file$4, 30, 4, 616);
-    			add_location(p, file$4, 31, 4, 678);
+    			add_location(span, file$4, 30, 4, 598);
+    			add_location(p, file$4, 31, 4, 660);
     			attr_dev(div2, "class", "modal-content");
-    			add_location(div2, file$4, 29, 2, 583);
+    			add_location(div2, file$4, 29, 2, 565);
     			attr_dev(div3, "class", "modal");
-    			add_location(div3, file$4, 28, 0, 542);
+    			add_location(div3, file$4, 28, 0, 524);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
