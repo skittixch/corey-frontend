@@ -23,7 +23,6 @@ jobs:
           NEW_VERSION="crai-0.0.${BUILD_NUMBER}"
           sed -i "s|$VERSION|$NEW_VERSION|g" ./src/Header.svelte
 
-
       - name: Use Node.js
         uses: actions/setup-node@v2
         with:
