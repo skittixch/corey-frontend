@@ -667,17 +667,17 @@ var app = (function () {
     			img = element("img");
     			attr_dev(input, "placeholder", "Corey...");
     			set_style(input, "width", /*inputWidth*/ ctx[4]);
-    			add_location(input, file$3, 26, 2, 831);
+    			add_location(input, file$3, 29, 2, 877);
     			if (!src_url_equal(img.src, img_src_value = "./send.svg")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "Send");
     			attr_dev(img, "class", "arrow-icon");
-    			add_location(img, file$3, 36, 4, 1114);
+    			add_location(img, file$3, 39, 4, 1160);
     			attr_dev(button, "class", "send-button");
     			attr_dev(button, "type", "submit");
     			button.disabled = button_disabled_value = /*dataSent*/ ctx[1] && !/*imageLoaded*/ ctx[2];
-    			add_location(button, file$3, 35, 2, 1030);
+    			add_location(button, file$3, 38, 2, 1076);
     			attr_dev(div, "class", "input-container");
-    			add_location(div, file$3, 25, 0, 798);
+    			add_location(div, file$3, 28, 0, 844);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -742,6 +742,10 @@ var app = (function () {
     	let { imageLoaded } = $$props;
     	let inputRef;
     	let inputWidth = "100px";
+
+    	if (inputRef) {
+    		inputRef.blur();
+    	}
 
     	$$self.$$.on_mount.push(function () {
     		if (prompt === undefined && !('prompt' in $$props || $$self.$$.bound[$$self.$$.props['prompt']])) {
@@ -1338,12 +1342,12 @@ var app = (function () {
     	header = new Header({ $$inline: true });
 
     	function inputfield_prompt_binding(value) {
-    		/*inputfield_prompt_binding*/ ctx[7](value);
+    		/*inputfield_prompt_binding*/ ctx[6](value);
     	}
 
     	let inputfield_props = {
-    		dataSent: /*dataSent*/ ctx[4],
-    		imageLoaded: /*imageLoaded*/ ctx[3]
+    		dataSent: /*dataSent*/ ctx[3],
+    		imageLoaded: /*imageLoaded*/ ctx[2]
     	};
 
     	if (/*prompt*/ ctx[0] !== void 0) {
@@ -1356,16 +1360,15 @@ var app = (function () {
     	imagedisplay = new ImageDisplay({
     			props: {
     				imageData: /*imageData*/ ctx[1],
-    				currentImageData: /*currentImageData*/ ctx[2],
-    				imageLoaded: /*imageLoaded*/ ctx[3]
+    				imageLoaded: /*imageLoaded*/ ctx[2]
     			},
     			$$inline: true
     		});
 
     	progressdisplay = new ProgressDisplay({
     			props: {
-    				progressData: /*progressData*/ ctx[5],
-    				imageLoaded: /*imageLoaded*/ ctx[3]
+    				progressData: /*progressData*/ ctx[4],
+    				imageLoaded: /*imageLoaded*/ ctx[2]
     			},
     			$$inline: true
     		});
@@ -1386,11 +1389,11 @@ var app = (function () {
     			create_component(progressdisplay.$$.fragment);
     			attr_dev(link, "rel", "stylesheet");
     			attr_dev(link, "href", "./AppStyle.css");
-    			add_location(link, file, 131, 2, 4944);
-    			add_location(head, file, 130, 0, 4934);
-    			attr_dev(div, "class", div_class_value = /*dataSent*/ ctx[4] ? "container sent" : "container");
-    			add_location(div, file, 136, 2, 5069);
-    			add_location(form, file, 135, 0, 5016);
+    			add_location(link, file, 135, 2, 4491);
+    			add_location(head, file, 134, 0, 4481);
+    			attr_dev(div, "class", div_class_value = /*dataSent*/ ctx[3] ? "container sent" : "container");
+    			add_location(div, file, 140, 2, 4616);
+    			add_location(form, file, 139, 0, 4563);
     		},
     		l: function claim(nodes) {
     			throw new Error_1("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -1411,14 +1414,14 @@ var app = (function () {
     			current = true;
 
     			if (!mounted) {
-    				dispose = listen_dev(form, "submit", prevent_default(/*prepareSendData*/ ctx[6]), false, true, false, false);
+    				dispose = listen_dev(form, "submit", prevent_default(/*prepareSendData*/ ctx[5]), false, true, false, false);
     				mounted = true;
     			}
     		},
     		p: function update(ctx, [dirty]) {
     			const inputfield_changes = {};
-    			if (dirty & /*dataSent*/ 16) inputfield_changes.dataSent = /*dataSent*/ ctx[4];
-    			if (dirty & /*imageLoaded*/ 8) inputfield_changes.imageLoaded = /*imageLoaded*/ ctx[3];
+    			if (dirty & /*dataSent*/ 8) inputfield_changes.dataSent = /*dataSent*/ ctx[3];
+    			if (dirty & /*imageLoaded*/ 4) inputfield_changes.imageLoaded = /*imageLoaded*/ ctx[2];
 
     			if (!updating_prompt && dirty & /*prompt*/ 1) {
     				updating_prompt = true;
@@ -1428,18 +1431,17 @@ var app = (function () {
 
     			inputfield.$set(inputfield_changes);
 
-    			if (!current || dirty & /*dataSent*/ 16 && div_class_value !== (div_class_value = /*dataSent*/ ctx[4] ? "container sent" : "container")) {
+    			if (!current || dirty & /*dataSent*/ 8 && div_class_value !== (div_class_value = /*dataSent*/ ctx[3] ? "container sent" : "container")) {
     				attr_dev(div, "class", div_class_value);
     			}
 
     			const imagedisplay_changes = {};
     			if (dirty & /*imageData*/ 2) imagedisplay_changes.imageData = /*imageData*/ ctx[1];
-    			if (dirty & /*currentImageData*/ 4) imagedisplay_changes.currentImageData = /*currentImageData*/ ctx[2];
-    			if (dirty & /*imageLoaded*/ 8) imagedisplay_changes.imageLoaded = /*imageLoaded*/ ctx[3];
+    			if (dirty & /*imageLoaded*/ 4) imagedisplay_changes.imageLoaded = /*imageLoaded*/ ctx[2];
     			imagedisplay.$set(imagedisplay_changes);
     			const progressdisplay_changes = {};
-    			if (dirty & /*progressData*/ 32) progressdisplay_changes.progressData = /*progressData*/ ctx[5];
-    			if (dirty & /*imageLoaded*/ 8) progressdisplay_changes.imageLoaded = /*imageLoaded*/ ctx[3];
+    			if (dirty & /*progressData*/ 16) progressdisplay_changes.progressData = /*progressData*/ ctx[4];
+    			if (dirty & /*imageLoaded*/ 4) progressdisplay_changes.imageLoaded = /*imageLoaded*/ ctx[2];
     			progressdisplay.$set(progressdisplay_changes);
     		},
     		i: function intro(local) {
@@ -1500,7 +1502,7 @@ var app = (function () {
     	validate_slots('App', slots, []);
     	let prompt = "";
     	let imageData = "";
-    	let currentImageData = ""; // ADDED: Variable to hold the current image data
+    	let currentImageData = "";
     	let imageLoaded = false;
     	let dataSent = false;
     	let progressData = null;
@@ -1542,24 +1544,24 @@ var app = (function () {
     		}
 
     		const result = await response.json();
-    		$$invalidate(5, progressData = result);
+    		$$invalidate(4, progressData = result);
 
     		// ADDED: Update currentImageData with the current_image data
-    		$$invalidate(2, currentImageData = `data:image/png;base64,${result.current_image}`);
+    		currentImageData = `data:image/png;base64,${result.current_image}`;
 
     		// If progress is not complete, fetch again
     		if (result.progress < 100) {
-    			$$invalidate(3, imageLoaded = true);
+    			$$invalidate(2, imageLoaded = true);
     			setTimeout(fetchProgress, 1000);
     		}
     	}
 
     	async function sendData(args) {
     		console.log("sendData called, initial imageLoaded:", imageLoaded);
-    		$$invalidate(3, imageLoaded = false);
-    		$$invalidate(4, dataSent = true);
-    		let tempPrompt = prompt.replace(/corey/gi, "an award winning portrait of <lora:crzx_v09:1> (ohwx:1.4) man, trending on artstation");
-    		tempPrompt += " (happy and excited:.2), epic composition, renaissance composition, rule of thirds, clarity, award winning, <lora:actionshot:.75>";
+    		$$invalidate(2, imageLoaded = false);
+    		$$invalidate(3, dataSent = true);
+    		let tempPrompt = prompt.replace(/corey/gi, "<lora:Corey-v02-ohwx:1> (ohwx:1.4) man");
+    		tempPrompt += " (excited:.1), epic composition, renaissance composition, rule of thirds, clarity, award winning, soft blonde curly hair and beard <lora:actionshot:1>, RAW photo, (high detailed skin:1.2), 8k uhd, dslr, soft lighting, high quality, film grain, Fujifilm XT3, graphic tee";
 
     		// ADDED: Moved the fetch operation into a separate variable
     		const responsePromise = fetch("https://ai.ericbacus.com/sdapi/v1/txt2img", {
@@ -1567,10 +1569,14 @@ var app = (function () {
     			headers: { "Content-Type": "application/json" },
     			mode: "cors",
     			body: JSON.stringify({
-    				cfg_scale: 7,
+    				enable_hr: true,
+    				denoising_strength: 0.36,
+    				hr_scale: 1.5,
+    				hr_upscaler: "R-ESRGAN 4x+",
+    				cfg_scale: 6,
     				prompt: tempPrompt,
-    				negative_prompt: "nsfw CyberRealistic_Negative-neg realisticvision-negative-embedding, nsfw, canvas frame, cartoon, 3d, ((disfigured)), ((bad art)), ((deformed)),((extra limbs)),((close up)),((b&w)), wierd colors, blurry, (((duplicate))), ((morbid)), ((mutilated)), [out of frame], extra fingers, mutated hands, ((poorly drawn hands)), ((poorly drawn face)), (((mutation))), (((deformed))), ((ugly)), blurry, ((bad anatomy)), (((bad proportions))), ((extra limbs)), cloned face, (((disfigured))), out of frame, ugly, extra limbs, (bad anatomy), gross proportions, (malformed limbs), ((missing arms)), ((missing legs)), (((extra arms))), (((extra legs))), mutated hands, (fused fingers), (too many fingers), (((long neck))), Photoshop, video game, ugly, tiling, poorly drawn hands, poorly drawn feet, poorly drawn face, out of frame, mutation, mutated, extra limbs, extra legs, extra arms, disfigured, deformed, cross-eye, body out of frame, blurry, bad art, bad anatomy, 3d render, (skinny:1.3), muscular, eyeliner, defined curls, mullet, quaffed, stylish, sharp pointy teeth, bow in hair, vampire, fade, flat top, cheek crease, dimples, (closeup:1.5), portrait, old, handsome",
-    				steps: 50,
+    				negative_prompt: "(deformed iris, deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime:1.4), text, close up, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated, extra fingers, mutated hands, poorly drawn hands, poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions, extra limbs, cloned face, disfigured, gross proportions, malformed limbs, missing arms, missing legs, extra arms, extra legs, fused fingers, too many fingers, long neck, stylish",
+    				steps: 20,
     				sampler_name: "DPM++ 2M SDE Karras",
     				restore_faces: true,
     				alwayson_scripts: { roop: { args } }
@@ -1590,7 +1596,7 @@ var app = (function () {
     		const result = await response.json();
     		console.log(result);
     		$$invalidate(1, imageData = `data:image/png;base64,${result.images[0]}`);
-    		$$invalidate(3, imageLoaded = true);
+    		$$invalidate(2, imageLoaded = true);
     		console.log("Data Sent, imageLoaded:", imageLoaded);
     	}
 
@@ -1600,7 +1606,7 @@ var app = (function () {
     			img.src = imageData;
 
     			img.onload = () => {
-    				$$invalidate(3, imageLoaded = true);
+    				$$invalidate(2, imageLoaded = true);
     			};
     		}
     	});
@@ -1638,10 +1644,10 @@ var app = (function () {
     	$$self.$inject_state = $$props => {
     		if ('prompt' in $$props) $$invalidate(0, prompt = $$props.prompt);
     		if ('imageData' in $$props) $$invalidate(1, imageData = $$props.imageData);
-    		if ('currentImageData' in $$props) $$invalidate(2, currentImageData = $$props.currentImageData);
-    		if ('imageLoaded' in $$props) $$invalidate(3, imageLoaded = $$props.imageLoaded);
-    		if ('dataSent' in $$props) $$invalidate(4, dataSent = $$props.dataSent);
-    		if ('progressData' in $$props) $$invalidate(5, progressData = $$props.progressData);
+    		if ('currentImageData' in $$props) currentImageData = $$props.currentImageData;
+    		if ('imageLoaded' in $$props) $$invalidate(2, imageLoaded = $$props.imageLoaded);
+    		if ('dataSent' in $$props) $$invalidate(3, dataSent = $$props.dataSent);
+    		if ('progressData' in $$props) $$invalidate(4, progressData = $$props.progressData);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -1651,7 +1657,6 @@ var app = (function () {
     	return [
     		prompt,
     		imageData,
-    		currentImageData,
     		imageLoaded,
     		dataSent,
     		progressData,

@@ -21,6 +21,9 @@
     inputWidth = newWidth + "px";
     document.body.removeChild(tempSpan);
   }
+  if (inputRef) {
+    inputRef.blur();
+  }
 </script>
 
 <div class="input-container">

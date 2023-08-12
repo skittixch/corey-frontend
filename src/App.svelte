@@ -7,7 +7,7 @@
 
   let prompt = "";
   let imageData = "";
-  let currentImageData = ""; // ADDED: Variable to hold the current image data
+  let currentImageData = "";
   let imageLoaded = false;
   let dataSent = false;
   let progressData = null;
@@ -76,10 +76,10 @@
     dataSent = true;
     let tempPrompt = prompt.replace(
       /corey/gi,
-      "an award winning portrait of <lora:crzx_v09:1> (ohwx:1.4) man, trending on artstation"
+      "<lora:Corey-v02-ohwx:1> (ohwx:1.4) man"
     );
     tempPrompt +=
-      " (happy and excited:.2), epic composition, renaissance composition, rule of thirds, clarity, award winning, <lora:actionshot:.75>";
+      " (excited:.1), epic composition, renaissance composition, rule of thirds, clarity, award winning, soft blonde curly hair and beard <lora:actionshot:1>, RAW photo, (high detailed skin:1.2), 8k uhd, dslr, soft lighting, high quality, film grain, Fujifilm XT3, graphic tee";
 
     // ADDED: Moved the fetch operation into a separate variable
     const responsePromise = fetch("https://ai.ericbacus.com/sdapi/v1/txt2img", {
@@ -89,11 +89,15 @@
       },
       mode: "cors",
       body: JSON.stringify({
-        cfg_scale: 7,
+        enable_hr: true,
+        denoising_strength: 0.36,
+        hr_scale: 1.5,
+        hr_upscaler: "R-ESRGAN 4x+",
+        cfg_scale: 6,
         prompt: tempPrompt,
         negative_prompt:
-          "nsfw CyberRealistic_Negative-neg realisticvision-negative-embedding, nsfw, canvas frame, cartoon, 3d, ((disfigured)), ((bad art)), ((deformed)),((extra limbs)),((close up)),((b&w)), wierd colors, blurry, (((duplicate))), ((morbid)), ((mutilated)), [out of frame], extra fingers, mutated hands, ((poorly drawn hands)), ((poorly drawn face)), (((mutation))), (((deformed))), ((ugly)), blurry, ((bad anatomy)), (((bad proportions))), ((extra limbs)), cloned face, (((disfigured))), out of frame, ugly, extra limbs, (bad anatomy), gross proportions, (malformed limbs), ((missing arms)), ((missing legs)), (((extra arms))), (((extra legs))), mutated hands, (fused fingers), (too many fingers), (((long neck))), Photoshop, video game, ugly, tiling, poorly drawn hands, poorly drawn feet, poorly drawn face, out of frame, mutation, mutated, extra limbs, extra legs, extra arms, disfigured, deformed, cross-eye, body out of frame, blurry, bad art, bad anatomy, 3d render, (skinny:1.3), muscular, eyeliner, defined curls, mullet, quaffed, stylish, sharp pointy teeth, bow in hair, vampire, fade, flat top, cheek crease, dimples, (closeup:1.5), portrait, old, handsome",
-        steps: 50,
+          "(deformed iris, deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime:1.4), text, close up, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated, extra fingers, mutated hands, poorly drawn hands, poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions, extra limbs, cloned face, disfigured, gross proportions, malformed limbs, missing arms, missing legs, extra arms, extra legs, fused fingers, too many fingers, long neck, stylish",
+        steps: 20,
         sampler_name: "DPM++ 2M SDE Karras",
         restore_faces: true,
         alwayson_scripts: { roop: { args: args } },
@@ -138,5 +142,5 @@
     <InputField bind:prompt {dataSent} {imageLoaded} />
   </div>
 </form>
-<ImageDisplay {imageData} {currentImageData} {imageLoaded} />
+<ImageDisplay {imageData} {imageLoaded} />
 <ProgressDisplay {progressData} {imageLoaded} />
