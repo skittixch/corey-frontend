@@ -3,7 +3,7 @@
   export let dataSent;
   export let imageLoaded;
   let inputRef;
-  let inputWidth = "100px";
+  let inputWidth = "175px";
 
   // Function to resize the input based on the text inside
   $: if (inputRef && prompt) {
@@ -17,13 +17,14 @@
     tempSpan.style.visibility = "hidden";
     tempSpan.innerHTML = prompt;
     document.body.appendChild(tempSpan);
-    const newWidth = Math.min(Math.max(tempSpan.offsetWidth + 40, 150), 300);
+    const newWidth = Math.min(Math.max(tempSpan.offsetWidth + 40, 175), 300);
     inputWidth = newWidth + "px";
     document.body.removeChild(tempSpan);
   }
   if (inputRef) {
     inputRef.blur();
   }
+  console.log("imageLoaded is", imageLoaded);
 </script>
 
 <div class="input-container">

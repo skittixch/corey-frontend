@@ -1,23 +1,23 @@
 .container {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%);
-    transition: top 0.5s ease-in-out;
-  }
-  
-  .container.sent {
-    top: calc(50% + (512px / 2 + 32px));
-  }
-  
-  input {
-    border-radius: 25px;
-    width: 200px;
-    height: 25px;
-    text-align: center;
-  }
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: top 0.5s ease-in-out;
+}
 
-  /* Container for the input field and send button */
+.container.sent {
+  top: calc(50% + (512px / 2 + 32px));
+}
+
+input {
+  border-radius: 25px;
+  width: 200px;
+  height: 50px;
+  text-align: center;
+}
+
+/* Container for the input field and send button */
 .input-container {
   display: flex;
   align-items: center;
@@ -48,30 +48,28 @@
   transition: transform 0.5s ease-out;
 }
 
-  
-  .image-container,
-  .progress-container,
-  .current-image-container {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.image-container,
+.progress-container,
+.current-image-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.current-image-container img {
+  width: 512px;
+  height: 512px;
+  object-fit: cover;
+}
+
+img {
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
   }
-  
-  .current-image-container img {
-    width: 512px;
-    height: 512px;
-    object-fit: cover;
-  }
-  
-  img {
-    opacity: 0;
-    animation: fadeIn 1s ease-in-out forwards;
-  }
-  
-  @keyframes fadeIn {
-    to {
-      opacity: 1;
-    }
-  }
-  
+}

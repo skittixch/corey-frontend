@@ -8,7 +8,7 @@
   let prompt = "";
   let imageData = "";
   let currentImageData = "";
-  let imageLoading = false;
+  let imageLoaded = false;
   let dataSent = false;
   let progressData = null;
 
@@ -61,21 +61,21 @@
 
     // If progress is not complete, fetch again
     if (result.progress < 100) {
-      imageLoading = true;
+      imageLoaded = true;
       setTimeout(fetchProgress, 1000);
     }
   }
 
   async function sendData(args) {
-    console.log("sendData called, initial imageLoading:", imageLoading);
-    imageLoading = true;
+    console.log("sendData called, initial imageLoaded:", imageLoaded);
+    //imageLoaded = false;
     dataSent = true;
     let tempPrompt = prompt.replace(
       /corey/gi,
       "<lora:Corey-v02-ohwx:1> (ohwx:1.4) man"
     );
     tempPrompt +=
-      " (excited:.1), epic composition, renaissance composition, rule of thirds, clarity, award winning, soft blonde curly hair and beard <lora:actionshot:1>, RAW photo, (high detailed skin:1.2), 8k uhd, dslr, soft lighting, high quality, film grain, Fujifilm XT3, graphic tee";
+      " (excited:.1), epic composition, renaissance composition, rule of thirds, clarity, award winning, soft blonde curly hair and beard <lora:actionshot:1>, RAW photo, (high detailed skin:1.2), 8k uhd, dslr, soft lighting, high quality, film grain, Fujifilm XT3, graphic tee, trending on artstation";
 
     // ADDED: Moved the fetch operation into a separate variable
     const responsePromise = fetch("https://ai.ericbacus.com/sdapi/v1/txt2img", {
@@ -92,7 +92,7 @@
         cfg_scale: 6,
         prompt: tempPrompt,
         negative_prompt:
-          "(deformed iris, deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime:1.4), text, close up, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated, extra fingers, mutated hands, poorly drawn hands, poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions, extra limbs, cloned face, disfigured, gross proportions, malformed limbs, missing arms, missing legs, extra arms, extra legs, fused fingers, too many fingers, long neck, stylish",
+          "(deformed iris, deformed pupils, semi-realistic, cgi, 3d, render, sketch, cartoon, drawing, anime:1.4), text, close up, cropped, out of frame, worst quality, low quality, jpeg artifacts, ugly, duplicate, morbid, mutilated, extra fingers, mutated hands, poorly drawn hands, poorly drawn face, mutation, deformed, blurry, dehydrated, bad anatomy, bad proportions, extra limbs, cloned face, disfigured, gross proportions, malformed limbs, missing arms, missing legs, extra arms, extra legs, fused fingers, too many fingers, long neck, stylish, buff, mullet, shoulder length hair, long hair",
         steps: 20,
         sampler_name: "DPM++ 2M SDE Karras",
         restore_faces: true,
@@ -113,8 +113,8 @@
     const result = await response.json();
     console.log(result);
     imageData = `data:image/png;base64,${result.images[0]}`;
-    //imageLoading = true;
-    console.log("Data Sent, imageLoading:", imageLoading);
+    //imageLoaded = true;
+    console.log("Data Sent, imageLoaded:", imageLoaded);
   }
 
   afterUpdate(() => {
@@ -122,7 +122,7 @@
       const img = new Image();
       img.src = imageData;
       img.onload = () => {
-        //imageLoading = true;
+        //imageLoaded = true;
       };
     }
   });
@@ -135,8 +135,8 @@
 <Header />
 <form on:submit|preventDefault={prepareSendData}>
   <div class={dataSent ? "container sent" : "container"}>
-    <InputField bind:prompt {dataSent} {imageLoading} />
+    <InputField bind:prompt {dataSent} {imageLoaded} />
   </div>
 </form>
-<ImageDisplay {imageData} {currentImageData} {imageLoading} />
-<ProgressDisplay {progressData} {imageLoading} />
+<ImageDisplay {imageData} {currentImageData} {imageLoaded} />
+<ProgressDisplay {progressData} {currentImageData} {imageLoaded} />
