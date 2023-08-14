@@ -1347,7 +1347,7 @@ var app = (function () {
 
     	let inputfield_props = {
     		dataSent: /*dataSent*/ ctx[4],
-    		imageLoaded: /*imageLoaded*/ ctx[3]
+    		imageLoading: /*imageLoading*/ ctx[3]
     	};
 
     	if (/*prompt*/ ctx[0] !== void 0) {
@@ -1361,7 +1361,7 @@ var app = (function () {
     			props: {
     				imageData: /*imageData*/ ctx[1],
     				currentImageData: /*currentImageData*/ ctx[2],
-    				imageLoaded: /*imageLoaded*/ ctx[3]
+    				imageLoading: /*imageLoading*/ ctx[3]
     			},
     			$$inline: true
     		});
@@ -1369,7 +1369,7 @@ var app = (function () {
     	progressdisplay = new ProgressDisplay({
     			props: {
     				progressData: /*progressData*/ ctx[5],
-    				imageLoaded: /*imageLoaded*/ ctx[3]
+    				imageLoading: /*imageLoading*/ ctx[3]
     			},
     			$$inline: true
     		});
@@ -1390,11 +1390,11 @@ var app = (function () {
     			create_component(progressdisplay.$$.fragment);
     			attr_dev(link, "rel", "stylesheet");
     			attr_dev(link, "href", "./AppStyle.css");
-    			add_location(link, file, 135, 2, 4491);
-    			add_location(head, file, 134, 0, 4481);
+    			add_location(link, file, 131, 2, 4449);
+    			add_location(head, file, 130, 0, 4439);
     			attr_dev(div, "class", div_class_value = /*dataSent*/ ctx[4] ? "container sent" : "container");
-    			add_location(div, file, 140, 2, 4616);
-    			add_location(form, file, 139, 0, 4563);
+    			add_location(div, file, 136, 2, 4574);
+    			add_location(form, file, 135, 0, 4521);
     		},
     		l: function claim(nodes) {
     			throw new Error_1("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -1422,7 +1422,7 @@ var app = (function () {
     		p: function update(ctx, [dirty]) {
     			const inputfield_changes = {};
     			if (dirty & /*dataSent*/ 16) inputfield_changes.dataSent = /*dataSent*/ ctx[4];
-    			if (dirty & /*imageLoaded*/ 8) inputfield_changes.imageLoaded = /*imageLoaded*/ ctx[3];
+    			if (dirty & /*imageLoading*/ 8) inputfield_changes.imageLoading = /*imageLoading*/ ctx[3];
 
     			if (!updating_prompt && dirty & /*prompt*/ 1) {
     				updating_prompt = true;
@@ -1439,11 +1439,11 @@ var app = (function () {
     			const imagedisplay_changes = {};
     			if (dirty & /*imageData*/ 2) imagedisplay_changes.imageData = /*imageData*/ ctx[1];
     			if (dirty & /*currentImageData*/ 4) imagedisplay_changes.currentImageData = /*currentImageData*/ ctx[2];
-    			if (dirty & /*imageLoaded*/ 8) imagedisplay_changes.imageLoaded = /*imageLoaded*/ ctx[3];
+    			if (dirty & /*imageLoading*/ 8) imagedisplay_changes.imageLoading = /*imageLoading*/ ctx[3];
     			imagedisplay.$set(imagedisplay_changes);
     			const progressdisplay_changes = {};
     			if (dirty & /*progressData*/ 32) progressdisplay_changes.progressData = /*progressData*/ ctx[5];
-    			if (dirty & /*imageLoaded*/ 8) progressdisplay_changes.imageLoaded = /*imageLoaded*/ ctx[3];
+    			if (dirty & /*imageLoading*/ 8) progressdisplay_changes.imageLoading = /*imageLoading*/ ctx[3];
     			progressdisplay.$set(progressdisplay_changes);
     		},
     		i: function intro(local) {
@@ -1505,7 +1505,7 @@ var app = (function () {
     	let prompt = "";
     	let imageData = "";
     	let currentImageData = "";
-    	let imageLoaded = false;
+    	let imageLoading = false;
     	let dataSent = false;
     	let progressData = null;
 
@@ -1528,10 +1528,6 @@ var app = (function () {
     		];
 
     		sendData(args); // Call sendData with the prepared args
-
-    		if (inputRef) {
-    			inputRef.blur();
-    		}
     	}
 
     	async function fetchProgress() {
@@ -1553,14 +1549,14 @@ var app = (function () {
 
     		// If progress is not complete, fetch again
     		if (result.progress < 100) {
-    			$$invalidate(3, imageLoaded = true);
+    			$$invalidate(3, imageLoading = true);
     			setTimeout(fetchProgress, 1000);
     		}
     	}
 
     	async function sendData(args) {
-    		console.log("sendData called, initial imageLoaded:", imageLoaded);
-    		$$invalidate(3, imageLoaded = false);
+    		console.log("sendData called, initial imageLoading:", imageLoading);
+    		$$invalidate(3, imageLoading = true);
     		$$invalidate(4, dataSent = true);
     		let tempPrompt = prompt.replace(/corey/gi, "<lora:Corey-v02-ohwx:1> (ohwx:1.4) man");
     		tempPrompt += " (excited:.1), epic composition, renaissance composition, rule of thirds, clarity, award winning, soft blonde curly hair and beard <lora:actionshot:1>, RAW photo, (high detailed skin:1.2), 8k uhd, dslr, soft lighting, high quality, film grain, Fujifilm XT3, graphic tee";
@@ -1598,8 +1594,9 @@ var app = (function () {
     		const result = await response.json();
     		console.log(result);
     		$$invalidate(1, imageData = `data:image/png;base64,${result.images[0]}`);
-    		$$invalidate(3, imageLoaded = true);
-    		console.log("Data Sent, imageLoaded:", imageLoaded);
+
+    		//imageLoading = true;
+    		console.log("Data Sent, imageLoading:", imageLoading);
     	}
 
     	afterUpdate(() => {
@@ -1608,8 +1605,8 @@ var app = (function () {
     			img.src = imageData;
 
     			img.onload = () => {
-    				$$invalidate(3, imageLoaded = true);
-    			};
+    				
+    			}; //imageLoading = true;
     		}
     	});
 
@@ -1634,7 +1631,7 @@ var app = (function () {
     		prompt,
     		imageData,
     		currentImageData,
-    		imageLoaded,
+    		imageLoading,
     		dataSent,
     		progressData,
     		loadImageAsBase64,
@@ -1647,7 +1644,7 @@ var app = (function () {
     		if ('prompt' in $$props) $$invalidate(0, prompt = $$props.prompt);
     		if ('imageData' in $$props) $$invalidate(1, imageData = $$props.imageData);
     		if ('currentImageData' in $$props) $$invalidate(2, currentImageData = $$props.currentImageData);
-    		if ('imageLoaded' in $$props) $$invalidate(3, imageLoaded = $$props.imageLoaded);
+    		if ('imageLoading' in $$props) $$invalidate(3, imageLoading = $$props.imageLoading);
     		if ('dataSent' in $$props) $$invalidate(4, dataSent = $$props.dataSent);
     		if ('progressData' in $$props) $$invalidate(5, progressData = $$props.progressData);
     	};
@@ -1660,7 +1657,7 @@ var app = (function () {
     		prompt,
     		imageData,
     		currentImageData,
-    		imageLoaded,
+    		imageLoading,
     		dataSent,
     		progressData,
     		prepareSendData,

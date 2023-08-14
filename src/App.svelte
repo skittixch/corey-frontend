@@ -8,7 +8,7 @@
   let prompt = "";
   let imageData = "";
   let currentImageData = "";
-  let imageLoaded = false;
+  let imageLoading = false;
   let dataSent = false;
   let progressData = null;
 
@@ -38,10 +38,6 @@
       true,
     ];
     sendData(args); // Call sendData with the prepared args
-
-    if (inputRef) {
-      inputRef.blur();
-    }
   }
 
   async function fetchProgress() {
@@ -65,14 +61,14 @@
 
     // If progress is not complete, fetch again
     if (result.progress < 100) {
-      imageLoaded = true;
+      imageLoading = true;
       setTimeout(fetchProgress, 1000);
     }
   }
 
   async function sendData(args) {
-    console.log("sendData called, initial imageLoaded:", imageLoaded);
-    imageLoaded = false;
+    console.log("sendData called, initial imageLoading:", imageLoading);
+    imageLoading = true;
     dataSent = true;
     let tempPrompt = prompt.replace(
       /corey/gi,
@@ -117,8 +113,8 @@
     const result = await response.json();
     console.log(result);
     imageData = `data:image/png;base64,${result.images[0]}`;
-    imageLoaded = true;
-    console.log("Data Sent, imageLoaded:", imageLoaded);
+    //imageLoading = true;
+    console.log("Data Sent, imageLoading:", imageLoading);
   }
 
   afterUpdate(() => {
@@ -126,7 +122,7 @@
       const img = new Image();
       img.src = imageData;
       img.onload = () => {
-        imageLoaded = true;
+        //imageLoading = true;
       };
     }
   });
@@ -139,8 +135,8 @@
 <Header />
 <form on:submit|preventDefault={prepareSendData}>
   <div class={dataSent ? "container sent" : "container"}>
-    <InputField bind:prompt {dataSent} {imageLoaded} />
+    <InputField bind:prompt {dataSent} {imageLoading} />
   </div>
 </form>
-<ImageDisplay {imageData} {currentImageData} {imageLoaded} />
-<ProgressDisplay {progressData} {imageLoaded} />
+<ImageDisplay {imageData} {currentImageData} {imageLoading} />
+<ProgressDisplay {progressData} {imageLoading} />
