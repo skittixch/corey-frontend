@@ -1,12 +1,12 @@
 <script>
   export let imageData;
   export let currentImageData; // Added this line
-  export let imageLoaded;
+  export let imageLoading;
 </script>
 
 {#if imageData}
   <div class="image-container">
-    <img src={imageData} alt="" class={imageLoaded ? "fade-in" : ""} />
+    <img src={imageData} alt="" class={imageLoading ? "fade-in" : ""} />
   </div>
 {/if}
 
@@ -15,7 +15,7 @@
     <img
       src={currentImageData}
       alt="output"
-      class={imageLoaded ? "fade-in" : ""}
+      class={imageLoading ? "fade-in" : ""}
       on:error={() => (currentImageData = null)}
     />
   </div>

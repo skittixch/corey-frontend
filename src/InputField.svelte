@@ -1,7 +1,7 @@
 <script>
   export let prompt;
   export let dataSent;
-  export let imageLoaded;
+  export let imageLoading;
   let inputRef;
   let inputWidth = "175px";
 
@@ -24,7 +24,7 @@
   if (inputRef) {
     inputRef.blur();
   }
-  console.log("imageLoaded is", imageLoaded);
+  console.log("imageLoading is", imageLoading);
 </script>
 
 <div class="input-container">
@@ -37,7 +37,11 @@
       if (!prompt) prompt = "Corey ";
     }}
   />
-  <button class="send-button" type="submit" disabled={dataSent && !imageLoaded}>
+  <button
+    class="send-button"
+    type="submit"
+    disabled={dataSent && !imageLoading}
+  >
     <img src="./send.svg" alt="Send" class="arrow-icon" />
   </button>
 </div>

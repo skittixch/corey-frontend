@@ -668,17 +668,17 @@ var app = (function () {
     			img = element("img");
     			attr_dev(input, "placeholder", "Corey...");
     			set_style(input, "width", /*inputWidth*/ ctx[4]);
-    			add_location(input, file$3, 30, 2, 924);
+    			add_location(input, file$3, 30, 2, 927);
     			if (!src_url_equal(img.src, img_src_value = "./send.svg")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "Send");
     			attr_dev(img, "class", "arrow-icon");
-    			add_location(img, file$3, 40, 4, 1207);
+    			add_location(img, file$3, 44, 4, 1230);
     			attr_dev(button, "class", "send-button");
     			attr_dev(button, "type", "submit");
-    			button.disabled = button_disabled_value = /*dataSent*/ ctx[1] && !/*imageLoaded*/ ctx[2];
-    			add_location(button, file$3, 39, 2, 1123);
+    			button.disabled = button_disabled_value = /*dataSent*/ ctx[1] && !/*imageLoading*/ ctx[2];
+    			add_location(button, file$3, 39, 2, 1126);
     			attr_dev(div, "class", "input-container");
-    			add_location(div, file$3, 29, 0, 891);
+    			add_location(div, file$3, 29, 0, 894);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -710,7 +710,7 @@ var app = (function () {
     				set_input_value(input, /*prompt*/ ctx[0]);
     			}
 
-    			if (dirty & /*dataSent, imageLoaded*/ 6 && button_disabled_value !== (button_disabled_value = /*dataSent*/ ctx[1] && !/*imageLoaded*/ ctx[2])) {
+    			if (dirty & /*dataSent, imageLoading*/ 6 && button_disabled_value !== (button_disabled_value = /*dataSent*/ ctx[1] && !/*imageLoading*/ ctx[2])) {
     				prop_dev(button, "disabled", button_disabled_value);
     			}
     		},
@@ -740,7 +740,7 @@ var app = (function () {
     	validate_slots('InputField', slots, []);
     	let { prompt } = $$props;
     	let { dataSent } = $$props;
-    	let { imageLoaded } = $$props;
+    	let { imageLoading } = $$props;
     	let inputRef;
     	let inputWidth = "175px";
 
@@ -748,7 +748,7 @@ var app = (function () {
     		inputRef.blur();
     	}
 
-    	console.log("imageLoaded is", imageLoaded);
+    	console.log("imageLoading is", imageLoading);
 
     	$$self.$$.on_mount.push(function () {
     		if (prompt === undefined && !('prompt' in $$props || $$self.$$.bound[$$self.$$.props['prompt']])) {
@@ -759,12 +759,12 @@ var app = (function () {
     			console_1$1.warn("<InputField> was created without expected prop 'dataSent'");
     		}
 
-    		if (imageLoaded === undefined && !('imageLoaded' in $$props || $$self.$$.bound[$$self.$$.props['imageLoaded']])) {
-    			console_1$1.warn("<InputField> was created without expected prop 'imageLoaded'");
+    		if (imageLoading === undefined && !('imageLoading' in $$props || $$self.$$.bound[$$self.$$.props['imageLoading']])) {
+    			console_1$1.warn("<InputField> was created without expected prop 'imageLoading'");
     		}
     	});
 
-    	const writable_props = ['prompt', 'dataSent', 'imageLoaded'];
+    	const writable_props = ['prompt', 'dataSent', 'imageLoading'];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console_1$1.warn(`<InputField> was created with unknown prop '${key}'`);
@@ -789,13 +789,13 @@ var app = (function () {
     	$$self.$$set = $$props => {
     		if ('prompt' in $$props) $$invalidate(0, prompt = $$props.prompt);
     		if ('dataSent' in $$props) $$invalidate(1, dataSent = $$props.dataSent);
-    		if ('imageLoaded' in $$props) $$invalidate(2, imageLoaded = $$props.imageLoaded);
+    		if ('imageLoading' in $$props) $$invalidate(2, imageLoading = $$props.imageLoading);
     	};
 
     	$$self.$capture_state = () => ({
     		prompt,
     		dataSent,
-    		imageLoaded,
+    		imageLoading,
     		inputRef,
     		inputWidth
     	});
@@ -803,7 +803,7 @@ var app = (function () {
     	$$self.$inject_state = $$props => {
     		if ('prompt' in $$props) $$invalidate(0, prompt = $$props.prompt);
     		if ('dataSent' in $$props) $$invalidate(1, dataSent = $$props.dataSent);
-    		if ('imageLoaded' in $$props) $$invalidate(2, imageLoaded = $$props.imageLoaded);
+    		if ('imageLoading' in $$props) $$invalidate(2, imageLoading = $$props.imageLoading);
     		if ('inputRef' in $$props) $$invalidate(3, inputRef = $$props.inputRef);
     		if ('inputWidth' in $$props) $$invalidate(4, inputWidth = $$props.inputWidth);
     	};
@@ -832,7 +832,7 @@ var app = (function () {
     	return [
     		prompt,
     		dataSent,
-    		imageLoaded,
+    		imageLoading,
     		inputRef,
     		inputWidth,
     		input_binding,
@@ -844,7 +844,7 @@ var app = (function () {
     class InputField extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$3, create_fragment$3, safe_not_equal, { prompt: 0, dataSent: 1, imageLoaded: 2 });
+    		init(this, options, instance$3, create_fragment$3, safe_not_equal, { prompt: 0, dataSent: 1, imageLoading: 2 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -870,11 +870,11 @@ var app = (function () {
     		throw new Error("<InputField>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 
-    	get imageLoaded() {
+    	get imageLoading() {
     		throw new Error("<InputField>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 
-    	set imageLoaded(value) {
+    	set imageLoading(value) {
     		throw new Error("<InputField>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
@@ -896,10 +896,10 @@ var app = (function () {
     			img = element("img");
     			if (!src_url_equal(img.src, img_src_value = /*imageData*/ ctx[1])) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "");
-    			attr_dev(img, "class", img_class_value = /*imageLoaded*/ ctx[2] ? "fade-in" : "");
-    			add_location(img, file$2, 8, 4, 180);
+    			attr_dev(img, "class", img_class_value = /*imageLoading*/ ctx[2] ? "fade-in" : "");
+    			add_location(img, file$2, 8, 4, 181);
     			attr_dev(div, "class", "image-container");
-    			add_location(div, file$2, 7, 2, 145);
+    			add_location(div, file$2, 7, 2, 146);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -910,7 +910,7 @@ var app = (function () {
     				attr_dev(img, "src", img_src_value);
     			}
 
-    			if (dirty & /*imageLoaded*/ 4 && img_class_value !== (img_class_value = /*imageLoaded*/ ctx[2] ? "fade-in" : "")) {
+    			if (dirty & /*imageLoading*/ 4 && img_class_value !== (img_class_value = /*imageLoading*/ ctx[2] ? "fade-in" : "")) {
     				attr_dev(img, "class", img_class_value);
     			}
     		},
@@ -945,10 +945,10 @@ var app = (function () {
     			img = element("img");
     			if (!src_url_equal(img.src, img_src_value = /*currentImageData*/ ctx[0])) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "output");
-    			attr_dev(img, "class", img_class_value = /*imageLoaded*/ ctx[2] ? "fade-in" : "");
-    			add_location(img, file$2, 14, 4, 337);
+    			attr_dev(img, "class", img_class_value = /*imageLoading*/ ctx[2] ? "fade-in" : "");
+    			add_location(img, file$2, 14, 4, 339);
     			attr_dev(div, "class", "current-image-container");
-    			add_location(div, file$2, 13, 2, 294);
+    			add_location(div, file$2, 13, 2, 296);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -964,7 +964,7 @@ var app = (function () {
     				attr_dev(img, "src", img_src_value);
     			}
 
-    			if (dirty & /*imageLoaded*/ 4 && img_class_value !== (img_class_value = /*imageLoaded*/ ctx[2] ? "fade-in" : "")) {
+    			if (dirty & /*imageLoading*/ 4 && img_class_value !== (img_class_value = /*imageLoading*/ ctx[2] ? "fade-in" : "")) {
     				attr_dev(img, "class", img_class_value);
     			}
     		},
@@ -1061,7 +1061,7 @@ var app = (function () {
     	validate_slots('ImageDisplay', slots, []);
     	let { imageData } = $$props;
     	let { currentImageData } = $$props;
-    	let { imageLoaded } = $$props;
+    	let { imageLoading } = $$props;
 
     	$$self.$$.on_mount.push(function () {
     		if (imageData === undefined && !('imageData' in $$props || $$self.$$.bound[$$self.$$.props['imageData']])) {
@@ -1072,12 +1072,12 @@ var app = (function () {
     			console.warn("<ImageDisplay> was created without expected prop 'currentImageData'");
     		}
 
-    		if (imageLoaded === undefined && !('imageLoaded' in $$props || $$self.$$.bound[$$self.$$.props['imageLoaded']])) {
-    			console.warn("<ImageDisplay> was created without expected prop 'imageLoaded'");
+    		if (imageLoading === undefined && !('imageLoading' in $$props || $$self.$$.bound[$$self.$$.props['imageLoading']])) {
+    			console.warn("<ImageDisplay> was created without expected prop 'imageLoading'");
     		}
     	});
 
-    	const writable_props = ['imageData', 'currentImageData', 'imageLoaded'];
+    	const writable_props = ['imageData', 'currentImageData', 'imageLoading'];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<ImageDisplay> was created with unknown prop '${key}'`);
@@ -1088,22 +1088,26 @@ var app = (function () {
     	$$self.$$set = $$props => {
     		if ('imageData' in $$props) $$invalidate(1, imageData = $$props.imageData);
     		if ('currentImageData' in $$props) $$invalidate(0, currentImageData = $$props.currentImageData);
-    		if ('imageLoaded' in $$props) $$invalidate(2, imageLoaded = $$props.imageLoaded);
+    		if ('imageLoading' in $$props) $$invalidate(2, imageLoading = $$props.imageLoading);
     	};
 
-    	$$self.$capture_state = () => ({ imageData, currentImageData, imageLoaded });
+    	$$self.$capture_state = () => ({
+    		imageData,
+    		currentImageData,
+    		imageLoading
+    	});
 
     	$$self.$inject_state = $$props => {
     		if ('imageData' in $$props) $$invalidate(1, imageData = $$props.imageData);
     		if ('currentImageData' in $$props) $$invalidate(0, currentImageData = $$props.currentImageData);
-    		if ('imageLoaded' in $$props) $$invalidate(2, imageLoaded = $$props.imageLoaded);
+    		if ('imageLoading' in $$props) $$invalidate(2, imageLoading = $$props.imageLoading);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [currentImageData, imageData, imageLoaded, error_handler];
+    	return [currentImageData, imageData, imageLoading, error_handler];
     }
 
     class ImageDisplay extends SvelteComponentDev {
@@ -1113,7 +1117,7 @@ var app = (function () {
     		init(this, options, instance$2, create_fragment$2, safe_not_equal, {
     			imageData: 1,
     			currentImageData: 0,
-    			imageLoaded: 2
+    			imageLoading: 2
     		});
 
     		dispatch_dev("SvelteRegisterComponent", {
@@ -1140,11 +1144,11 @@ var app = (function () {
     		throw new Error("<ImageDisplay>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 
-    	get imageLoaded() {
+    	get imageLoading() {
     		throw new Error("<ImageDisplay>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 
-    	set imageLoaded(value) {
+    	set imageLoading(value) {
     		throw new Error("<ImageDisplay>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
@@ -1153,7 +1157,7 @@ var app = (function () {
 
     const file$1 = "src\\ProgressDisplay.svelte";
 
-    // (6:0) {#if progressData && imageLoaded}
+    // (6:0) {#if progressData && imageLoading}
     function create_if_block(ctx) {
     	let div;
     	let p;
@@ -1169,9 +1173,9 @@ var app = (function () {
     			t0 = text("Progress: ");
     			t1 = text(t1_value);
     			t2 = text("%");
-    			add_location(p, file$1, 7, 4, 153);
+    			add_location(p, file$1, 7, 4, 155);
     			attr_dev(div, "class", "progress-container");
-    			add_location(div, file$1, 6, 2, 115);
+    			add_location(div, file$1, 6, 2, 117);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -1192,7 +1196,7 @@ var app = (function () {
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(6:0) {#if progressData && imageLoaded}",
+    		source: "(6:0) {#if progressData && imageLoading}",
     		ctx
     	});
 
@@ -1201,7 +1205,7 @@ var app = (function () {
 
     function create_fragment$1(ctx) {
     	let if_block_anchor;
-    	let if_block = /*progressData*/ ctx[0] && /*imageLoaded*/ ctx[1] && create_if_block(ctx);
+    	let if_block = /*progressData*/ ctx[0] && /*imageLoading*/ ctx[1] && create_if_block(ctx);
 
     	const block = {
     		c: function create() {
@@ -1216,7 +1220,7 @@ var app = (function () {
     			insert_dev(target, if_block_anchor, anchor);
     		},
     		p: function update(ctx, [dirty]) {
-    			if (/*progressData*/ ctx[0] && /*imageLoaded*/ ctx[1]) {
+    			if (/*progressData*/ ctx[0] && /*imageLoading*/ ctx[1]) {
     				if (if_block) {
     					if_block.p(ctx, dirty);
     				} else {
@@ -1252,19 +1256,19 @@ var app = (function () {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('ProgressDisplay', slots, []);
     	let { progressData } = $$props;
-    	let { imageLoaded } = $$props;
+    	let { imageLoading } = $$props;
 
     	$$self.$$.on_mount.push(function () {
     		if (progressData === undefined && !('progressData' in $$props || $$self.$$.bound[$$self.$$.props['progressData']])) {
     			console.warn("<ProgressDisplay> was created without expected prop 'progressData'");
     		}
 
-    		if (imageLoaded === undefined && !('imageLoaded' in $$props || $$self.$$.bound[$$self.$$.props['imageLoaded']])) {
-    			console.warn("<ProgressDisplay> was created without expected prop 'imageLoaded'");
+    		if (imageLoading === undefined && !('imageLoading' in $$props || $$self.$$.bound[$$self.$$.props['imageLoading']])) {
+    			console.warn("<ProgressDisplay> was created without expected prop 'imageLoading'");
     		}
     	});
 
-    	const writable_props = ['progressData', 'imageLoaded'];
+    	const writable_props = ['progressData', 'imageLoading'];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<ProgressDisplay> was created with unknown prop '${key}'`);
@@ -1272,27 +1276,27 @@ var app = (function () {
 
     	$$self.$$set = $$props => {
     		if ('progressData' in $$props) $$invalidate(0, progressData = $$props.progressData);
-    		if ('imageLoaded' in $$props) $$invalidate(1, imageLoaded = $$props.imageLoaded);
+    		if ('imageLoading' in $$props) $$invalidate(1, imageLoading = $$props.imageLoading);
     	};
 
-    	$$self.$capture_state = () => ({ progressData, imageLoaded });
+    	$$self.$capture_state = () => ({ progressData, imageLoading });
 
     	$$self.$inject_state = $$props => {
     		if ('progressData' in $$props) $$invalidate(0, progressData = $$props.progressData);
-    		if ('imageLoaded' in $$props) $$invalidate(1, imageLoaded = $$props.imageLoaded);
+    		if ('imageLoading' in $$props) $$invalidate(1, imageLoading = $$props.imageLoading);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	return [progressData, imageLoaded];
+    	return [progressData, imageLoading];
     }
 
     class ProgressDisplay extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$1, create_fragment$1, safe_not_equal, { progressData: 0, imageLoaded: 1 });
+    		init(this, options, instance$1, create_fragment$1, safe_not_equal, { progressData: 0, imageLoading: 1 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -1310,11 +1314,11 @@ var app = (function () {
     		throw new Error("<ProgressDisplay>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 
-    	get imageLoaded() {
+    	get imageLoading() {
     		throw new Error("<ProgressDisplay>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 
-    	set imageLoaded(value) {
+    	set imageLoading(value) {
     		throw new Error("<ProgressDisplay>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
@@ -1350,7 +1354,7 @@ var app = (function () {
 
     	let inputfield_props = {
     		dataSent: /*dataSent*/ ctx[4],
-    		imageLoaded: /*imageLoaded*/ ctx[3]
+    		imageLoading: /*imageLoading*/ ctx[3]
     	};
 
     	if (/*prompt*/ ctx[0] !== void 0) {
@@ -1364,7 +1368,7 @@ var app = (function () {
     			props: {
     				imageData: /*imageData*/ ctx[1],
     				currentImageData: /*currentImageData*/ ctx[2],
-    				imageLoaded: /*imageLoaded*/ ctx[3]
+    				imageLoading: /*imageLoading*/ ctx[3]
     			},
     			$$inline: true
     		});
@@ -1373,7 +1377,7 @@ var app = (function () {
     			props: {
     				progressData: /*progressData*/ ctx[5],
     				currentImageData: /*currentImageData*/ ctx[2],
-    				imageLoaded: /*imageLoaded*/ ctx[3]
+    				imageLoading: /*imageLoading*/ ctx[3]
     			},
     			$$inline: true
     		});
@@ -1394,11 +1398,11 @@ var app = (function () {
     			create_component(progressdisplay.$$.fragment);
     			attr_dev(link, "rel", "stylesheet");
     			attr_dev(link, "href", "./AppStyle.css");
-    			add_location(link, file, 131, 2, 4514);
-    			add_location(head, file, 130, 0, 4504);
+    			add_location(link, file, 131, 2, 4523);
+    			add_location(head, file, 130, 0, 4513);
     			attr_dev(div, "class", div_class_value = /*dataSent*/ ctx[4] ? "container sent" : "container");
-    			add_location(div, file, 136, 2, 4639);
-    			add_location(form, file, 135, 0, 4586);
+    			add_location(div, file, 136, 2, 4648);
+    			add_location(form, file, 135, 0, 4595);
     		},
     		l: function claim(nodes) {
     			throw new Error_1("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -1426,7 +1430,7 @@ var app = (function () {
     		p: function update(ctx, [dirty]) {
     			const inputfield_changes = {};
     			if (dirty & /*dataSent*/ 16) inputfield_changes.dataSent = /*dataSent*/ ctx[4];
-    			if (dirty & /*imageLoaded*/ 8) inputfield_changes.imageLoaded = /*imageLoaded*/ ctx[3];
+    			if (dirty & /*imageLoading*/ 8) inputfield_changes.imageLoading = /*imageLoading*/ ctx[3];
 
     			if (!updating_prompt && dirty & /*prompt*/ 1) {
     				updating_prompt = true;
@@ -1443,12 +1447,12 @@ var app = (function () {
     			const imagedisplay_changes = {};
     			if (dirty & /*imageData*/ 2) imagedisplay_changes.imageData = /*imageData*/ ctx[1];
     			if (dirty & /*currentImageData*/ 4) imagedisplay_changes.currentImageData = /*currentImageData*/ ctx[2];
-    			if (dirty & /*imageLoaded*/ 8) imagedisplay_changes.imageLoaded = /*imageLoaded*/ ctx[3];
+    			if (dirty & /*imageLoading*/ 8) imagedisplay_changes.imageLoading = /*imageLoading*/ ctx[3];
     			imagedisplay.$set(imagedisplay_changes);
     			const progressdisplay_changes = {};
     			if (dirty & /*progressData*/ 32) progressdisplay_changes.progressData = /*progressData*/ ctx[5];
     			if (dirty & /*currentImageData*/ 4) progressdisplay_changes.currentImageData = /*currentImageData*/ ctx[2];
-    			if (dirty & /*imageLoaded*/ 8) progressdisplay_changes.imageLoaded = /*imageLoaded*/ ctx[3];
+    			if (dirty & /*imageLoading*/ 8) progressdisplay_changes.imageLoading = /*imageLoading*/ ctx[3];
     			progressdisplay.$set(progressdisplay_changes);
     		},
     		i: function intro(local) {
@@ -1510,7 +1514,7 @@ var app = (function () {
     	let prompt = "";
     	let imageData = "";
     	let currentImageData = "";
-    	let imageLoaded = false;
+    	let imageLoading = false;
     	let dataSent = false;
     	let progressData = null;
 
@@ -1554,15 +1558,15 @@ var app = (function () {
 
     		// If progress is not complete, fetch again
     		if (result.progress < 100) {
-    			$$invalidate(3, imageLoaded = true);
+    			$$invalidate(3, imageLoading = true);
     			setTimeout(fetchProgress, 1000);
     		}
     	}
 
     	async function sendData(args) {
-    		console.log("sendData called, initial imageLoaded:", imageLoaded);
+    		console.log("sendData called, initial imageLoading:", imageLoading);
 
-    		//imageLoaded = false;
+    		//imageLoading = false;
     		$$invalidate(4, dataSent = true);
 
     		let tempPrompt = prompt.replace(/corey/gi, "<lora:Corey-v02-ohwx:1> (ohwx:1.4) man");
@@ -1602,8 +1606,8 @@ var app = (function () {
     		console.log(result);
     		$$invalidate(1, imageData = `data:image/png;base64,${result.images[0]}`);
 
-    		//imageLoaded = true;
-    		console.log("Data Sent, imageLoaded:", imageLoaded);
+    		//imageLoading = true;
+    		console.log("Data Sent, imageLoading:", imageLoading);
     	}
 
     	afterUpdate(() => {
@@ -1613,7 +1617,7 @@ var app = (function () {
 
     			img.onload = () => {
     				
-    			}; //imageLoaded = true;
+    			}; //imageLoading = true;
     		}
     	});
 
@@ -1638,7 +1642,7 @@ var app = (function () {
     		prompt,
     		imageData,
     		currentImageData,
-    		imageLoaded,
+    		imageLoading,
     		dataSent,
     		progressData,
     		loadImageAsBase64,
@@ -1651,7 +1655,7 @@ var app = (function () {
     		if ('prompt' in $$props) $$invalidate(0, prompt = $$props.prompt);
     		if ('imageData' in $$props) $$invalidate(1, imageData = $$props.imageData);
     		if ('currentImageData' in $$props) $$invalidate(2, currentImageData = $$props.currentImageData);
-    		if ('imageLoaded' in $$props) $$invalidate(3, imageLoaded = $$props.imageLoaded);
+    		if ('imageLoading' in $$props) $$invalidate(3, imageLoading = $$props.imageLoading);
     		if ('dataSent' in $$props) $$invalidate(4, dataSent = $$props.dataSent);
     		if ('progressData' in $$props) $$invalidate(5, progressData = $$props.progressData);
     	};
@@ -1664,7 +1668,7 @@ var app = (function () {
     		prompt,
     		imageData,
     		currentImageData,
-    		imageLoaded,
+    		imageLoading,
     		dataSent,
     		progressData,
     		prepareSendData,

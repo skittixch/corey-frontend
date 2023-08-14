@@ -1,9 +1,9 @@
 <script>
   export let progressData;
-  export let imageLoaded;
+  export let imageLoading;
 </script>
 
-{#if progressData && imageLoaded}
+{#if progressData && imageLoading}
   <div class="progress-container">
     <p>Progress: {progressData.progress * 100}%</p>
   </div>
