@@ -1342,12 +1342,12 @@ var app = (function () {
     	header = new Header({ $$inline: true });
 
     	function inputfield_prompt_binding(value) {
-    		/*inputfield_prompt_binding*/ ctx[6](value);
+    		/*inputfield_prompt_binding*/ ctx[7](value);
     	}
 
     	let inputfield_props = {
-    		dataSent: /*dataSent*/ ctx[3],
-    		imageLoaded: /*imageLoaded*/ ctx[2]
+    		dataSent: /*dataSent*/ ctx[4],
+    		imageLoaded: /*imageLoaded*/ ctx[3]
     	};
 
     	if (/*prompt*/ ctx[0] !== void 0) {
@@ -1360,15 +1360,16 @@ var app = (function () {
     	imagedisplay = new ImageDisplay({
     			props: {
     				imageData: /*imageData*/ ctx[1],
-    				imageLoaded: /*imageLoaded*/ ctx[2]
+    				currentImageData: /*currentImageData*/ ctx[2],
+    				imageLoaded: /*imageLoaded*/ ctx[3]
     			},
     			$$inline: true
     		});
 
     	progressdisplay = new ProgressDisplay({
     			props: {
-    				progressData: /*progressData*/ ctx[4],
-    				imageLoaded: /*imageLoaded*/ ctx[2]
+    				progressData: /*progressData*/ ctx[5],
+    				imageLoaded: /*imageLoaded*/ ctx[3]
     			},
     			$$inline: true
     		});
@@ -1391,7 +1392,7 @@ var app = (function () {
     			attr_dev(link, "href", "./AppStyle.css");
     			add_location(link, file, 135, 2, 4491);
     			add_location(head, file, 134, 0, 4481);
-    			attr_dev(div, "class", div_class_value = /*dataSent*/ ctx[3] ? "container sent" : "container");
+    			attr_dev(div, "class", div_class_value = /*dataSent*/ ctx[4] ? "container sent" : "container");
     			add_location(div, file, 140, 2, 4616);
     			add_location(form, file, 139, 0, 4563);
     		},
@@ -1414,14 +1415,14 @@ var app = (function () {
     			current = true;
 
     			if (!mounted) {
-    				dispose = listen_dev(form, "submit", prevent_default(/*prepareSendData*/ ctx[5]), false, true, false, false);
+    				dispose = listen_dev(form, "submit", prevent_default(/*prepareSendData*/ ctx[6]), false, true, false, false);
     				mounted = true;
     			}
     		},
     		p: function update(ctx, [dirty]) {
     			const inputfield_changes = {};
-    			if (dirty & /*dataSent*/ 8) inputfield_changes.dataSent = /*dataSent*/ ctx[3];
-    			if (dirty & /*imageLoaded*/ 4) inputfield_changes.imageLoaded = /*imageLoaded*/ ctx[2];
+    			if (dirty & /*dataSent*/ 16) inputfield_changes.dataSent = /*dataSent*/ ctx[4];
+    			if (dirty & /*imageLoaded*/ 8) inputfield_changes.imageLoaded = /*imageLoaded*/ ctx[3];
 
     			if (!updating_prompt && dirty & /*prompt*/ 1) {
     				updating_prompt = true;
@@ -1431,17 +1432,18 @@ var app = (function () {
 
     			inputfield.$set(inputfield_changes);
 
-    			if (!current || dirty & /*dataSent*/ 8 && div_class_value !== (div_class_value = /*dataSent*/ ctx[3] ? "container sent" : "container")) {
+    			if (!current || dirty & /*dataSent*/ 16 && div_class_value !== (div_class_value = /*dataSent*/ ctx[4] ? "container sent" : "container")) {
     				attr_dev(div, "class", div_class_value);
     			}
 
     			const imagedisplay_changes = {};
     			if (dirty & /*imageData*/ 2) imagedisplay_changes.imageData = /*imageData*/ ctx[1];
-    			if (dirty & /*imageLoaded*/ 4) imagedisplay_changes.imageLoaded = /*imageLoaded*/ ctx[2];
+    			if (dirty & /*currentImageData*/ 4) imagedisplay_changes.currentImageData = /*currentImageData*/ ctx[2];
+    			if (dirty & /*imageLoaded*/ 8) imagedisplay_changes.imageLoaded = /*imageLoaded*/ ctx[3];
     			imagedisplay.$set(imagedisplay_changes);
     			const progressdisplay_changes = {};
-    			if (dirty & /*progressData*/ 16) progressdisplay_changes.progressData = /*progressData*/ ctx[4];
-    			if (dirty & /*imageLoaded*/ 4) progressdisplay_changes.imageLoaded = /*imageLoaded*/ ctx[2];
+    			if (dirty & /*progressData*/ 32) progressdisplay_changes.progressData = /*progressData*/ ctx[5];
+    			if (dirty & /*imageLoaded*/ 8) progressdisplay_changes.imageLoaded = /*imageLoaded*/ ctx[3];
     			progressdisplay.$set(progressdisplay_changes);
     		},
     		i: function intro(local) {
@@ -1544,22 +1546,22 @@ var app = (function () {
     		}
 
     		const result = await response.json();
-    		$$invalidate(4, progressData = result);
+    		$$invalidate(5, progressData = result);
 
     		// ADDED: Update currentImageData with the current_image data
-    		currentImageData = `data:image/png;base64,${result.current_image}`;
+    		$$invalidate(2, currentImageData = `data:image/png;base64,${result.current_image}`);
 
     		// If progress is not complete, fetch again
     		if (result.progress < 100) {
-    			$$invalidate(2, imageLoaded = true);
+    			$$invalidate(3, imageLoaded = true);
     			setTimeout(fetchProgress, 1000);
     		}
     	}
 
     	async function sendData(args) {
     		console.log("sendData called, initial imageLoaded:", imageLoaded);
-    		$$invalidate(2, imageLoaded = false);
-    		$$invalidate(3, dataSent = true);
+    		$$invalidate(3, imageLoaded = false);
+    		$$invalidate(4, dataSent = true);
     		let tempPrompt = prompt.replace(/corey/gi, "<lora:Corey-v02-ohwx:1> (ohwx:1.4) man");
     		tempPrompt += " (excited:.1), epic composition, renaissance composition, rule of thirds, clarity, award winning, soft blonde curly hair and beard <lora:actionshot:1>, RAW photo, (high detailed skin:1.2), 8k uhd, dslr, soft lighting, high quality, film grain, Fujifilm XT3, graphic tee";
 
@@ -1596,7 +1598,7 @@ var app = (function () {
     		const result = await response.json();
     		console.log(result);
     		$$invalidate(1, imageData = `data:image/png;base64,${result.images[0]}`);
-    		$$invalidate(2, imageLoaded = true);
+    		$$invalidate(3, imageLoaded = true);
     		console.log("Data Sent, imageLoaded:", imageLoaded);
     	}
 
@@ -1606,7 +1608,7 @@ var app = (function () {
     			img.src = imageData;
 
     			img.onload = () => {
-    				$$invalidate(2, imageLoaded = true);
+    				$$invalidate(3, imageLoaded = true);
     			};
     		}
     	});
@@ -1644,10 +1646,10 @@ var app = (function () {
     	$$self.$inject_state = $$props => {
     		if ('prompt' in $$props) $$invalidate(0, prompt = $$props.prompt);
     		if ('imageData' in $$props) $$invalidate(1, imageData = $$props.imageData);
-    		if ('currentImageData' in $$props) currentImageData = $$props.currentImageData;
-    		if ('imageLoaded' in $$props) $$invalidate(2, imageLoaded = $$props.imageLoaded);
-    		if ('dataSent' in $$props) $$invalidate(3, dataSent = $$props.dataSent);
-    		if ('progressData' in $$props) $$invalidate(4, progressData = $$props.progressData);
+    		if ('currentImageData' in $$props) $$invalidate(2, currentImageData = $$props.currentImageData);
+    		if ('imageLoaded' in $$props) $$invalidate(3, imageLoaded = $$props.imageLoaded);
+    		if ('dataSent' in $$props) $$invalidate(4, dataSent = $$props.dataSent);
+    		if ('progressData' in $$props) $$invalidate(5, progressData = $$props.progressData);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -1657,6 +1659,7 @@ var app = (function () {
     	return [
     		prompt,
     		imageData,
+    		currentImageData,
     		imageLoaded,
     		dataSent,
     		progressData,
