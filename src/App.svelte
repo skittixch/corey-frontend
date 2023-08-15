@@ -60,7 +60,7 @@
     currentImageData = `data:image/png;base64,${result.current_image}`;
 
     // If progress is not complete, fetch again
-    if (result.progress < 100) {
+    if (result.progress < 100 && result.progress > 0) {
       imageLoading = true;
       setTimeout(fetchProgress, 1000);
     }
