@@ -24,7 +24,7 @@
   if (inputRef) {
     inputRef.blur();
   }
-  console.log("imageLoading is", imageLoading);
+  console.log("page loaded, imageLoading is", imageLoading);
 </script>
 
 <div class="input-container">

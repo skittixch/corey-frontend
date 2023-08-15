@@ -8,6 +8,8 @@
   let prompt = "";
   let imageData = "";
   let currentImageData = "";
+  // you need a master state that is explicit. check out that youtube video
+  let state = "start";
   let imageLoading = false;
   let dataSent = false;
   let progressData = null;
@@ -60,22 +62,22 @@
     currentImageData = `data:image/png;base64,${result.current_image}`;
 
     // If progress is not complete, fetch again
-    if (result.progress < 100 && result.progress > 0) {
+    if (result.progress < 100) {
       imageLoading = true;
       setTimeout(fetchProgress, 1000);
     }
   }
 
   async function sendData(args) {
+    imageLoading = true;
     console.log("sendData called, initial imageLoading:", imageLoading);
-    //imageLoading = false;
     dataSent = true;
     let tempPrompt = prompt.replace(
       /corey/gi,
       "<lora:Corey-v02-ohwx:1> (ohwx:1.4) man"
     );
     tempPrompt +=
-      " (excited:.1), epic composition, renaissance composition, rule of thirds, clarity, award winning, soft blonde curly hair and beard <lora:actionshot:1>, RAW photo, (high detailed skin:1.2), 8k uhd, dslr, soft lighting, high quality, film grain, Fujifilm XT3, graphic tee, trending on artstation";
+      " (excited:.1), epic composition, renaissance composition, rule of thirds, clarity, award winning, soft blonde fuzzy curly hair and beard <lora:actionshot:1>, RAW photo, (high detailed skin:1.2), 8k uhd, dslr, volumetric lighting, high quality, film grain, Fujifilm XT3, graphic tee, trending on artstation";
 
     // ADDED: Moved the fetch operation into a separate variable
     const responsePromise = fetch("https://ai.ericbacus.com/sdapi/v1/txt2img", {
@@ -108,12 +110,13 @@
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
+      console.log("HTTP error, imageLoading:", imageLoading);
     }
 
     const result = await response.json();
     console.log(result);
     imageData = `data:image/png;base64,${result.images[0]}`;
-    //imageLoading = true;
+    imageLoading = true;
     console.log("Data Sent, imageLoading:", imageLoading);
   }
 
@@ -139,4 +142,4 @@
   </div>
 </form>
 <ImageDisplay {imageData} {currentImageData} {imageLoading} />
-<ProgressDisplay {progressData} {currentImageData} {imageLoading} />
+<ProgressDisplay {progressData} {imageLoading} />

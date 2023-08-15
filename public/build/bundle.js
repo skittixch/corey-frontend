@@ -1,5 +1,5 @@
 
-(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
+(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35730/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
 var app = (function () {
     'use strict';
 
@@ -668,17 +668,17 @@ var app = (function () {
     			img = element("img");
     			attr_dev(input, "placeholder", "Corey...");
     			set_style(input, "width", /*inputWidth*/ ctx[4]);
-    			add_location(input, file$3, 30, 2, 927);
+    			add_location(input, file$3, 30, 2, 940);
     			if (!src_url_equal(img.src, img_src_value = "./send.svg")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "Send");
     			attr_dev(img, "class", "arrow-icon");
-    			add_location(img, file$3, 44, 4, 1230);
+    			add_location(img, file$3, 44, 4, 1243);
     			attr_dev(button, "class", "send-button");
     			attr_dev(button, "type", "submit");
     			button.disabled = button_disabled_value = /*dataSent*/ ctx[1] && !/*imageLoading*/ ctx[2];
-    			add_location(button, file$3, 39, 2, 1126);
+    			add_location(button, file$3, 39, 2, 1139);
     			attr_dev(div, "class", "input-container");
-    			add_location(div, file$3, 29, 0, 894);
+    			add_location(div, file$3, 29, 0, 907);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -748,7 +748,7 @@ var app = (function () {
     		inputRef.blur();
     	}
 
-    	console.log("imageLoading is", imageLoading);
+    	console.log("page loaded, imageLoading is", imageLoading);
 
     	$$self.$$.on_mount.push(function () {
     		if (prompt === undefined && !('prompt' in $$props || $$self.$$.bound[$$self.$$.props['prompt']])) {
@@ -1376,7 +1376,6 @@ var app = (function () {
     	progressdisplay = new ProgressDisplay({
     			props: {
     				progressData: /*progressData*/ ctx[5],
-    				currentImageData: /*currentImageData*/ ctx[2],
     				imageLoading: /*imageLoading*/ ctx[3]
     			},
     			$$inline: true
@@ -1398,11 +1397,11 @@ var app = (function () {
     			create_component(progressdisplay.$$.fragment);
     			attr_dev(link, "rel", "stylesheet");
     			attr_dev(link, "href", "./AppStyle.css");
-    			add_location(link, file, 131, 2, 4523);
-    			add_location(head, file, 130, 0, 4513);
+    			add_location(link, file, 134, 2, 4694);
+    			add_location(head, file, 133, 0, 4684);
     			attr_dev(div, "class", div_class_value = /*dataSent*/ ctx[4] ? "container sent" : "container");
-    			add_location(div, file, 136, 2, 4648);
-    			add_location(form, file, 135, 0, 4595);
+    			add_location(div, file, 139, 2, 4819);
+    			add_location(form, file, 138, 0, 4766);
     		},
     		l: function claim(nodes) {
     			throw new Error_1("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -1451,7 +1450,6 @@ var app = (function () {
     			imagedisplay.$set(imagedisplay_changes);
     			const progressdisplay_changes = {};
     			if (dirty & /*progressData*/ 32) progressdisplay_changes.progressData = /*progressData*/ ctx[5];
-    			if (dirty & /*currentImageData*/ 4) progressdisplay_changes.currentImageData = /*currentImageData*/ ctx[2];
     			if (dirty & /*imageLoading*/ 8) progressdisplay_changes.imageLoading = /*imageLoading*/ ctx[3];
     			progressdisplay.$set(progressdisplay_changes);
     		},
@@ -1514,6 +1512,10 @@ var app = (function () {
     	let prompt = "";
     	let imageData = "";
     	let currentImageData = "";
+
+    	// you need a master state that is explicit. check out that youtube video
+    	let state = "start";
+
     	let imageLoading = false;
     	let dataSent = false;
     	let progressData = null;
@@ -1564,13 +1566,11 @@ var app = (function () {
     	}
 
     	async function sendData(args) {
+    		$$invalidate(3, imageLoading = true);
     		console.log("sendData called, initial imageLoading:", imageLoading);
-
-    		//imageLoading = false;
     		$$invalidate(4, dataSent = true);
-
     		let tempPrompt = prompt.replace(/corey/gi, "<lora:Corey-v02-ohwx:1> (ohwx:1.4) man");
-    		tempPrompt += " (excited:.1), epic composition, renaissance composition, rule of thirds, clarity, award winning, soft blonde curly hair and beard <lora:actionshot:1>, RAW photo, (high detailed skin:1.2), 8k uhd, dslr, soft lighting, high quality, film grain, Fujifilm XT3, graphic tee, trending on artstation";
+    		tempPrompt += " (excited:.1), epic composition, renaissance composition, rule of thirds, clarity, award winning, soft blonde fuzzy curly hair and beard <lora:actionshot:1>, RAW photo, (high detailed skin:1.2), 8k uhd, dslr, volumetric lighting, high quality, film grain, Fujifilm XT3, graphic tee, trending on artstation";
 
     		// ADDED: Moved the fetch operation into a separate variable
     		const responsePromise = fetch("https://ai.ericbacus.com/sdapi/v1/txt2img", {
@@ -1605,8 +1605,7 @@ var app = (function () {
     		const result = await response.json();
     		console.log(result);
     		$$invalidate(1, imageData = `data:image/png;base64,${result.images[0]}`);
-
-    		//imageLoading = true;
+    		$$invalidate(3, imageLoading = true);
     		console.log("Data Sent, imageLoading:", imageLoading);
     	}
 
@@ -1642,6 +1641,7 @@ var app = (function () {
     		prompt,
     		imageData,
     		currentImageData,
+    		state,
     		imageLoading,
     		dataSent,
     		progressData,
@@ -1655,6 +1655,7 @@ var app = (function () {
     		if ('prompt' in $$props) $$invalidate(0, prompt = $$props.prompt);
     		if ('imageData' in $$props) $$invalidate(1, imageData = $$props.imageData);
     		if ('currentImageData' in $$props) $$invalidate(2, currentImageData = $$props.currentImageData);
+    		if ('state' in $$props) state = $$props.state;
     		if ('imageLoading' in $$props) $$invalidate(3, imageLoading = $$props.imageLoading);
     		if ('dataSent' in $$props) $$invalidate(4, dataSent = $$props.dataSent);
     		if ('progressData' in $$props) $$invalidate(5, progressData = $$props.progressData);
