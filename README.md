@@ -35,12 +35,8 @@ EXPOSE 7860
 ```
 `docker build -t stable-diffusion-crai-v01 . `
 
-## To Do: 
-deploy in swarm mode to use secrets for the private keys.
-
-- according to a (Reddit comment)[https://www.reddit.com/r/sveltejs/comments/v8owzc/comment/ibruetp/?utm_source=share&utm_medium=mweb3x&utm_name=mweb3xcss&utm_term=1&utm_content=share_button], 
-I could use this technique to pull the intermediate images while they're being generated. I think this would really add some wow factor. Apparently, in sveltekit, I should use a server-side script tag to read the contents of the folder and send one as a prop to the page when it gets loaded.
-
+## To Do:
+- deploy in swarm mode to use secrets for the private keys.
 - figure out if I can just use DNS from digitalocean
 
 # Happy birthday bro - July 23rd, 2023
