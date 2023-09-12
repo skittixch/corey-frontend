@@ -98,6 +98,7 @@
         steps: 20,
         sampler_name: "DPM++ 2M SDE Karras",
         restore_faces: true,
+        save_images: true,
         alwayson_scripts: { roop: { args: args } },
       }),
     });
